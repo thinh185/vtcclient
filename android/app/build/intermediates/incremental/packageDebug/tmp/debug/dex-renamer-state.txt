@@ -1,0 +1,4 @@
+#Mon Jan 07 14:10:47 ICT 2019
+base.0=/Users/luong/demo/client/android/app/build/intermediates/transforms/dexMerger/debug/0
+path.0=classes.dex
+renamed.0=classes.dex
