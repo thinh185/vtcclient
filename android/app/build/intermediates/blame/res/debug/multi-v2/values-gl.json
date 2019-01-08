@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/luong/demo/client/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-gl/values-gl.xml",
+            "outputFile": "/home/thinhnn/demo/vtcclient/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-gl/values-gl.xml",
             "map": [
                 {
-                    "source": "/Users/luong/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/09a4d973d4dacf76ea713b86ffb29804/res/values-gl/values-gl.xml",
+                    "source": "/home/thinhnn/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/fe1256335dea96b5397740747d9d851e/res/values-gl/values-gl.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "/Users/luong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/7282649c7a7cdfc86247d2cf721805b0/res/values-gl/values-gl.xml",
+                    "source": "/home/thinhnn/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/e7deb9149401a7bfb4160a963f99733e/res/values-gl/values-gl.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

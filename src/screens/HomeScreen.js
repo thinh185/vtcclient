@@ -4,9 +4,6 @@ import Utils from '../Utils'
 
 export default class HomeScreen extends React.Component {
   render() {
-    console.log('====================================')
-    console.log('why not')
-    console.log('====================================')
     return (
       <View style={styles.container}>
         <StatusBar barStyle="dark-content" />

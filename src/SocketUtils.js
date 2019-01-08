@@ -4,22 +4,23 @@ import moment from 'moment'
 import Utils from './Utils'
 import LiveStatus from './liveStatus'
 
-let socket = null
+const socket = io(
+  Utils.getSocketIOIP(),
+  { transports: ['websocket'] },
+)
+console.log(Utils.getSocketIOIP())
 
 const getSocket = () => {
   return socket
 }
 
 const connect = () => {
-  socket = io.connect(
-    Utils.getSocketIOIP(),
-    { transports: ['websocket'] },
-  )
+  console.log('connected')
+  socket.emit('testconnect', { data: 'data' })
 }
 
 const handleOnConnect = () => {
   socket.on('connect', () => {
-    console.log('connect')
   })
 }
 

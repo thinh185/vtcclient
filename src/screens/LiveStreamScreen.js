@@ -59,6 +59,8 @@ export default class LiveStreamScreen extends Component {
     }
     this.Animation = new Animated.Value(0)
     this.scrollView = null
+    this.onBeginLiveStream = this.onBeginLiveStream.bind(this)
+    this.onFinishLiveStream = this.onFinishLiveStream.bind(this)
   }
 
   componentDidMount = () => {
@@ -126,18 +128,21 @@ export default class LiveStreamScreen extends Component {
     this.setState({ liveStatus: LiveStatus.ON_LIVE })
     SocketUtils.emitBeginLiveStream(Utils.getRoomName(), Utils.getUserId())
     this.vbCamera.start()
+    console.log('start stream')
   };
 
   onFinishLiveStream = () => {
     this.setState({ liveStatus: LiveStatus.FINISH })
     SocketUtils.emitFinishLiveStream(Utils.getRoomName(), Utils.getUserId())
     this.vbCamera.stop()
+    console.log('stop stream')
   };
 
   onPressHeart = () => {
     this.setState({ countHeart: this.state.countHeart + 1 })
     SocketUtils.emitSendHeart(Utils.getRoomName())
   };
+
 
   onChangeMessageText = (text) => {
     this.setState({ message: text })
@@ -604,8 +609,8 @@ export default class LiveStreamScreen extends Component {
         <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
         <NodeCameraView
           style={styles.streamerCameraView}
-          ref={(vb) => {
-            this.vbCamera = vb
+          ref={(refs) => {
+            this.vbCamera = refs
           }}
           outputUrl={Utils.getRtmpPath() + Utils.getRoomName()}
           camera={{ cameraId: 1, cameraFrontMirror: true }}
@@ -615,7 +620,7 @@ export default class LiveStreamScreen extends Component {
             bitrate: 500000,
             profile: 1,
             fps: 15,
-            videoFrontMirror: false,
+            videoFrontMirror: true,
           }}
           smoothSkinLevel={3}
           autopreview
@@ -873,6 +878,8 @@ export default class LiveStreamScreen extends Component {
 
   render() {
     const type = Utils.getUserType()
+    console.log(type)
+
     if (type === 'STREAMER') {
       return this.renderStreamerUI()
     } if (type === 'VIEWER') {
