@@ -128,14 +128,12 @@ export default class LiveStreamScreen extends Component {
     this.setState({ liveStatus: LiveStatus.ON_LIVE })
     SocketUtils.emitBeginLiveStream(Utils.getRoomName(), Utils.getUserId())
     this.vbCamera.start()
-    console.log('start stream')
   };
 
   onFinishLiveStream = () => {
     this.setState({ liveStatus: LiveStatus.FINISH })
     SocketUtils.emitFinishLiveStream(Utils.getRoomName(), Utils.getUserId())
     this.vbCamera.stop()
-    console.log('stop stream')
   };
 
   onPressHeart = () => {
@@ -604,6 +602,7 @@ export default class LiveStreamScreen extends Component {
 
   renderStreamerUI = () => {
     const { liveStatus, countViewer, countHeart } = this.state
+
     return (
       <View style={styles.container}>
         <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
@@ -617,7 +616,7 @@ export default class LiveStreamScreen extends Component {
           audio={{ bitrate: 32000, profile: 1, samplerate: 44100 }}
           video={{
             preset: 1,
-            bitrate: 500000,
+            bitrate: 50000,
             profile: 1,
             fps: 15,
             videoFrontMirror: true,
@@ -671,7 +670,7 @@ export default class LiveStreamScreen extends Component {
           transparent
           visible={this.state.modalVisible}
           onRequestClose={() => {
-            alert('Modal has been closed.')
+            Alert('Modal has been closed.')
           }}
         >
           <View
@@ -711,24 +710,27 @@ export default class LiveStreamScreen extends Component {
         '#1abc9c',
       ],
     })
+    console.log(123)
+    console.log(Utils.getRtmpPath() + Utils.getRoomName())
+    console.log(liveStatus)
+
     const { liveStatus, countViewer, countHeart } = this.state
     return (
       <View style={styles.container}>
         <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
-        {liveStatus === LiveStatus.ON_LIVE && (
-          <NodePlayerView
-            style={styles.streamerCameraView}
-            ref={(vb) => {
-              this.vbViewer = vb
-            }}
-            inputUrl={Utils.getRtmpPath() + Utils.getRoomName()}
-            // inputUrl={'rtmp://192.168.1.2/live/' + Utils.getRoomName()}
-            scaleMode="ScaleAspectFit"
-            bufferTime={300}
-            maxBufferTime={1000}
-            autoplay
-          />
-        )}
+        {/* {liveStatus === LiveStatus.ON_LIVE && ( */}
+        <NodePlayerView
+          style={styles.streamerCameraView}
+          ref={(vb) => {
+            this.vbViewer = vb
+          }}
+          inputUrl={Utils.getRtmpPath() + Utils.getRoomName()}
+          scaleMode="ScaleAspectFit"
+          bufferTime={300}
+          maxBufferTime={1000}
+          autoplay
+        />
+
         <TouchableWithoutFeedback
           onPress={() => {
             Keyboard.dismiss()
@@ -796,7 +798,7 @@ export default class LiveStreamScreen extends Component {
           transparent
           visible={this.state.modalVisible}
           onRequestClose={() => {
-            alert('Modal has been closed.')
+            Alert('Modal has been closed.')
           }}
         >
           <View
@@ -882,7 +884,8 @@ export default class LiveStreamScreen extends Component {
 
     if (type === 'STREAMER') {
       return this.renderStreamerUI()
-    } if (type === 'VIEWER') {
+    }
+    if (type === 'VIEWER') {
       return this.renderViewerUI()
     }
     return this.renderReplayUI()

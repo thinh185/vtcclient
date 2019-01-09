@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    // zIndex: 2,
+    zIndex: 2,
   },
   viewDismissKeyboard: {
     position: 'absolute',
@@ -97,12 +97,11 @@ const styles = StyleSheet.create({
   },
   streamerCameraView: {
     position: 'absolute',
-    // top: 0,
-    // left: 0,
-    height: 100,
-    width: 100,
-    backgroundColor: '#a55eea',
-    // zIndex: 1,
+    top: 0,
+    left: 0,
+    height: height,
+    width: width,
+    zIndex: 1,
   },
   beginLiveStreamButton: {
     position: 'absolute',
