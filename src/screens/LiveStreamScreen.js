@@ -81,10 +81,18 @@ export default class LiveStreamScreen extends Component {
       SocketUtils.emitRegisterLiveStream(Utils.getUserId(), Utils.getUserId())
     } else if (userType === 'VIEWER') {
       SocketUtils.emitJoinServer(Utils.getRoomName(), Utils.getUserId())
-      this.StartBackgroundColorAnimation()
+      this.vbViewer.start()
+      // this.StartBackgroundColorAnimation()
     } else if (userType === 'REPLAY') {
       SocketUtils.emitReplay(Utils.getRoomName(), Utils.getUserId())
     }
+
+    // const type = Utils.getUserType()
+    // if (type === 'VIEWER') {
+    //   console.log('vao day')
+
+    //   return this.vbViewer.start()
+    // }
   };
 
   alertStreamerNotReady = () => {
@@ -209,9 +217,9 @@ export default class LiveStreamScreen extends Component {
   onPressCancelViewer = () => {
     if (this.vbViewer !== null && this.vbViewer !== undefined) {
       this.vbViewer.stop()
+      this.props.navigation.goBack()
     }
     SocketUtils.emitLeaveServer(Utils.getRoomName(), Utils.getUserId())
-    this.props.navigation.goBack()
   };
 
   renderCancelViewerButton = () => {
@@ -302,6 +310,25 @@ export default class LiveStreamScreen extends Component {
       </TouchableOpacity>
     )
   };
+
+
+  switchCamera = () => {
+    this.vbCamera.switchCamera()
+  }
+
+  renderSwitchCamera = () => {
+    return (
+      <TouchableOpacity
+        style={styles.buttonSwitch}
+        onPress={this.switchCamera}
+      >
+        <Image
+          source={require('../assets/switch_camera.png')}
+          style={styles.iconSwitch}
+        />
+      </TouchableOpacity>
+    )
+  }
 
   renderLiveText = () => {
     const { liveStatus } = this.state
@@ -608,20 +635,20 @@ export default class LiveStreamScreen extends Component {
         <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
         <NodeCameraView
           style={styles.streamerCameraView}
-          ref={(refs) => {
-            this.vbCamera = refs
+          ref={(vb) => {
+            this.vbCamera = vb
           }}
           outputUrl={Utils.getRtmpPath() + Utils.getRoomName()}
           camera={{ cameraId: 1, cameraFrontMirror: true }}
           audio={{ bitrate: 32000, profile: 1, samplerate: 44100 }}
           video={{
             preset: 1,
-            bitrate: 50000,
+            bitrate: 500000,
             profile: 1,
-            fps: 15,
+            fps: 30,
             videoFrontMirror: true,
           }}
-          smoothSkinLevel={3}
+          smoothSkinLevel={4}
           autopreview
         />
         <TouchableWithoutFeedback
@@ -644,6 +671,7 @@ export default class LiveStreamScreen extends Component {
                 <Text style={styles.textViewer}>{countViewer}</Text>
               </View>
             </View>
+            {this.renderSwitchCamera()}
             {this.renderGroupInput()}
             <FloatingHearts count={countHeart} style={styles.wrapGroupHeart} />
             {liveStatus === LiveStatus.REGISTER && (
@@ -699,22 +727,7 @@ export default class LiveStreamScreen extends Component {
   };
 
   renderViewerUI = () => {
-    const BackgroundColorConfig = this.Animation.interpolate({
-      inputRange: [0, 0.2, 0.4, 0.6, 0.8, 1],
-      outputRange: [
-        '#1abc9c',
-        '#3498db',
-        '#9b59b6',
-        '#34495e',
-        '#f1c40f',
-        '#1abc9c',
-      ],
-    })
-    console.log(123)
-    console.log(Utils.getRtmpPath() + Utils.getRoomName())
-    console.log(liveStatus)
-
-    const { liveStatus, countViewer, countHeart } = this.state
+    const { countViewer, countHeart } = this.state
     return (
       <View style={styles.container}>
         <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
@@ -739,59 +752,25 @@ export default class LiveStreamScreen extends Component {
           accessible={false}
           style={styles.viewDismissKeyboard}
         >
-          {liveStatus === LiveStatus.ON_LIVE ? (
-            <View style={styles.container}>
-              {this.renderCancelViewerButton()}
-              {this.renderLiveText()}
-              <View style={styles.wrapIconView}>
-                <Image
-                  source={require('../assets/ico_view.png')}
-                  style={styles.iconView}
-                />
-                <View style={styles.wrapTextViewer}>
-                  <Text style={styles.textViewer}>{countViewer}</Text>
-                </View>
-              </View>
-              {this.renderGroupInput()}
-              <FloatingHearts
-                count={countHeart}
-                style={styles.wrapGroupHeart}
+          <View style={styles.container}>
+            {this.renderCancelViewerButton()}
+            {this.renderLiveText()}
+            <View style={styles.wrapIconView}>
+              <Image
+                source={require('../assets/ico_view.png')}
+                style={styles.iconView}
               />
+              <View style={styles.wrapTextViewer}>
+                <Text style={styles.textViewer}>{countViewer}</Text>
+              </View>
             </View>
-          ) : (
-            <Animated.View
-              style={[
-                styles.container,
-                { backgroundColor: BackgroundColorConfig },
-              ]}
-            >
-              {liveStatus === LiveStatus.REGISTER && (
-                <View style={styles.wrapPromotionText}>
-                  <Text style={styles.textPromotion}>
-                    Stay here and wait until start live stream you will get 30%
-                    discount
-                  </Text>
-                </View>
-              )}
-              {this.renderCancelViewerButton()}
-              {this.renderLiveText()}
-              <View style={styles.wrapIconView}>
-                <Image
-                  source={require('../assets/ico_view.png')}
-                  style={styles.iconView}
-                />
-                <View style={styles.wrapTextViewer}>
-                  <Text style={styles.textViewer}>{countViewer}</Text>
-                </View>
-              </View>
-              {this.renderGroupInput()}
-              <FloatingHearts
-                count={countHeart}
-                style={styles.wrapGroupHeart}
-              />
-            </Animated.View>
-          )}
+            <FloatingHearts
+              count={countHeart}
+              style={styles.wrapGroupHeart}
+            />
+          </View>
         </TouchableWithoutFeedback>
+        {this.renderGroupInput()}
         {this.renderListMessages()}
         <Modal
           animationType="slide"
@@ -849,12 +828,6 @@ export default class LiveStreamScreen extends Component {
                 }/replayfor${
                   Utils.getUserId()}`
               }
-              // inputUrl={
-              //   'rtmp://192.168.1.2/live/' +
-              //   Utils.getRoomName() +
-              //   '/replayfor' +
-              //   Utils.getUserId()
-              // }
               scaleMode="ScaleAspectFit"
               bufferTime={300}
               maxBufferTime={1000}

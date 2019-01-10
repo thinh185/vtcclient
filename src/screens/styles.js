@@ -248,6 +248,19 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     zIndex: 2,
   },
+  buttonSwitch: {
+    height: 40,
+    flexDirection: 'row',
+    position: 'absolute',
+    top: 30,
+    left: 195,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 6,
+    paddingHorizontal: 6,
+    borderRadius: 5,
+    zIndex: 2,
+  },
   buttonCloseModal: {
     height: 40,
     flexDirection: 'row',
@@ -263,6 +276,11 @@ const styles = StyleSheet.create({
   iconCancel: {
     width: 20,
     height: 20,
+    tintColor: 'white',
+  },
+  iconSwitch: {
+    width: 30,
+    height: 30,
     tintColor: 'white',
   },
   col: {
