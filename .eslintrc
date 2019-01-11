@@ -9,6 +9,9 @@
           "~": "./src",
           "screens": "./src/screens",
           "components": "./src/components",
+          "actions": "./src/actions",
+          "reducer": "./src/reducer",
+          "saga": "./src/saga",
           "assests": "./src/assets"
         }
       }

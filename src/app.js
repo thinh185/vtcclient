@@ -1,6 +1,14 @@
 import React from 'react'
 import { PermissionsAndroid } from 'react-native'
+
+import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
+import { ThemeProvider } from 'styled-components'
+import configureStore from './store'
+
 import AppContainer from './Router'
+
+const { store, persistor } = configureStore()
 
 export default class App extends React.Component {
   componentDidMount() {
@@ -24,6 +32,14 @@ export default class App extends React.Component {
   }
 
   render() {
-    return <AppContainer />
+    return (
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <ThemeProvider>
+            <AppContainer />
+          </ThemeProvider>
+        </PersistGate>
+      </Provider>
+    )
   }
 }

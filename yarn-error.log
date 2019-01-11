@@ -1,28 +1,28 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/Cellar/yarn/1.12.3/libexec/bin/yarn.js add babel-module
+  /usr/bin/node /home/thinhnn/.npm-global/bin/yarn add styled-component
 
 PATH: 
-  /usr/local/bin:/Users/luong/.fastlane/bin:/bin:/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:/Users/luong/Library/Android/sdk/emulator:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Users/luong/.fastlane/bin:/usr/local/sbin:/Users/luong/Library/Android/sdk/emulator:/Users/luong/Library/Android/sdk/tools:/Users/luong/.composer/vendor/bin:/Users/luong/Library/Android/sdk/tools/bin:/Users/luong/Library/Android/sdk/platform-tools:/Users/luong/Library/Android/sdk/tools:/Users/luong/.composer/vendor/bin:/Users/luong/Library/Android/sdk/tools/bin:/Users/luong/Library/Android/sdk/platform-tools
+  /home/thinhnn/GoProjects/bin:/usr/local/go/bin:/home/thinhnn/bin:/home/thinhnn/.local/bin:/home/thinhnn/GoProjects/bin:/usr/local/go/bin:/home/thinhnn/bin:/home/thinhnn/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin:/home/thinhnn/Android/Sdk/tools:/home/thinhnn/Android/Sdk/tools/bin:/home/thinhnn/Android/Sdk/platform-tools:/home/thinhnn/Android/Sdk/emulator:/home/thinhnn/.npm-global/bin:/home/thinhnn/Android/Sdk/tools:/home/thinhnn/Android/Sdk/tools/bin:/home/thinhnn/Android/Sdk/platform-tools:/home/thinhnn/Android/Sdk/emulator:/home/thinhnn/.npm-global/bin
 
 Yarn version: 
-  1.12.3
+  1.10.1
 
 Node version: 
-  8.11.2
+  8.15.0
 
 Platform: 
-  darwin x64
+  linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/babel-module: Not found
-      at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.12.3/libexec/lib/cli.js:65894:18)
-      at Request.self.callback (/usr/local/Cellar/yarn/1.12.3/libexec/lib/cli.js:129018:22)
+  Error: http://10.30.154.118:8888/repository/NodeJS/styled-component: Not found
+      at Request.params.callback [as _callback] (/home/thinhnn/.npm-global/lib/node_modules/yarn/lib/cli.js:61073:18)
+      at Request.self.callback (/home/thinhnn/.npm-global/lib/node_modules/yarn/lib/cli.js:120166:22)
       at emitTwo (events.js:126:13)
       at Request.emit (events.js:214:7)
-      at Request.<anonymous> (/usr/local/Cellar/yarn/1.12.3/libexec/lib/cli.js:129990:10)
+      at Request.<anonymous> (/home/thinhnn/.npm-global/lib/node_modules/yarn/lib/cli.js:121138:10)
       at emitOne (events.js:116:13)
       at Request.emit (events.js:211:7)
-      at IncomingMessage.<anonymous> (/usr/local/Cellar/yarn/1.12.3/libexec/lib/cli.js:129912:12)
+      at IncomingMessage.<anonymous> (/home/thinhnn/.npm-global/lib/node_modules/yarn/lib/cli.js:121060:12)
       at Object.onceWrapper (events.js:313:30)
       at emitNone (events.js:111:20)
 
@@ -33,10 +33,12 @@ npm manifest:
     "private": true,
     "scripts": {
       "start": "node node_modules/react-native/local-cli/cli.js start",
-      "test": "jest"
+      "test": "jest",
+      "lint": "eslint 'src/**'"
     },
     "dependencies": {
       "@babel/core": "^7.2.2",
+      "eslint-import-resolver-babel-module": "^4.0.0",
       "eslint-plugin-react": "^7.12.3",
       "moment": "^2.23.0",
       "prop-types": "^15.6.2",
@@ -47,7 +49,10 @@ npm manifest:
       "react-native-sticky-keyboard-accessory": "^0.1.3",
       "react-native-vector-icons": "^6.1.0",
       "react-navigation": "^3.0.9",
-      "socket.io-client": "^2.2.0"
+      "redux": "^4.0.1",
+      "redux-persist": "^5.10.0",
+      "redux-saga": "^0.16.2",
+      "socket.io-client": "2.0.4"
     },
     "devDependencies": {
       "babel-core": "^6.26.3",
@@ -982,7 +987,7 @@ Lockfile:
   
   after@0.8.2:
     version "0.8.2"
-    resolved "https://registry.yarnpkg.com/after/-/after-0.8.2.tgz#fedb394f9f0e02aa9768e702bda23b505fae7e1f"
+    resolved "http://10.30.154.118:8888/repository/NodeJS/after/-/after-0.8.2.tgz#fedb394f9f0e02aa9768e702bda23b505fae7e1f"
     integrity sha1-/ts5T58OAqqXaOcCvaI7UF+ufh8=
   
   ajv@^6.5.3, ajv@^6.5.5, ajv@^6.6.1:
@@ -1188,7 +1193,7 @@ Lockfile:
   
   arraybuffer.slice@~0.0.7:
     version "0.0.7"
-    resolved "https://registry.yarnpkg.com/arraybuffer.slice/-/arraybuffer.slice-0.0.7.tgz#3bbc4275dd584cc1b10809b89d4e8b63a69e7675"
+    resolved "http://10.30.154.118:8888/repository/NodeJS/arraybuffer.slice/-/arraybuffer.slice-0.0.7.tgz#3bbc4275dd584cc1b10809b89d4e8b63a69e7675"
     integrity sha512-wGUIVQXuehL5TCqQun8OW81jGzAWycqzFF8lFp+GOM5BXLYj3bKNsYC4daB7n6XjCqxQA/qgTJ+8ANR3acjrog==
   
   arrify@^1.0.1:
@@ -1901,7 +1906,7 @@ Lockfile:
   
   backo2@1.0.2:
     version "1.0.2"
-    resolved "https://registry.yarnpkg.com/backo2/-/backo2-1.0.2.tgz#31ab1ac8b129363463e35b3ebb69f4dfcfba7947"
+    resolved "http://10.30.154.118:8888/repository/NodeJS/backo2/-/backo2-1.0.2.tgz#31ab1ac8b129363463e35b3ebb69f4dfcfba7947"
     integrity sha1-MasayLEpNjRj41s+u2n038+6eUc=
   
   balanced-match@^1.0.0:
@@ -1911,7 +1916,7 @@ Lockfile:
   
   base64-arraybuffer@0.1.5:
     version "0.1.5"
-    resolved "https://registry.yarnpkg.com/base64-arraybuffer/-/base64-arraybuffer-0.1.5.tgz#73926771923b5a19747ad666aa5cd4bf9c6e9ce8"
+    resolved "http://10.30.154.118:8888/repository/NodeJS/base64-arraybuffer/-/base64-arraybuffer-0.1.5.tgz#73926771923b5a19747ad666aa5cd4bf9c6e9ce8"
     integrity sha1-c5JncZI7Whl0etZmqlzUv5xunOg=
   
   base64-js@1.1.2:
@@ -1953,7 +1958,7 @@ Lockfile:
   
   better-assert@~1.0.0:
     version "1.0.2"
-    resolved "https://registry.yarnpkg.com/better-assert/-/better-assert-1.0.2.tgz#40866b9e1b9e0b55b481894311e68faffaebc522"
+    resolved "http://10.30.154.118:8888/repository/NodeJS/better-assert/-/better-assert-1.0.2.tgz#40866b9e1b9e0b55b481894311e68faffaebc522"
     integrity sha1-QIZrnhueC1W0gYlDEeaPr/rrxSI=
     dependencies:
       callsite "1.0.0"
@@ -1970,7 +1975,7 @@ Lockfile:
   
   blob@0.0.5:
     version "0.0.5"
-    resolved "https://registry.yarnpkg.com/blob/-/blob-0.0.5.tgz#d680eeef25f8cd91ad533f5b01eed48e64caf683"
+    resolved "http://10.30.154.118:8888/repository/NodeJS/blob/-/blob-0.0.5.tgz#d680eeef25f8cd91ad533f5b01eed48e64caf683"
     integrity sha512-gaqbzQPqOoamawKg0LGVd7SzLgXS+JH61oWprSLH+P+abTczqJbhTR8CmJ2u9/bUYNmHTGJx/UEmn6doAvvuig==
   
   bluebird@^3.5.1:
@@ -2099,7 +2104,7 @@ Lockfile:
   
   callsite@1.0.0:
     version "1.0.0"
-    resolved "https://registry.yarnpkg.com/callsite/-/callsite-1.0.0.tgz#280398e5d664bd74038b6f0905153e6e8af1bc20"
+    resolved "http://10.30.154.118:8888/repository/NodeJS/callsite/-/callsite-1.0.0.tgz#280398e5d664bd74038b6f0905153e6e8af1bc20"
     integrity sha1-KAOY5dZkvXQDi28JBRU+borxvCA=
   
   callsites@^2.0.0:
@@ -2303,7 +2308,7 @@ Lockfile:
   
   component-bind@1.0.0:
     version "1.0.0"
-    resolved "https://registry.yarnpkg.com/component-bind/-/component-bind-1.0.0.tgz#00c608ab7dcd93897c0009651b1d3a8e1e73bbd1"
+    resolved "http://10.30.154.118:8888/repository/NodeJS/component-bind/-/component-bind-1.0.0.tgz#00c608ab7dcd93897c0009651b1d3a8e1e73bbd1"
     integrity sha1-AMYIq33Nk4l8AAllGx06jh5zu9E=
   
   component-emitter@1.2.1, component-emitter@^1.2.1:
@@ -2313,7 +2318,7 @@ Lockfile:
   
   component-inherit@0.0.3:
     version "0.0.3"
-    resolved "https://registry.yarnpkg.com/component-inherit/-/component-inherit-0.0.3.tgz#645fc4adf58b72b649d5cae65135619db26ff143"
+    resolved "http://10.30.154.118:8888/repository/NodeJS/component-inherit/-/component-inherit-0.0.3.tgz#645fc4adf58b72b649d5cae65135619db26ff143"
     integrity sha1-ZF/ErfWLcrZJ1crmUTVhnbJv8UM=
   
   compressible@~2.0.14:
@@ -2478,7 +2483,7 @@ Lockfile:
       whatwg-mimetype "^2.2.0"
       whatwg-url "^7.0.0"
   
-  debug@2.6.9, debug@^2.1.2, debug@^2.2.0, debug@^2.3.3, debug@^2.6.8, debug@^2.6.9:
+  debug@2.6.9, debug@^2.1.2, debug@^2.2.0, debug@^2.3.3, debug@^2.6.8, debug@^2.6.9, debug@~2.6.4:
     version "2.6.9"
     resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
     integrity sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==
@@ -2501,7 +2506,7 @@ Lockfile:
   
   debug@~3.1.0:
     version "3.1.0"
-    resolved "https://registry.yarnpkg.com/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
+    resolved "http://10.30.154.118:8888/repository/NodeJS/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
     integrity sha512-OX8XqP7/1a9cqkxYw2yXss15f26NKWBpDXQd0/uK/KPqdQhxbPa994hnzjcE2VqQpDslf55723cKPUOGSmMY3g==
     dependencies:
       ms "2.0.0"
@@ -2671,10 +2676,10 @@ Lockfile:
     dependencies:
       iconv-lite "~0.4.13"
   
-  engine.io-client@~3.3.1:
-    version "3.3.1"
-    resolved "https://registry.yarnpkg.com/engine.io-client/-/engine.io-client-3.3.1.tgz#afedb4a07b2ea48b7190c3136bfea98fdd4f0f03"
-    integrity sha512-q66JBFuQcy7CSlfAz9L3jH+v7DTT3i6ZEadYcVj2pOs8/0uJHLxKX3WBkGTvULJMdz0tUCyJag0aKT/dpXL9BQ==
+  engine.io-client@~3.1.0:
+    version "3.1.6"
+    resolved "http://10.30.154.118:8888/repository/NodeJS/engine.io-client/-/engine.io-client-3.1.6.tgz#5bdeb130f8b94a50ac5cbeb72583e7a4a063ddfd"
+    integrity sha512-hnuHsFluXnsKOndS4Hv6SvUrgdYx1pk2NqfaDMW+GWdgfU3+/V25Cj7I8a0x92idSpa5PIhJRKxPvp9mnoLsfg==
     dependencies:
       component-emitter "1.2.1"
       component-inherit "0.0.3"
@@ -2684,13 +2689,13 @@ Lockfile:
       indexof "0.0.1"
       parseqs "0.0.5"
       parseuri "0.0.5"
-      ws "~6.1.0"
+      ws "~3.3.1"
       xmlhttprequest-ssl "~1.5.4"
       yeast "0.1.2"
   
   engine.io-parser@~2.1.1:
     version "2.1.3"
-    resolved "https://registry.yarnpkg.com/engine.io-parser/-/engine.io-parser-2.1.3.tgz#757ab970fbf2dfb32c7b74b033216d5739ef79a6"
+    resolved "http://10.30.154.118:8888/repository/NodeJS/engine.io-parser/-/engine.io-parser-2.1.3.tgz#757ab970fbf2dfb32c7b74b033216d5739ef79a6"
     integrity sha512-6HXPre2O4Houl7c4g7Ic/XzPnHBvaEmN90vtRO9uLmwtRqQmTOw0QMevL1TOfL2Cpu1VzsaTmMotQgMdkzGkVA==
     dependencies:
       after "0.8.2"
@@ -2779,6 +2784,14 @@ Lockfile:
       eslint-config-airbnb-base "^13.1.0"
       object.assign "^4.1.0"
       object.entries "^1.0.4"
+  
+  eslint-import-resolver-babel-module@^4.0.0:
+    version "4.0.0"
+    resolved "https://registry.yarnpkg.com/eslint-import-resolver-babel-module/-/eslint-import-resolver-babel-module-4.0.0.tgz#1c596f7fb9815050292c8750d523b27a5444b4bf"
+    integrity sha512-aPj0+pG0H3HCaMD9eRDYEzPdMyKrLE2oNhAzTXd2w86ZBe3s7drSrrPwVTfzO1CBp13FGk8S84oRmZHZvSo0mA==
+    dependencies:
+      pkg-up "^2.0.0"
+      resolve "^1.4.0"
   
   eslint-import-resolver-node@^0.3.1:
     version "0.3.2"
@@ -3550,14 +3563,14 @@ Lockfile:
   
   has-binary2@~1.0.2:
     version "1.0.3"
-    resolved "https://registry.yarnpkg.com/has-binary2/-/has-binary2-1.0.3.tgz#7776ac627f3ea77250cfc332dab7ddf5e4f5d11d"
+    resolved "http://10.30.154.118:8888/repository/NodeJS/has-binary2/-/has-binary2-1.0.3.tgz#7776ac627f3ea77250cfc332dab7ddf5e4f5d11d"
     integrity sha512-G1LWKhDSvhGeAQ8mPVQlqNcOB2sJdwATtZKl2pDKKHfpf/rYj24lkinxf69blJbnsvtqqNU+L3SL50vzZhXOnw==
     dependencies:
       isarray "2.0.1"
   
   has-cors@1.1.0:
     version "1.1.0"
-    resolved "https://registry.yarnpkg.com/has-cors/-/has-cors-1.1.0.tgz#5e474793f7ea9843d1bb99c23eef49ff126fff39"
+    resolved "http://10.30.154.118:8888/repository/NodeJS/has-cors/-/has-cors-1.1.0.tgz#5e474793f7ea9843d1bb99c23eef49ff126fff39"
     integrity sha1-XkdHk/fqmEPRu5nCPu9J/xJv/zk=
   
   has-flag@^1.0.0:
@@ -3729,7 +3742,7 @@ Lockfile:
   
   indexof@0.0.1:
     version "0.0.1"
-    resolved "https://registry.yarnpkg.com/indexof/-/indexof-0.0.1.tgz#82dc336d232b9062179d05ab3293a66059fd435d"
+    resolved "http://10.30.154.118:8888/repository/NodeJS/indexof/-/indexof-0.0.1.tgz#82dc336d232b9062179d05ab3293a66059fd435d"
     integrity sha1-gtwzbSMrkGIXnQWrMpOmYFn9Q10=
   
   inflight@^1.0.4:
@@ -4059,7 +4072,7 @@ Lockfile:
   
   isarray@2.0.1:
     version "2.0.1"
-    resolved "https://registry.yarnpkg.com/isarray/-/isarray-2.0.1.tgz#a37d94ed9cda2d59865c9f76fe596ee1f338741e"
+    resolved "http://10.30.154.118:8888/repository/NodeJS/isarray/-/isarray-2.0.1.tgz#a37d94ed9cda2d59865c9f76fe596ee1f338741e"
     integrity sha1-o32U7ZzaLVmGXJ92/llu4fM4dB4=
   
   isexe@^2.0.0:
@@ -4776,7 +4789,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
     integrity sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
   
-  loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.3.1:
+  loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.3.1, loose-envify@^1.4.0:
     version "1.4.0"
     resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
     integrity sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==
@@ -5427,7 +5440,7 @@ Lockfile:
   
   object-component@0.0.3:
     version "0.0.3"
-    resolved "https://registry.yarnpkg.com/object-component/-/object-component-0.0.3.tgz#f0c69aa50efc95b866c186f400a33769cb2f1291"
+    resolved "http://10.30.154.118:8888/repository/NodeJS/object-component/-/object-component-0.0.3.tgz#f0c69aa50efc95b866c186f400a33769cb2f1291"
     integrity sha1-8MaapQ78lbhmwYb0AKM3acsvEpE=
   
   object-copy@^0.1.0:
@@ -5657,14 +5670,14 @@ Lockfile:
   
   parseqs@0.0.5:
     version "0.0.5"
-    resolved "https://registry.yarnpkg.com/parseqs/-/parseqs-0.0.5.tgz#d5208a3738e46766e291ba2ea173684921a8b89d"
+    resolved "http://10.30.154.118:8888/repository/NodeJS/parseqs/-/parseqs-0.0.5.tgz#d5208a3738e46766e291ba2ea173684921a8b89d"
     integrity sha1-1SCKNzjkZ2bikbouoXNoSSGouJ0=
     dependencies:
       better-assert "~1.0.0"
   
   parseuri@0.0.5:
     version "0.0.5"
-    resolved "https://registry.yarnpkg.com/parseuri/-/parseuri-0.0.5.tgz#80204a50d4dbb779bfdc6ebe2778d90e4bce320a"
+    resolved "http://10.30.154.118:8888/repository/NodeJS/parseuri/-/parseuri-0.0.5.tgz#80204a50d4dbb779bfdc6ebe2778d90e4bce320a"
     integrity sha1-gCBKUNTbt3m/3G6+J3jZDkvOMgo=
     dependencies:
       better-assert "~1.0.0"
@@ -6243,6 +6256,24 @@ Lockfile:
     dependencies:
       util.promisify "^1.0.0"
   
+  redux-persist@^5.10.0:
+    version "5.10.0"
+    resolved "http://10.30.154.118:8888/repository/NodeJS/redux-persist/-/redux-persist-5.10.0.tgz#5d8d802c5571e55924efc1c3a9b23575283be62b"
+    integrity sha512-sSJAzNq7zka3qVHKce1hbvqf0Vf5DuTVm7dr4GtsqQVOexnrvbV47RWFiPxQ8fscnyiuWyD2O92DOxPl0tGCRg==
+  
+  redux-saga@^0.16.2:
+    version "0.16.2"
+    resolved "http://10.30.154.118:8888/repository/NodeJS/redux-saga/-/redux-saga-0.16.2.tgz#993662e86bc945d8509ac2b8daba3a8c615cc971"
+    integrity sha512-iIjKnRThI5sKPEASpUvySemjzwqwI13e3qP7oLub+FycCRDysLSAOwt958niZW6LhxfmS6Qm1BzbU70w/Koc4w==
+  
+  redux@^4.0.1:
+    version "4.0.1"
+    resolved "http://10.30.154.118:8888/repository/NodeJS/redux/-/redux-4.0.1.tgz#436cae6cc40fbe4727689d7c8fae44808f1bfef5"
+    integrity sha512-R7bAtSkk7nY6O/OYMVR9RiBI+XghjF9rlbl5806HJbQph0LJVHZrU5oaO4q70eUKiqMRqm4y07KLTlMZ2BlVmg==
+    dependencies:
+      loose-envify "^1.4.0"
+      symbol-observable "^1.2.0"
+  
   regenerate-unicode-properties@^7.0.0:
     version "7.0.0"
     resolved "https://registry.yarnpkg.com/regenerate-unicode-properties/-/regenerate-unicode-properties-7.0.0.tgz#107405afcc4a190ec5ed450ecaa00ed0cafa7a4c"
@@ -6714,33 +6745,33 @@ Lockfile:
       source-map-resolve "^0.5.0"
       use "^3.1.0"
   
-  socket.io-client@^2.2.0:
-    version "2.2.0"
-    resolved "https://registry.yarnpkg.com/socket.io-client/-/socket.io-client-2.2.0.tgz#84e73ee3c43d5020ccc1a258faeeb9aec2723af7"
-    integrity sha512-56ZrkTDbdTLmBIyfFYesgOxsjcLnwAKoN4CiPyTVkMQj3zTUh0QAx3GbvIvLpFEOvQWu92yyWICxB0u7wkVbYA==
+  socket.io-client@2.0.4:
+    version "2.0.4"
+    resolved "http://10.30.154.118:8888/repository/NodeJS/socket.io-client/-/socket.io-client-2.0.4.tgz#0918a552406dc5e540b380dcd97afc4a64332f8e"
+    integrity sha1-CRilUkBtxeVAs4Dc2Xr8SmQzL44=
     dependencies:
       backo2 "1.0.2"
       base64-arraybuffer "0.1.5"
       component-bind "1.0.0"
       component-emitter "1.2.1"
-      debug "~3.1.0"
-      engine.io-client "~3.3.1"
-      has-binary2 "~1.0.2"
+      debug "~2.6.4"
+      engine.io-client "~3.1.0"
       has-cors "1.1.0"
       indexof "0.0.1"
       object-component "0.0.3"
       parseqs "0.0.5"
       parseuri "0.0.5"
-      socket.io-parser "~3.3.0"
+      socket.io-parser "~3.1.1"
       to-array "0.1.4"
   
-  socket.io-parser@~3.3.0:
-    version "3.3.0"
-    resolved "https://registry.yarnpkg.com/socket.io-parser/-/socket.io-parser-3.3.0.tgz#2b52a96a509fdf31440ba40fed6094c7d4f1262f"
-    integrity sha512-hczmV6bDgdaEbVqhAeVMM/jfUfzuEZHsQg6eOmLgJht6G3mPKMxYm75w2+qhAQZ+4X+1+ATZ+QFKeOZD5riHng==
+  socket.io-parser@~3.1.1:
+    version "3.1.3"
+    resolved "http://10.30.154.118:8888/repository/NodeJS/socket.io-parser/-/socket.io-parser-3.1.3.tgz#ed2da5ee79f10955036e3da413bfd7f1e4d86c8e"
+    integrity sha512-g0a2HPqLguqAczs3dMECuA1RgoGFPyvDqcbaDEdCWY9g59kdUAz3YRmaJBNKXflrHNwB7Q12Gkf/0CZXfdHR7g==
     dependencies:
       component-emitter "1.2.1"
       debug "~3.1.0"
+      has-binary2 "~1.0.2"
       isarray "2.0.1"
   
   source-map-resolve@^0.5.0:
@@ -6979,6 +7010,11 @@ Lockfile:
     dependencies:
       has-flag "^3.0.0"
   
+  symbol-observable@^1.2.0:
+    version "1.2.0"
+    resolved "http://10.30.154.118:8888/repository/NodeJS/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
+    integrity sha512-e900nM8RRtGhlV36KGEU9k65K3mPb1WV70OdjfxlG2EAuM1noi/E/BaW/uMhL7bPEssK8QV57vN3esixjUvcXQ==
+  
   symbol-tree@^3.2.2:
     version "3.2.2"
     resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.2.tgz#ae27db38f660a7ae2e1c3b7d1bc290819b8519e6"
@@ -7068,7 +7104,7 @@ Lockfile:
   
   to-array@0.1.4:
     version "0.1.4"
-    resolved "https://registry.yarnpkg.com/to-array/-/to-array-0.1.4.tgz#17e6c11f73dd4f3d74cda7a4ff3238e9ad9bf890"
+    resolved "http://10.30.154.118:8888/repository/NodeJS/to-array/-/to-array-0.1.4.tgz#17e6c11f73dd4f3d74cda7a4ff3238e9ad9bf890"
     integrity sha1-F+bBH3PdTz10zaek/zI46a2b+JA=
   
   to-fast-properties@^1.0.3:
@@ -7449,7 +7485,7 @@ Lockfile:
       options ">=0.0.5"
       ultron "1.0.x"
   
-  ws@^3.3.1:
+  ws@^3.3.1, ws@~3.3.1:
     version "3.3.3"
     resolved "https://registry.yarnpkg.com/ws/-/ws-3.3.3.tgz#f1cf84fe2d5e901ebce94efaece785f187a228f2"
     integrity sha512-nnWLa/NwZSt4KQJu51MYlCcSQ5g7INpOrOMt4XV8j4dqTXdmlUmSHQ8/oLC069ckre0fRsgfvsKwbTdtKLCDkA==
@@ -7462,13 +7498,6 @@ Lockfile:
     version "5.2.2"
     resolved "https://registry.yarnpkg.com/ws/-/ws-5.2.2.tgz#dffef14866b8e8dc9133582514d1befaf96e980f"
     integrity sha512-jaHFD6PFv6UgoIVda6qZllptQsMlDEJkTQcybzzXDYM1XO9Y8em691FGMPmM46WGyLU4z9KMgQN+qrux/nhlHA==
-    dependencies:
-      async-limiter "~1.0.0"
-  
-  ws@~6.1.0:
-    version "6.1.2"
-    resolved "https://registry.yarnpkg.com/ws/-/ws-6.1.2.tgz#3cc7462e98792f0ac679424148903ded3b9c3ad8"
-    integrity sha512-rfUqzvz0WxmSXtJpPMX2EeASXabOrSMk1ruMOV3JBTBjo4ac2lDjGGsbQSyxj8Odhw5fBib8ZKEjDNvgouNKYw==
     dependencies:
       async-limiter "~1.0.0"
   
@@ -7509,7 +7538,7 @@ Lockfile:
   
   xmlhttprequest-ssl@~1.5.4:
     version "1.5.5"
-    resolved "https://registry.yarnpkg.com/xmlhttprequest-ssl/-/xmlhttprequest-ssl-1.5.5.tgz#c2876b06168aadc40e57d97e81191ac8f4398b3e"
+    resolved "http://10.30.154.118:8888/repository/NodeJS/xmlhttprequest-ssl/-/xmlhttprequest-ssl-1.5.5.tgz#c2876b06168aadc40e57d97e81191ac8f4398b3e"
     integrity sha1-wodrBhaKrcQOV9l+gRkayPQ5iz4=
   
   xpipe@^1.0.5:
@@ -7609,5 +7638,5 @@ Lockfile:
   
   yeast@0.1.2:
     version "0.1.2"
-    resolved "https://registry.yarnpkg.com/yeast/-/yeast-0.1.2.tgz#008e06d8094320c372dbc2f8ed76a0ca6c8ac419"
+    resolved "http://10.30.154.118:8888/repository/NodeJS/yeast/-/yeast-0.1.2.tgz#008e06d8094320c372dbc2f8ed76a0ca6c8ac419"
     integrity sha1-AI4G2AlDIMNy28L47XagymyKxBk=

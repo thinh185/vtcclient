@@ -9,7 +9,10 @@
           "~": "./src",
           "screens": "./src/screens",
           "components": "./src/components",
-          "assests": "./src/assets"
+          "actions": "./src/actions",
+          "reducer": "./src/reducer",
+          "saga": "./src/saga",
+          "assests": "./src/assets",
         },
         "stripExtensions": [
           ".js",
