@@ -3,8 +3,8 @@ import { create } from 'apisauce'
 const api = create({})
 
 export function configApi(token) {
-  api.setBaseURL = 'http://172.16.1.158:3333'
-  api.setHeader('Accept', 'application/json')
+  api.setBaseURL('http://a659f2e2.ngrok.io')
+  api.setHeader('Accept', 'application/vnd.github.v3+json')
   if (token) {
     api.setHeader('Authorization', `Bearer ${token}`)
   }

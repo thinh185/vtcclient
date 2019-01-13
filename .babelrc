@@ -12,7 +12,10 @@
           "actions": "./src/actions",
           "reducer": "./src/reducer",
           "saga": "./src/saga",
-          "assests": "./src/assets",
+          "assets": "./src/assets",
+          "config": "./src/config",
+          "navigations": "./src/navigations",
+          "utils": "./src/utils"
         },
         "stripExtensions": [
           ".js",

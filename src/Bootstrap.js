@@ -7,10 +7,6 @@ class Bootstrap extends React.Component {
     configApi(this.props.token)
   }
 
-  componentWillReceiveProps() {
-    this.initWebSocketForChat()
-  }
-
   render() {
     return this.props.children
   }

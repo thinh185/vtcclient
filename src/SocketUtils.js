@@ -24,11 +24,12 @@ const handleOnConnect = () => {
   })
 }
 
-const emitRegisterLiveStream = (roomName, userId) => {
+const emitRegisterLiveStream = (streamKey, userId) => {
   socket.emit('register-live-stream', {
-    roomName,
+    streamKey,
     userId,
   })
+  console.log('da xong')
 }
 
 const emitBeginLiveStream = (roomName, userId) => {
@@ -192,6 +193,9 @@ const emitReplay = (roomName, userId) => {
 const handleOnChangedLiveStatus = () => {
   socket.on('changed-live-status', (data) => {
     const { roomName, liveStatus } = data
+    console.log('roomName ', roomName)
+
+    Utils.setRoomName(roomName)
     const currentRoomName = Utils.getRoomName()
     const currentUserType = Utils.getUserType()
     if (roomName === currentRoomName) {

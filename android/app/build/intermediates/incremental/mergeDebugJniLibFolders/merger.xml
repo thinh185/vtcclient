@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/home/thinhnn/demo/vtcclient/android/app/src/main/jniLibs"/></dataSet><dataSet config="debug"><source path="/home/thinhnn/demo/vtcclient/android/app/src/debug/jniLibs"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/home/thinh/demo/vtcclient/android/app/src/main/jniLibs"/></dataSet><dataSet config="debug"><source path="/home/thinh/demo/vtcclient/android/app/src/debug/jniLibs"/></dataSet></merger>

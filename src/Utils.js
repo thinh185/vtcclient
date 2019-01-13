@@ -4,10 +4,10 @@ let userId = null
 let roomName = null
 let timeOutMessages = []
 
-const socketIOIP = 'http://172.16.1.158:3333'
-// const socketIOIP = 'http://192.168.1.2:3333';
-const rtmpPath = 'rtmp://172.16.1.158/live/'
-// const rtmpPath = 'rtmp://192.168.1.2/live/';
+// const socketIOIP = 'http://172.16.1.158:3333'
+const socketIOIP = 'http://a659f2e2.ngrok.io'
+// const rtmpPath = 'rtmp://172.16.1.158/live/'
+const rtmpPath = 'rtmp://a659f2e2.ngrok.io/live/'
 
 const getSocketIOIP = () => {
   return socketIOIP

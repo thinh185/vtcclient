@@ -3,7 +3,7 @@ import { Platform, StyleSheet, Dimensions } from 'react-native'
 const { width, height } = Dimensions.get('window')
 console.log('width height', width, height)
 
-const styles = StyleSheet.create({
+export const stylesLive = StyleSheet.create({
   containerBackdrop: {
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.8)',
@@ -314,4 +314,47 @@ const styles = StyleSheet.create({
   },
 })
 
-export default styles
+
+export const styleAuthen = StyleSheet.create({
+  container: {
+    marginHorizontal: 20,
+    flex: 1 },
+  body: {
+    justifyContent: 'space-between',
+    height: 300,
+  },
+  item: {
+  },
+  image: {
+    height: 100,
+    width: 300,
+    marginVertical: 10,
+  },
+  label: {
+    fontSize: 16,
+    fontWeight: '300',
+    paddingHorizontal: 8,
+  },
+  textInput: {
+    fontSize: 16,
+    borderRadius: 18,
+    borderWidth: 1,
+    marginVertical: 8,
+  },
+  textButton: {
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    textAlign: 'center',
+    fontSize: 20,
+    borderRadius: 18,
+    borderWidth: 1,
+    width: 300,
+    backgroundColor: 'rgb(170,20,150)',
+  },
+  textMore: {
+    textAlign: 'center',
+    fontSize: 16,
+    fontWeight: '300',
+    marginTop: 20,
+  },
+})
