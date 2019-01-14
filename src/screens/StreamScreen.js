@@ -57,14 +57,8 @@ class StreamScreen extends Component {
     this.keyboardShowListener = Keyboard.addListener(keyboardShowEvent, e => this.keyboardShow(e))
     this.keyboardHideListener = Keyboard.addListener(keyboardHideEvent, e => this.keyboardHide(e))
 
-    Utils.setContainer(this)
-
     this.setState({ liveStatus: LiveStatus.REGISTER })
     const { user } = this.props
-    console.log('user csa', user)
-    console.log('user csa', user.streamKey)
-
-
     SocketUtils.emitRegisterLiveStream(user.streamKey, user._id)
   };
 
@@ -94,9 +88,9 @@ class StreamScreen extends Component {
     this.vbCamera.start()
   };
 
-  onFinishLiveStream = () => {
+  onFinishLiveStream = (roomName, userId) => {
     this.setState({ liveStatus: LiveStatus.FINISH })
-    SocketUtils.emitFinishLiveStream(Utils.getRoomName(), Utils.getUserId())
+    SocketUtils.emitFinishLiveStream(roomName, userId)
     this.vbCamera.stop()
   };
 
@@ -376,7 +370,6 @@ class StreamScreen extends Component {
   renderStreamerUI = () => {
     const { liveStatus, countViewer, countHeart } = this.state
     const { user } = this.props
-
     return (
       <View style={stylesLive.container}>
         <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
@@ -385,7 +378,7 @@ class StreamScreen extends Component {
           ref={(vb) => {
             this.vbCamera = vb
           }}
-          outputUrl={Utils.getRtmpPath() + Utils.getRoomName()}
+          outputUrl={Utils.getRtmpPath() + this.props.user._id}
           camera={{ cameraId: 1, cameraFrontMirror: true }}
           audio={{ bitrate: 32000, profile: 1, samplerate: 44100 }}
           video={{
@@ -431,7 +424,7 @@ class StreamScreen extends Component {
             {liveStatus === LiveStatus.ON_LIVE && (
               <TouchableOpacity
                 style={stylesLive.finishLiveStreamButton}
-                onPress={() => this.onFinishLiveStream(user._id, Utils.getRoomName())}
+                onPress={() => this.onFinishLiveStream(Utils.getRoomName(), user._id)}
               >
                 <Text style={stylesLive.beginLiveStreamText}>Finish</Text>
               </TouchableOpacity>

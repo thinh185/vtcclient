@@ -4,6 +4,7 @@ import moment from 'moment'
 import Utils from './Utils'
 import LiveStatus from './liveStatus'
 
+let store = null
 const socket = io(
   Utils.getSocketIOIP(),
   { transports: ['websocket'] },
@@ -14,9 +15,16 @@ const getSocket = () => {
   return socket
 }
 
-const connect = () => {
-  console.log('connected')
+const connect = (initstore) => {
+  store = initstore
   socket.emit('testconnect', { data: 'data' })
+  socket.on('testconnect', (data) => {
+    console.log('data ', data)
+    store.dispatch({
+      type: 'TEST_SOCKETIO',
+      payload: { data },
+    })
+  })
 }
 
 const handleOnConnect = () => {
@@ -29,19 +37,11 @@ const emitRegisterLiveStream = (streamKey, userId) => {
     streamKey,
     userId,
   })
-  console.log('da xong')
 }
 
 const emitBeginLiveStream = (roomName, userId) => {
   socket.emit(
-    'begin-live-stream',
-    {
-      roomName,
-      userId,
-    },
-    () => {
-      console.log('register-live-stream')
-    },
+    'begin-live-stream', { roomName, userId },
   )
 }
 
@@ -51,10 +51,7 @@ const emitFinishLiveStream = (roomName, userId) => {
     {
       roomName,
       userId,
-    },
-    () => {
-      console.log('register-live-stream')
-    },
+    }
   )
 }
 
@@ -66,39 +63,23 @@ const emitCancelLiveStream = (roomName, userId) => {
 }
 
 const emitJoinServer = (roomName, userId) => {
-  socket.emit(
-    'join-server',
-    {
-      roomName,
-      userId,
-    },
-    (data) => {
-      const countViewer = data
-      Utils.getContainer().setState({ countViewer: countViewer })
-    },
-  )
+  socket.emit('join-server', { roomName, userId })
 }
 
 const handleOnClientJoin = () => {
   socket.on('join-client', () => {
     console.log('join-client')
-    const countViewer = Utils.getContainer().state.countViewer
-    Utils.getContainer().setState({ countViewer: countViewer + 1 })
   })
 }
 
 const handleOnSendHeart = () => {
   socket.on('send-heart', () => {
     console.log('send-heart')
-    const countHeart = Utils.getContainer().state.countHeart
-    Utils.getContainer().setState({ countHeart: countHeart + 1 })
   })
 }
 
 const emitSendHeart = (roomName) => {
-  socket.emit('send-heart', {
-    roomName,
-  })
+  socket.emit('send-heart', { roomName })
 }
 
 const handleOnSendMessage = () => {
@@ -113,7 +94,6 @@ const handleOnSendMessage = () => {
       productImageUrl,
       productUrl,
     })
-    Utils.getContainer().setState({ listMessages: newListMessages })
   })
 }
 
@@ -145,56 +125,14 @@ const emitLeaveServer = (roomName, userId) => {
 const handleOnLeaveClient = () => {
   socket.on('leave-client', () => {
     console.log('leave-client')
-    const countViewer = Utils.getContainer().state.countViewer
-    Utils.getContainer().setState({ countViewer: countViewer - 1 })
   })
 }
 
-const emitReplay = (roomName, userId) => {
-  socket.emit(
-    'replay',
-    {
-      roomName,
-      userId,
-    },
-    (result) => {
-      if (!Utils.isNullOrUndefined(result)) {
-        const createdAt = result.createdAt
-        const messages = result.messages
-        const start = moment(createdAt)
-        for (let i = 0; i < messages.length; i += 1) {
-          const end = moment(messages[i].createdAt)
-          const duration = end.diff(start)
-          const timeout = setTimeout(() => {
-            const {
-              message,
-              productId,
-              productImageUrl,
-              productUrl,
-            } = messages[i]
-            const listMessages = Utils.getContainer().state.listMessages
-            const newListMessages = listMessages.slice()
-            newListMessages.push({
-              userId,
-              message,
-              productId,
-              productImageUrl,
-              productUrl,
-            })
-            Utils.getContainer().setState({ listMessages: newListMessages })
-          }, duration)
-          Utils.getTimeOutMessages().push(timeout)
-        }
-      }
-    },
-  )
-}
-
 const handleOnChangedLiveStatus = () => {
+  console.log('changed-live-status')
+
   socket.on('changed-live-status', (data) => {
     const { roomName, liveStatus } = data
-    console.log('roomName ', roomName)
-
     Utils.setRoomName(roomName)
     const currentRoomName = Utils.getRoomName()
     const currentUserType = Utils.getUserType()
@@ -227,8 +165,6 @@ const handleOnNotReady = () => {
   socket.on('not-ready', () => {
     console.log('not-ready')
     Utils.getContainer().alertStreamerNotReady()
-    // countViewer = Utils.getContainer().state.countViewer;
-    // Utils.getContainer().setState({ countViewer: countViewer + 1 });
   })
 }
 
@@ -248,8 +184,8 @@ const SocketUtils = {
   emitSendMessage,
   emitLeaveServer,
   handleOnLeaveClient,
-  emitReplay,
   handleOnChangedLiveStatus,
   handleOnNotReady,
 }
 export default SocketUtils
+1

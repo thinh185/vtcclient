@@ -5,8 +5,6 @@ const login = (data) => {
 }
 
 const register = (data) => {
-  console.log('data ', data)
-
   return api.post('/authen/register', data)
 }
 

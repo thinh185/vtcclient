@@ -6,7 +6,6 @@ import {
   Keyboard,
   Image,
   TouchableOpacity,
-  Animated,
   TextInput,
   Platform,
   Alert,
@@ -44,24 +43,21 @@ class ViewStreamScreen extends Component {
       productImageUrl: null,
       modalVisible: false,
     }
-    this.Animation = new Animated.Value(0)
-    this.scrollView = null
-    this.onBeginLiveStream = this.onBeginLiveStream.bind(this)
-    this.onFinishLiveStream = this.onFinishLiveStream.bind(this)
   }
 
   componentDidMount = () => {
     let keyboardShowEvent = 'keyboardWillShow'
     let keyboardHideEvent = 'keyboardWillHide'
-
+    const { user } = this.props
     if (Platform.OS === 'android') {
       keyboardShowEvent = 'keyboardDidShow'
       keyboardHideEvent = 'keyboardDidHide'
     }
     this.keyboardShowListener = Keyboard.addListener(keyboardShowEvent, e => this.keyboardShow(e))
     this.keyboardHideListener = Keyboard.addListener(keyboardHideEvent, e => this.keyboardHide(e))
+    console.log('csac ', Utils.getRoomName(), user._id)
 
-    SocketUtils.emitJoinServer(Utils.getRoomName(), Utils.getUserId())
+    SocketUtils.emitJoinServer(Utils.getRoomName(), user._id)
     this.vbViewer.start()
   };
 
@@ -363,6 +359,7 @@ class ViewStreamScreen extends Component {
 
   renderViewerUI = () => {
     const { countViewer, countHeart } = this.state
+
     return (
       <View style={stylesLive.container}>
         <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
@@ -372,7 +369,7 @@ class ViewStreamScreen extends Component {
           ref={(vb) => {
             this.vbViewer = vb
           }}
-          inputUrl={Utils.getRtmpPath() + Utils.getRoomName()}
+          inputUrl={Utils.getRtmpPath() + this.props.navigation.getParam('pathStream')}
           scaleMode="ScaleAspectFit"
           bufferTime={300}
           maxBufferTime={1000}
@@ -389,7 +386,6 @@ class ViewStreamScreen extends Component {
         >
           <View style={stylesLive.container}>
             {this.renderCancelViewerButton()}
-            {this.renderLiveText()}
             <View style={stylesLive.wrapIconView}>
               <Image
                 source={require('../assets/ico_view.png')}

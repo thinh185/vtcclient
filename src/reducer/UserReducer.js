@@ -26,6 +26,13 @@ export const userReducer = (state = initState, action) => {
         ...state,
         list_live,
       }
+    case 'TEST_SOCKETIO':
+      const { data } = payload
+      console.log('data 123', data)
+
+      return {
+        ...state,
+      }
     default:
       return state
   }

@@ -12,9 +12,6 @@ export default function* userSagas() {
 function* fetchUserSaga({ payload: { data } }) {
   const res = yield call(UserAPI.login, data)
   const { user } = res.data.result
-  console.log('res.data ', res)
-
-  console.log('user ', user)
 
   yield put({ type: 'USER_LOGIN_SUCCESS', payload: { user } })
   navigator.navigate('Contact')
@@ -23,7 +20,6 @@ function* fetchUserSaga({ payload: { data } }) {
 function* registerSaga({ payload: { data } }) {
   const res = yield call(UserAPI.register, data)
   const result = res.data
-  console.log('result ', result)
 
   if (result.code == 200) {
     Alert.alert('Register success')
@@ -33,6 +29,7 @@ function* registerSaga({ payload: { data } }) {
 
 function* fetchLiveStreamSaga() {
   const res = yield call(UserAPI.list_livestream)
-  const result = res.data
-  yield put({ type: 'LIVE_STREAM_SUCCESS', payload: { list_live: result } })
+  const { list_live } = res.data.result
+
+  yield put({ type: 'LIVE_STREAM_SUCCESS', payload: { list_live } })
 }

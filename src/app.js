@@ -9,8 +9,20 @@ import navigator from 'navigations/customNavigator'
 import configureStore from './store'
 import AppContainer from './navigations/Router'
 import Bootstrap from './Bootstrap'
+import Utils from './Utils'
 
 const { store, persistor } = configureStore()
+
+import SocketUtils from './SocketUtils'
+
+SocketUtils.connect(store)
+SocketUtils.handleOnConnect()
+SocketUtils.handleOnClientJoin()
+SocketUtils.handleOnSendHeart()
+SocketUtils.handleOnSendMessage()
+SocketUtils.handleOnLeaveClient()
+SocketUtils.handleOnChangedLiveStatus()
+SocketUtils.handleOnNotReady()
 
 export default class App extends React.Component {
   componentDidMount() {
@@ -38,8 +50,11 @@ export default class App extends React.Component {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <ThemeProvider theme={theme}>
-            <Bootstrap>
-              <AppContainer ref={navigatorRef => navigator.setContainer(navigatorRef)} />
+            <Bootstrap ref={boot => Utils.setContainer(boot)}>
+              <AppContainer ref={(navigatorRef) => {
+                navigator.setContainer(navigatorRef)
+              }}
+              />
             </Bootstrap>
           </ThemeProvider>
         </PersistGate>

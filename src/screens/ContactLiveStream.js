@@ -52,10 +52,10 @@ class ContactLiveStreamScreen extends React.Component {
                           style={stylesList.avatar}
                           source={require('../assets/female.png')}
                         />
-                        <Text style={stylesList.user}>{item.user.username}</Text>
+                        <Text style={stylesList.user}>{item.username}</Text>
                       </RowContainer>
                       <TouchableOpacity onPress={() => {
-                        navigator.navigate('Viewer')
+                        this.props.navigation.navigate('Viewer', { pathStream: item.userId })
                         Utils.setRoomName(item.roomName)
                       }}
                       >
@@ -67,8 +67,6 @@ class ContactLiveStreamScreen extends React.Component {
 
               }
               />
-
-
             </StartColumnContainer>
           </StartColumnContainer>
         </Container>
@@ -106,7 +104,7 @@ const stylesList = StyleSheet.create({
 })
 const mapStateToProps = state => ({
   user: state.user.user,
-  list_live: state.user.user,
+  list_live: state.user.list_live,
 })
 
 export default connect(mapStateToProps, { listLiveStreamAction })(ContactLiveStreamScreen)

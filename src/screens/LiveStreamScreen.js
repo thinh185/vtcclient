@@ -74,7 +74,6 @@ export default class LiveStreamScreen extends Component {
     this.keyboardShowListener = Keyboard.addListener(keyboardShowEvent, e => this.keyboardShow(e))
     this.keyboardHideListener = Keyboard.addListener(keyboardHideEvent, e => this.keyboardHide(e))
 
-    Utils.setContainer(this)
     const userType = Utils.getUserType()
     if (userType === 'STREAMER') {
       this.setState({ liveStatus: LiveStatus.REGISTER })
@@ -82,17 +81,9 @@ export default class LiveStreamScreen extends Component {
     } else if (userType === 'VIEWER') {
       SocketUtils.emitJoinServer(Utils.getRoomName(), Utils.getUserId())
       this.vbViewer.start()
-      // this.StartBackgroundColorAnimation()
     } else if (userType === 'REPLAY') {
       SocketUtils.emitReplay(Utils.getRoomName(), Utils.getUserId())
     }
-
-    // const type = Utils.getUserType()
-    // if (type === 'VIEWER') {
-    //   console.log('vao day')
-
-    //   return this.vbViewer.start()
-    // }
   };
 
   alertStreamerNotReady = () => {
@@ -120,17 +111,6 @@ export default class LiveStreamScreen extends Component {
       keyboardHeight: 0,
     })
   }
-
-  StartBackgroundColorAnimation = () => {
-    this.Animation.setValue(0)
-
-    Animated.timing(this.Animation, {
-      toValue: 1,
-      duration: 15000,
-    }).start(() => {
-      this.StartBackgroundColorAnimation()
-    })
-  };
 
   onBeginLiveStream = () => {
     this.setState({ liveStatus: LiveStatus.ON_LIVE })
@@ -853,7 +833,6 @@ export default class LiveStreamScreen extends Component {
 
   render() {
     const type = Utils.getUserType()
-    console.log(type)
 
     if (type === 'STREAMER') {
       return this.renderStreamerUI()

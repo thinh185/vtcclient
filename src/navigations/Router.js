@@ -6,17 +6,9 @@ import LoginSCreen from 'screens/LoginScreen'
 import ContactLiveStreamScreen from 'screens/ContactLiveStream'
 import RegisterScreen from 'screens/RegisterScreen'
 import StreamScreen from 'screens/StreamScreen'
+import ViewStreamScreen from 'screens/ViewStreamScreen'
+import NewViewerScreen from 'screens/NewViewerScreen'
 
-import SocketUtils from '../SocketUtils'
-
-SocketUtils.connect()
-SocketUtils.handleOnConnect()
-SocketUtils.handleOnClientJoin()
-SocketUtils.handleOnSendHeart()
-SocketUtils.handleOnSendMessage()
-SocketUtils.handleOnLeaveClient()
-SocketUtils.handleOnChangedLiveStatus()
-SocketUtils.handleOnNotReady()
 
 const RootStack = createStackNavigator(
   {
@@ -27,9 +19,11 @@ const RootStack = createStackNavigator(
     Register: RegisterScreen,
     Contact: ContactLiveStreamScreen,
     Stream: StreamScreen,
+    Viewer: ViewStreamScreen,
+    NewViewer: NewViewerScreen,
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'NewViewer',
     navigationOptions: {
       gesturesEnabled: false,
     },

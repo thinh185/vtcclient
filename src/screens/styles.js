@@ -161,10 +161,11 @@ export const stylesLive = StyleSheet.create({
   textInput: {
     flex: 1,
     backgroundColor: 'rgba(255, 255, 255, 0.4)',
-    borderRadius: 10,
+    borderRadius: 20,
     paddingHorizontal: 15,
     height: 45,
     paddingTop: Platform.OS === 'android' ? 10 : 0,
+    borderWidth: 1,
   },
   wrapIconHeart: {
     width: 45,
@@ -177,8 +178,8 @@ export const stylesLive = StyleSheet.create({
     zIndex: 2,
   },
   iconHeart: {
-    width: 45,
-    height: 45,
+    width: 33,
+    height: 33,
     zIndex: 2,
   },
   wrapIconSend: {
@@ -193,6 +194,7 @@ export const stylesLive = StyleSheet.create({
   iconSend: {
     width: 33,
     height: 33,
+    marginHorizontal: 5,
   },
   wrapListMessages: {
     position: 'absolute',
@@ -317,7 +319,7 @@ export const stylesLive = StyleSheet.create({
 
 export const styleAuthen = StyleSheet.create({
   container: {
-    marginHorizontal: 20,
+    // marginHorizontal: 20,
     flex: 1 },
   body: {
     justifyContent: 'space-between',
