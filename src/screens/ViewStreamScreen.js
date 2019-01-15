@@ -187,7 +187,7 @@ class ViewStreamScreen extends Component {
           style={{
             flex: 1,
             height: this.state.keyboardHeight,
-            zIndex: -1,
+            zIndex: 2,
           }}
         >
           <View style={stylesLive.wrapBottom}>

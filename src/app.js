@@ -1,5 +1,5 @@
 import React from 'react'
-import { PermissionsAndroid } from 'react-native'
+import { PermissionsAndroid, AsyncStorage } from 'react-native'
 
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
@@ -21,12 +21,27 @@ SocketUtils.handleOnClientJoin()
 SocketUtils.handleOnSendHeart()
 SocketUtils.handleOnSendMessage()
 SocketUtils.handleOnLeaveClient()
-SocketUtils.handleOnChangedLiveStatus()
-SocketUtils.handleOnNotReady()
+SocketUtils.onNewVideoLiveStream()
+SocketUtils.onVideoLiveStreamFinish()
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      initialRouteName: null,
+    }
+  }
+
   componentDidMount() {
     this.requestVideoCallPermission()
+    AsyncStorage.getItem('persist:livestreamapp').then((result) => {
+      const storage = JSON.parse(result)
+      console.log(storage)
+      const { user } = JSON.parse(storage.user)
+
+      if (!user.username) this.setState({ initialRouteName: 'AuthenStack' })
+      else this.setState({ initialRouteName: 'HomeStack' })
+    })
   }
 
   requestVideoCallPermission = async () => {
@@ -46,15 +61,20 @@ export default class App extends React.Component {
   }
 
   render() {
+    const { initialRouteName } = this.state
+    console.log(initialRouteName)
+
+    const RootRouter = AppContainer({ initialRouteName })
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <ThemeProvider theme={theme}>
             <Bootstrap ref={boot => Utils.setContainer(boot)}>
-              <AppContainer ref={(navigatorRef) => {
-                navigator.setContainer(navigatorRef)
-              }}
-              />
+              {initialRouteName
+                && (
+                <RootRouter ref={(navigatorRef) => { navigator.setContainer(navigatorRef) }} />
+                )
+              }
             </Bootstrap>
           </ThemeProvider>
         </PersistGate>

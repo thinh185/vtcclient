@@ -14,10 +14,10 @@ export const stylesLive = StyleSheet.create({
   },
   viewDismissKeyboard: {
     position: 'absolute',
-    top: 0,
+    bottom: 0,
     left: 0,
-    height: height,
-    width: width,
+    // height: height,
+    // width: width,
     zIndex: 2,
   },
   wrapPromotionText: {
@@ -278,11 +278,11 @@ export const stylesLive = StyleSheet.create({
   iconCancel: {
     width: 20,
     height: 20,
-    tintColor: 'white',
+    tintColor: 'black',
   },
   iconSwitch: {
-    width: 30,
-    height: 30,
+    width: 40,
+    height: 40,
     tintColor: 'white',
   },
   col: {

@@ -1,15 +1,13 @@
-import { Alert } from 'react-native'
+// import { Alert } from 'react-native'
 import io from 'socket.io-client'
-import moment from 'moment'
 import Utils from './Utils'
-import LiveStatus from './liveStatus'
+// import LiveStatus from './liveStatus'
 
 let store = null
 const socket = io(
   Utils.getSocketIOIP(),
   { transports: ['websocket'] },
 )
-console.log(Utils.getSocketIOIP())
 
 const getSocket = () => {
   return socket
@@ -37,6 +35,12 @@ const emitRegisterLiveStream = (streamKey, userId) => {
     streamKey,
     userId,
   })
+  socket.on('on_live_stream', (data) => {
+    store.dispatch({
+      type: 'CREATE_ROOM_STREAM_SUCCESS',
+      payload: { data },
+    })
+  })
 }
 
 const emitBeginLiveStream = (roomName, userId) => {
@@ -51,15 +55,8 @@ const emitFinishLiveStream = (roomName, userId) => {
     {
       roomName,
       userId,
-    }
+    },
   )
-}
-
-const emitCancelLiveStream = (roomName, userId) => {
-  socket.emit('cancel-live-stream', {
-    roomName,
-    userId,
-  })
 }
 
 const emitJoinServer = (roomName, userId) => {
@@ -128,43 +125,15 @@ const handleOnLeaveClient = () => {
   })
 }
 
-const handleOnChangedLiveStatus = () => {
-  console.log('changed-live-status')
-
-  socket.on('changed-live-status', (data) => {
-    const { roomName, liveStatus } = data
-    Utils.setRoomName(roomName)
-    const currentRoomName = Utils.getRoomName()
-    const currentUserType = Utils.getUserType()
-    if (roomName === currentRoomName) {
-      if (currentUserType === 'VIEWER') {
-        if (liveStatus === LiveStatus.CANCEL) {
-          Alert.alert('Alert', 'Streamer has been canceled streaming', [
-            {
-              text: 'Close',
-              onPress: () => {
-                SocketUtils.emitLeaveServer(
-                  Utils.getRoomName(),
-                  Utils.getUserId(),
-                )
-                Utils.getContainer().props.navigation.goBack()
-              },
-            },
-          ])
-        }
-        if (liveStatus === LiveStatus.FINISH) {
-          Alert.alert('Alert', 'Streamer finish streaming')
-        }
-        Utils.getContainer().setState({ liveStatus })
-      }
-    }
+const onNewVideoLiveStream = () => {
+  socket.on('new-live-stream', (data) => {
+    console.log('data ', data)
   })
 }
 
-const handleOnNotReady = () => {
-  socket.on('not-ready', () => {
-    console.log('not-ready')
-    Utils.getContainer().alertStreamerNotReady()
+const onVideoLiveStreamFinish = () => {
+  socket.on('live-stream-finish', (data) => {
+    console.log('data ', data)
   })
 }
 
@@ -177,15 +146,13 @@ const SocketUtils = {
   emitFinishLiveStream,
   handleOnClientJoin,
   emitJoinServer,
-  emitCancelLiveStream,
   handleOnSendHeart,
   emitSendHeart,
   handleOnSendMessage,
   emitSendMessage,
   emitLeaveServer,
   handleOnLeaveClient,
-  handleOnChangedLiveStatus,
-  handleOnNotReady,
+  onNewVideoLiveStream,
+  onVideoLiveStreamFinish,
 }
 export default SocketUtils
-1

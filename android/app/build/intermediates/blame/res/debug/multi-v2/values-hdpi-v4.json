@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/thinh/demo/vtcclient/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-hdpi-v4/values-hdpi-v4.xml",
+            "outputFile": "/home/thinhnn/demo/vtcclient/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-hdpi-v4/values-hdpi-v4.xml",
             "map": [
                 {
-                    "source": "/home/thinh/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/b2831a2559d3394ef1ffc728b2b9e614/res/values-hdpi-v4/values-hdpi-v4.xml",
+                    "source": "/home/thinhnn/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/e7deb9149401a7bfb4160a963f99733e/res/values-hdpi-v4/values-hdpi-v4.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

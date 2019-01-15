@@ -11,18 +11,19 @@ import {
   Alert,
   ScrollView,
   LayoutAnimation,
-  WebView,
-  Modal,
   StatusBar,
+  Dimensions,
 } from 'react-native'
 import { NodeCameraView } from 'react-native-nodemediaclient'
 import FloatingHearts from 'components/FloatingHearts'
 import { connect } from 'react-redux'
+import { RowContainer, StartColumnContainer, Container } from 'components/common/SComponent'
 import { LiveStatus } from '../liveStatus'
 import SocketUtils from '../SocketUtils'
 import Utils from '../Utils'
 import { stylesLive } from './styles'
 
+const { width } = Dimensions.get('window')
 class StreamScreen extends Component {
   static navigationOptions = () => ({
     header: null,
@@ -34,14 +35,8 @@ class StreamScreen extends Component {
       liveStatus: LiveStatus.REGISTER,
       countViewer: 0,
       countHeart: 0,
-      message: '',
       visibleListMessages: true,
       listMessages: [],
-
-      productId: null,
-      productUrl: null,
-      productImageUrl: null,
-      modalVisible: false,
     }
     this.Animation = new Animated.Value(0)
   }
@@ -62,17 +57,9 @@ class StreamScreen extends Component {
     SocketUtils.emitRegisterLiveStream(user.streamKey, user._id)
   };
 
-  alertStreamerNotReady = () => {
-    return Alert.alert('Alert', 'Streamer not ready to live stream yet', [
-      {
-        text: 'Close',
-        onPress: () => {
-          SocketUtils.emitLeaveServer(Utils.getRoomName(), Utils.getUserId())
-          this.props.navigation.goBack()
-        },
-      },
-    ])
-  };
+  componentWillUnmount() {
+    this.vbCamera.stop()
+  }
 
   keyboardShow() {
     LayoutAnimation.easeInEaseOut()
@@ -94,112 +81,11 @@ class StreamScreen extends Component {
     this.vbCamera.stop()
   };
 
-  onPressHeart = () => {
-    this.setState({ countHeart: this.state.countHeart + 1 })
-    SocketUtils.emitSendHeart(Utils.getRoomName())
-  };
-
-
-  onChangeMessageText = (text) => {
-    this.setState({ message: text })
-  };
-
-  onPressSend = () => {
-    const {
-      message,
-      listMessages,
-      productId,
-      productImageUrl,
-      productUrl,
-    } = this.state
-    if (productId !== null && productUrl !== null && productImageUrl !== null) {
-      this.setState({ message: '' })
-      Keyboard.dismiss()
-      const newListMessages = listMessages.slice()
-      newListMessages.push({
-        userId: Utils.getUserId(),
-        message,
-        productId,
-        productImageUrl,
-        productUrl,
-      })
-      this.setState({
-        listMessages: newListMessages,
-        visibleListMessages: true,
-        productId: null,
-        productUrl: null,
-        productImageUrl: null,
-      })
-      SocketUtils.emitSendMessage(
-        Utils.getRoomName(),
-        Utils.getUserId(),
-        message,
-        productId,
-        productImageUrl,
-        productUrl,
-      )
-    } else if (message !== '') {
-      this.setState({ message: '' })
-      Keyboard.dismiss()
-      const newListMessages = listMessages.slice()
-      newListMessages.push({ userId: Utils.getUserId(), message })
-      this.setState({
-        listMessages: newListMessages,
-        visibleListMessages: true,
-      })
-      SocketUtils.emitSendMessage(
-        Utils.getRoomName(),
-        Utils.getUserId(),
-        message,
-      )
-    }
-  };
-
-  onPressCloseModal = () => {
-    this.setState({
-      productId: null,
-      productUrl: null,
-      productImageUrl: null,
-      modalVisible: false,
-    })
-  };
-
-  onPressCancelViewer = () => {
-    if (this.vbViewer !== null && this.vbViewer !== undefined) {
-      this.vbViewer.stop()
-      this.props.navigation.goBack()
-    }
-    SocketUtils.emitLeaveServer(Utils.getRoomName(), Utils.getUserId())
-  };
-
   renderCancelViewerButton = () => {
     return (
       <TouchableOpacity
         style={stylesLive.buttonCancel}
         onPress={this.onPressCancelViewer}
-      >
-        <Image
-          source={require('../assets/ico_cancel.png')}
-          style={stylesLive.iconCancel}
-        />
-      </TouchableOpacity>
-    )
-  };
-
-  onPressCancelReplay = () => {
-    Utils.clearTimeOutMessages()
-    if (this.vbReplay !== null && this.vbReplay !== undefined) {
-      this.vbReplay.stop()
-    }
-    SocketUtils.emitLeaveServer(Utils.getRoomName(), Utils.getUserId())
-    this.props.navigation.goBack()
-  };
-
-  renderCancelReplayButton = () => {
-    return (
-      <TouchableOpacity
-        style={stylesLive.buttonCancel}
-        onPress={this.onPressCancelReplay}
       >
         <Image
           source={require('../assets/ico_cancel.png')}
@@ -230,10 +116,6 @@ class StreamScreen extends Component {
           {
             text: 'Sure',
             onPress: () => {
-              SocketUtils.emitCancelLiveStream(
-                Utils.getRoomName(),
-                Utils.getUserId(),
-              )
               SocketUtils.emitLeaveServer(
                 Utils.getRoomName(),
                 Utils.getUserId(),
@@ -248,15 +130,33 @@ class StreamScreen extends Component {
   };
 
   renderCancelStreamerButton = () => {
+    const { liveStatus } = this.state
+    const { user, streamOnline } = this.props
     return (
       <TouchableOpacity
-        style={stylesLive.buttonCancel}
-        onPress={this.onPressCancelStreamer}
+        onPress={() => {
+          if (liveStatus == LiveStatus.ON_LIVE) {
+            this.onPressCancelStreamer()
+            return
+          }
+          this.setState({ liveStatus: LiveStatus.ON_LIVE })
+          this.onBeginLiveStream(streamOnline.roomName, user._id)
+        }}
       >
-        <Image
-          source={require('../assets/ico_cancel.png')}
-          style={stylesLive.iconCancel}
-        />
+        <Text style={{
+          paddingHorizontal: 8,
+          paddingVertical: 5,
+          borderWidth: 1,
+          borderRadius: 8,
+          borderColor: 'white',
+          color: 'white',
+          fontSize: 16,
+          fontWeight: '400',
+          marginHorizontal: 10,
+        }}
+        >
+          {liveStatus === LiveStatus.ON_LIVE ? 'Kết thúc' : 'Bắt đầu' }
+        </Text>
       </TouchableOpacity>
     )
   };
@@ -269,12 +169,11 @@ class StreamScreen extends Component {
   renderSwitchCamera = () => {
     return (
       <TouchableOpacity
-        style={stylesLive.buttonSwitch}
-        onPress={this.switchCamera}
+        onPress={() => this.switchCamera()}
       >
         <Image
           source={require('../assets/switch_camera.png')}
-          style={stylesLive.iconSwitch}
+          style={[stylesLive.iconSwitch, { marginHorizontal: 10 }]}
         />
       </TouchableOpacity>
     )
@@ -283,12 +182,11 @@ class StreamScreen extends Component {
   renderLiveText = () => {
     const { liveStatus } = this.state
     return (
-      <View
-        style={
-          liveStatus === LiveStatus.ON_LIVE
-            ? stylesLive.wrapLiveText
-            : stylesLive.wrapNotLiveText
-        }
+      <View style={
+        liveStatus === LiveStatus.ON_LIVE
+          ? { backgroundColor: 'red', paddingHorizontal: 10, paddingVertical: 8, borderRadius: 8, marginHorizontal: 5 }
+          : { backgroundColor: 'rgb(153,153,153)', borderRadius: 8, paddingHorizontal: 10, paddingVertical: 8, marginHorizontal: 5 }
+      }
       >
         <Text
           style={
@@ -368,100 +266,101 @@ class StreamScreen extends Component {
   };
 
   renderStreamerUI = () => {
-    const { liveStatus, countViewer, countHeart } = this.state
-    const { user } = this.props
+    const { countViewer, countHeart } = this.state
     return (
-      <View style={stylesLive.container}>
-        <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
-        <NodeCameraView
-          style={stylesLive.streamerCameraView}
-          ref={(vb) => {
-            this.vbCamera = vb
-          }}
-          outputUrl={Utils.getRtmpPath() + this.props.user._id}
-          camera={{ cameraId: 1, cameraFrontMirror: true }}
-          audio={{ bitrate: 32000, profile: 1, samplerate: 44100 }}
-          video={{
-            preset: 1,
-            bitrate: 500000,
-            profile: 1,
-            fps: 30,
-            videoFrontMirror: true,
-          }}
-          smoothSkinLevel={4}
-          autopreview
-        />
-        <TouchableWithoutFeedback
-          onPress={() => {
-            Keyboard.dismiss()
-            this.setState({ visibleListMessages: true })
-          }}
-          accessible={false}
-          style={stylesLive.viewDismissKeyboard}
-        >
-          <View style={stylesLive.container}>
-            {this.renderCancelStreamerButton()}
+      <Container>
+        <StartColumnContainer>
+          <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
+          <RowContainer
+            alignItems="center"
+            justifyContent="flex-start"
+            style={[{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width,
+              flex: 1,
+              zIndex: 2,
+            }]}
+          >
             {this.renderLiveText()}
-            <View style={stylesLive.wrapIconView}>
+            <RowContainer
+              alignItems="center"
+              justifyContents="flex-start"
+              style={{
+                paddingHorizontal: 10,
+                paddingVertical: 8,
+                backgroundColor: 'red',
+                borderRadius: 8,
+                marginHorizontal: 5,
+              }}
+            >
               <Image
                 source={require('../assets/ico_view.png')}
                 style={stylesLive.iconView}
               />
-              <View style={stylesLive.wrapTextViewer}>
-                <Text style={stylesLive.textViewer}>{countViewer}</Text>
-              </View>
-            </View>
-            {this.renderSwitchCamera()}
-            <FloatingHearts count={countHeart} style={stylesLive.wrapGroupHeart} />
-            {liveStatus === LiveStatus.REGISTER && (
-              <TouchableOpacity
-                style={stylesLive.beginLiveStreamButton}
-                onPress={() => this.onBeginLiveStream(Utils.getRoomName(), user._id)}
-              >
-                <Text style={stylesLive.beginLiveStreamText}>Begin Live</Text>
-              </TouchableOpacity>
-            )}
-            {liveStatus === LiveStatus.ON_LIVE && (
-              <TouchableOpacity
-                style={stylesLive.finishLiveStreamButton}
-                onPress={() => this.onFinishLiveStream(Utils.getRoomName(), user._id)}
-              >
-                <Text style={stylesLive.beginLiveStreamText}>Finish</Text>
-              </TouchableOpacity>
-            )}
-          </View>
-        </TouchableWithoutFeedback>
-        {this.renderListMessages()}
-        <Modal
-          animationType="slide"
-          transparent
-          visible={this.state.modalVisible}
-          onRequestClose={() => {
-            Alert.alert('Modal has been closed.')
-          }}
-        >
-          <View
-            style={{
-              flex: 1,
-              backgroundColor: 'rgba(0,0,0,0.6)',
-              justifyContent: 'center',
+              <Text style={{
+                paddingHorizontal: 8,
+                fontSize: 18,
+                fontWeight: '400',
+                color: 'white' }}
+              >{countViewer}
+              </Text>
+            </RowContainer>
+
+          </RowContainer>
+          <NodeCameraView
+            style={stylesLive.streamerCameraView}
+            ref={(vb) => {
+              this.vbCamera = vb
             }}
+            outputUrl={Utils.getRtmpPath() + this.props.user._id}
+            camera={{ cameraId: 1, cameraFrontMirror: true }}
+            audio={{ bitrate: 32000, profile: 1, samplerate: 44100 }}
+            video={{
+              preset: 1,
+              bitrate: 500000,
+              profile: 1,
+              fps: 30,
+              videoFrontMirror: true,
+            }}
+            smoothSkinLevel={4}
+            autopreview
+          />
+          <RowContainer
+            alignItems="center"
+            justifyContent="flex-start"
+            style={[{
+              position: 'absolute',
+              bottom: 0,
+              right: 0,
+              zIndex: 2,
+              paddingVertical: 5,
+              borderRadius: 8,
+              borderColor: 'rgb(153, 153, 153)',
+              backgroundColor: 'rgb(153, 153, 153)',
+              borderWidth: 1,
+            }]}
+            // onLayout={(event) => {
+            //   const { height } = event.nativeEvent.layout
+            //   this.setState({ heightBottom: height })
+            // }}
           >
-            <TouchableOpacity
-              style={stylesLive.buttonCloseModal}
-              onPress={this.onPressCloseModal}
+            <RowContainer
+              alignItems="center"
+              justifyContent="flex-end"
+              // style={{ flex: 1 }}
             >
-              <Image
-                source={require('../assets/ico_cancel.png')}
-                style={stylesLive.iconCancel}
-              />
-            </TouchableOpacity>
-            <View style={stylesLive.wrapWebview}>
-              <WebView source={{ uri: this.state.productUrl }} />
-            </View>
-          </View>
-        </Modal>
-      </View>
+              {this.renderSwitchCamera()}
+              {this.renderCancelStreamerButton()}
+            </RowContainer>
+            <FloatingHearts count={countHeart} style={stylesLive.wrapGroupHeart} />
+          </RowContainer>
+          {this.renderListMessages()}
+        </StartColumnContainer>
+
+      </Container>
+
     )
   };
 
@@ -472,6 +371,7 @@ class StreamScreen extends Component {
 
 const mapStateToProps = state => ({
   user: state.user.user,
+  streamOnline: state.stream.streamOnline,
 })
 
 export default connect(mapStateToProps)(StreamScreen)

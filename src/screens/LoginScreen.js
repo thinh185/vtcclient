@@ -8,6 +8,7 @@ import {
 import navigator from 'navigations/customNavigator'
 import { connect } from 'react-redux'
 import { loginAction } from 'actions/userActions'
+import KeyboardSpacer from 'react-native-keyboard-spacer'
 import { styleAuthen } from './styles'
 
 class LoginScreen extends React.Component {
@@ -60,6 +61,8 @@ class LoginScreen extends React.Component {
                 <Text style={styleAuthen.textMore}> Register </Text>
               </TouchableOpacity>
             </StartColumnContainer>
+            <KeyboardSpacer />
+
           </StartColumnContainer>
         </Container>
       </ScrollView>

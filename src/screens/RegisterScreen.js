@@ -8,6 +8,7 @@ import {
 import navigator from 'navigations/customNavigator'
 import { registerAction } from 'actions/userActions'
 import { connect } from 'react-redux'
+import KeyboardSpacer from 'react-native-keyboard-spacer'
 import { styleAuthen } from './styles'
 
 class RegisterScreen extends React.Component {
@@ -21,7 +22,6 @@ class RegisterScreen extends React.Component {
 
   register = () => {
     const { username, password } = this.state
-    console.log('sacas ', username, password)
 
     this.props.registerAction({ username, password })
   }
@@ -63,6 +63,7 @@ class RegisterScreen extends React.Component {
                 <Text style={styleAuthen.textMore}> Login </Text>
               </TouchableOpacity>
             </StartColumnContainer>
+            <KeyboardSpacer />
           </StartColumnContainer>
         </Container>
       </ScrollView>

@@ -8,7 +8,7 @@ import {
 } from 'components/common/SComponent'
 import navigator from 'navigations/customNavigator'
 import Utils from 'Utils'
-import { listLiveStreamAction } from 'actions/userActions'
+import { listLiveStreamAction } from 'actions/streamAction'
 import { styleAuthen } from './styles'
 
 
@@ -33,7 +33,7 @@ class ContactLiveStreamScreen extends React.Component {
               </RowContainer>
 
               <TouchableOpacity onPress={() => {
-                navigator.navigate('Stream')
+                navigator.navigate('Streamer')
               }}
               >
                 <Text style={stylesList.live}>Begin Live</Text>
@@ -104,7 +104,7 @@ const stylesList = StyleSheet.create({
 })
 const mapStateToProps = state => ({
   user: state.user.user,
-  list_live: state.user.list_live,
+  list_live: state.stream.list_live,
 })
 
 export default connect(mapStateToProps, { listLiveStreamAction })(ContactLiveStreamScreen)

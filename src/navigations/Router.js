@@ -1,4 +1,4 @@
-import { createStackNavigator, createAppContainer } from 'react-navigation'
+import { createStackNavigator, createSwitchNavigator, createAppContainer } from 'react-navigation'
 import HomeScreen from 'screens/HomeScreen'
 import ListScreen from 'screens/ListScreen'
 import LiveStreamScreen from 'screens/LiveStreamScreen'
@@ -7,28 +7,52 @@ import ContactLiveStreamScreen from 'screens/ContactLiveStream'
 import RegisterScreen from 'screens/RegisterScreen'
 import StreamScreen from 'screens/StreamScreen'
 import ViewStreamScreen from 'screens/ViewStreamScreen'
-import NewViewerScreen from 'screens/NewViewerScreen'
 
 
-const RootStack = createStackNavigator(
+const AuthenStack = createStackNavigator(
   {
     Home: HomeScreen,
     List: ListScreen,
     Live: LiveStreamScreen,
     Login: LoginSCreen,
     Register: RegisterScreen,
-    Contact: ContactLiveStreamScreen,
-    Stream: StreamScreen,
-    Viewer: ViewStreamScreen,
-    NewViewer: NewViewerScreen,
   },
   {
-    initialRouteName: 'NewViewer',
+    initialRouteName: 'Login',
     navigationOptions: {
       gesturesEnabled: false,
     },
+    headerMode: 'none',
+
   },
 )
-const AppContainer = createAppContainer(RootStack)
 
-export default AppContainer
+const HomeStack = createStackNavigator(
+  {
+    Streamer: StreamScreen,
+    Viewer: ViewStreamScreen,
+    Contact: ContactLiveStreamScreen,
+  },
+  {
+    initialRouteName: 'Contact',
+    navigationOptions: {
+      gesturesEnabled: false,
+    },
+    headerMode: 'none',
+
+  },
+)
+
+export default ({ initialRouteName }) => {
+  const MainNavigator = createSwitchNavigator(
+    {
+      AuthenStack,
+      HomeStack,
+    },
+    {
+      initialRouteName,
+      headerMode: 'none',
+    },
+  )
+  return createAppContainer(MainNavigator)
+}

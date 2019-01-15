@@ -9,6 +9,7 @@ const initState = {
     num_question: 0,
   },
   list_live: [],
+  roomStream: '',
 }
 
 export const userReducer = (state = initState, action) => {
@@ -19,19 +20,6 @@ export const userReducer = (state = initState, action) => {
       return {
         ...state,
         user,
-      }
-    case 'LIVE_STREAM_SUCCESS':
-      const { list_live } = payload
-      return {
-        ...state,
-        list_live,
-      }
-    case 'TEST_SOCKETIO':
-      const { data } = payload
-      console.log('data 123', data)
-
-      return {
-        ...state,
       }
     default:
       return state

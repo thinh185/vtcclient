@@ -9,7 +9,7 @@ import rootReducer from './rootReducer'
 export default () => {
   const sagaMiddleware = createSagaMiddleware()
   const persistConfig = {
-    key: 'root',
+    key: 'livestreamapp',
     storage: AsyncStorage,
     whitelist: ['user'],
     timeout: 0,
@@ -28,10 +28,6 @@ export default () => {
   )
 
   const persistor = persistStore(store)
-
-  // clean Async Storage
-  // console.log('Storage')
-  // persistor.purge()
 
   sagaMiddleware.run(rootSaga)
   return {

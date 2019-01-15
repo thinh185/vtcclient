@@ -1,5 +1,5 @@
 import React from 'react'
-import { StatusBar, TextInput, TouchableOpacity, Image } from 'react-native'
+import { StatusBar, TextInput, TouchableOpacity, Image, View, Text } from 'react-native'
 import {
   Container,
   StartColumnContainer,
@@ -8,41 +8,55 @@ import {
 import navigator from 'navigations/customNavigator'
 import { connect } from 'react-redux'
 import { loginAction } from 'actions/userActions'
-import { NodePlayerView } from 'react-native-nodemediaclient'
+import FloatingHearts from 'components/FloatingHearts'
+// import { NodePlayerView } from 'react-native-nodemediaclient'
 import { styleAuthen, stylesLive } from './styles'
 
 class NewViewerScreen extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      password: null,
-      username: null,
+      countHeart: 0,
     }
   }
 
-  log = () => {
-    const { username, password } = this.state
-    this.props.loginAction({ username, password })
-  }
-
   render() {
+    const { countHeart } = this.state
     return (
-      <Container style={[styleAuthen.container, { backgroundColor: 'red' }]}>
+      <Container>
         <StatusBar barStyle="dark-content" />
-        <StartColumnContainer style={[styleAuthen.container, { backgroundColor: 'red' }]}>
-          <RowContainer alignItems="flex-start" justifyContent="center">
+        <StartColumnContainer style={styleAuthen.container}>
+          <RowContainer
+            alignItems="center"
+            justifyContent="flex-start"
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              zIndex: 2,
+            }}
+          >
             <TouchableOpacity
-              style={stylesLive.buttonCloseModal}
+              onPress={() => {
+                navigator.goBack()
+              }}
             >
               <Image
                 source={require('../assets/ico_cancel.png')}
-                style={stylesLive.iconCancel}
+                style={{ width: 20, height: 20, tintcolor: 'white' }}
               />
             </TouchableOpacity>
-
+            <Text style={{ paddingHorizontal: 10, paddingVertical: 5, borderRadiusL: 8 }}>
+              10
+            </Text>
           </RowContainer>
+          <View style={{
+            flex: 1,
+            backgroundColor: 'white',
+          }}
+          />
           {/* <NodePlayerView
-            style={stylesLive.streamerCameraView}
+            // style={stylesLive.streamerCameraView}
             ref={(vb) => {
               this.vbViewer = vb
             }}
@@ -52,7 +66,6 @@ class NewViewerScreen extends React.Component {
             maxBufferTime={1000}
             autoplay
           /> */}
-
           <RowContainer
             justifyContent="flex-start"
             alignItems="center"
@@ -60,9 +73,11 @@ class NewViewerScreen extends React.Component {
               position: 'absolute',
               bottom: 10,
               left: 0,
-              zIndex: 2,
+              marginHorizontal: 5,
             }}
           >
+            <FloatingHearts count={countHeart} />
+
             <TextInput
               style={stylesLive.textInput}
             />
@@ -72,7 +87,11 @@ class NewViewerScreen extends React.Component {
                 style={stylesLive.iconSend}
               />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => { navigator.navigate('Register') }}>
+            <TouchableOpacity onPress={() => {
+              this.setState((prev) => { this.setState({ countHeart: prev.countHeart + 1 }) })
+            }
+            }
+            >
               <Image
                 source={require('../assets/ico_heart.png')}
                 style={stylesLive.iconHeart}
