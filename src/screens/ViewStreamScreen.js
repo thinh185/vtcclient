@@ -42,6 +42,7 @@ class ViewStreamScreen extends Component {
       productUrl: null,
       productImageUrl: null,
       modalVisible: false,
+      roomName: '',
     }
   }
 
@@ -55,10 +56,9 @@ class ViewStreamScreen extends Component {
     }
     this.keyboardShowListener = Keyboard.addListener(keyboardShowEvent, e => this.keyboardShow(e))
     this.keyboardHideListener = Keyboard.addListener(keyboardHideEvent, e => this.keyboardHide(e))
-    console.log('csac ', Utils.getRoomName(), user._id)
-
-    SocketUtils.emitJoinServer(Utils.getRoomName(), user._id)
-    this.vbViewer.start()
+    const roomName = this.props.navigation.getParam('roomName')
+    this.setState({ roomName })
+    SocketUtils.emitJoinServer(roomName, user._id)
   };
 
   alertStreamerNotReady = () => {
@@ -66,7 +66,7 @@ class ViewStreamScreen extends Component {
       {
         text: 'Close',
         onPress: () => {
-          SocketUtils.emitLeaveServer(Utils.getRoomName(), Utils.getUserId())
+          SocketUtils.emitLeaveServer(this.state.roomName, this.props.user._id)
           this.props.navigation.goBack()
         },
       },
@@ -89,7 +89,7 @@ class ViewStreamScreen extends Component {
 
   onPressHeart = () => {
     this.setState({ countHeart: this.state.countHeart + 1 })
-    SocketUtils.emitSendHeart(Utils.getRoomName())
+    SocketUtils.emitSendHeart(this.state.roomName)
   };
 
 
@@ -105,12 +105,13 @@ class ViewStreamScreen extends Component {
       productImageUrl,
       productUrl,
     } = this.state
+    const { user } = this.props
     if (productId !== null && productUrl !== null && productImageUrl !== null) {
       this.setState({ message: '' })
       Keyboard.dismiss()
       const newListMessages = listMessages.slice()
       newListMessages.push({
-        userId: Utils.getUserId(),
+        userId: user._id,
         message,
         productId,
         productImageUrl,
@@ -124,8 +125,8 @@ class ViewStreamScreen extends Component {
         productImageUrl: null,
       })
       SocketUtils.emitSendMessage(
-        Utils.getRoomName(),
-        Utils.getUserId(),
+        this.state.roomName,
+        user._id,
         message,
         productId,
         productImageUrl,
@@ -135,14 +136,14 @@ class ViewStreamScreen extends Component {
       this.setState({ message: '' })
       Keyboard.dismiss()
       const newListMessages = listMessages.slice()
-      newListMessages.push({ userId: Utils.getUserId(), message })
+      newListMessages.push({ userId: user._id, message })
       this.setState({
         listMessages: newListMessages,
         visibleListMessages: true,
       })
       SocketUtils.emitSendMessage(
-        Utils.getRoomName(),
-        Utils.getUserId(),
+        this.state.roomName,
+        user._id,
         message,
       )
     }
@@ -162,7 +163,8 @@ class ViewStreamScreen extends Component {
       this.vbViewer.stop()
       this.props.navigation.goBack()
     }
-    SocketUtils.emitLeaveServer(Utils.getRoomName(), Utils.getUserId())
+
+    SocketUtils.emitLeaveServer(this.state.roomName, this.props.user._id)
   };
 
   renderCancelViewerButton = () => {
@@ -261,10 +263,6 @@ class ViewStreamScreen extends Component {
                 onFocus={() => {
                   this.setState({ visibleListMessages: false })
                 }}
-                // onEndEditing={() => {
-                //   Keyboard.dismiss()
-                //   this.setState({ visibleListMessages: true })
-                // }}
               />
               <TouchableOpacity
                 style={stylesLive.wrapIconSend}
@@ -363,7 +361,6 @@ class ViewStreamScreen extends Component {
     return (
       <View style={stylesLive.container}>
         <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
-        {/* {liveStatus === LiveStatus.ON_LIVE && ( */}
         <NodePlayerView
           style={stylesLive.streamerCameraView}
           ref={(vb) => {

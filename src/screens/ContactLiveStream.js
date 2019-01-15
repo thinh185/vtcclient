@@ -7,7 +7,6 @@ import {
   RowContainer,
 } from 'components/common/SComponent'
 import navigator from 'navigations/customNavigator'
-import Utils from 'Utils'
 import { listLiveStreamAction } from 'actions/streamAction'
 import { styleAuthen } from './styles'
 
@@ -55,8 +54,9 @@ class ContactLiveStreamScreen extends React.Component {
                         <Text style={stylesList.user}>{item.username}</Text>
                       </RowContainer>
                       <TouchableOpacity onPress={() => {
-                        this.props.navigation.navigate('Viewer', { pathStream: item.userId })
-                        Utils.setRoomName(item.roomName)
+                        this.props.navigation.navigate('Viewer', {
+                          pathStream: item.userId,
+                          roomName: item.roomName })
                       }}
                       >
                         <Text style={stylesList.live}>Xem live</Text>
