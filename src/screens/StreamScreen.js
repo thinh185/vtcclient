@@ -33,8 +33,6 @@ class StreamScreen extends Component {
     super(props)
     this.state = {
       liveStatus: LiveStatus.REGISTER,
-      countViewer: 0,
-      countHeart: 0,
       visibleListMessages: true,
       listMessages: [],
     }
@@ -100,6 +98,8 @@ class StreamScreen extends Component {
       this.vbCamera.stop()
     }
     const { liveStatus } = this.state
+    const { streamOnline } = this.props
+
     if (
       liveStatus === LiveStatus.REGISTER
       || liveStatus === LiveStatus.ON_LIVE
@@ -116,9 +116,10 @@ class StreamScreen extends Component {
           {
             text: 'Sure',
             onPress: () => {
-              SocketUtils.emitLeaveServer(
-                Utils.getRoomName(),
-                Utils.getUserId(),
+              console.log('send finish')
+
+              SocketUtils.emitFinishLiveStream(
+                streamOnline.roomName,
               )
               this.props.navigation.goBack()
             },
@@ -135,7 +136,7 @@ class StreamScreen extends Component {
     return (
       <TouchableOpacity
         onPress={() => {
-          if (liveStatus == LiveStatus.ON_LIVE) {
+          if (liveStatus === LiveStatus.ON_LIVE) {
             this.onPressCancelStreamer()
             return
           }
@@ -266,7 +267,9 @@ class StreamScreen extends Component {
   };
 
   renderStreamerUI = () => {
-    const { countViewer, countHeart } = this.state
+    const { deltailStream } = this.props
+    console.log('detail Stream ', deltailStream)
+
     return (
       <Container>
         <StartColumnContainer>
@@ -304,7 +307,7 @@ class StreamScreen extends Component {
                 fontSize: 18,
                 fontWeight: '400',
                 color: 'white' }}
-              >{countViewer}
+              >{deltailStream.countViewer || 0}
               </Text>
             </RowContainer>
 
@@ -341,10 +344,6 @@ class StreamScreen extends Component {
               backgroundColor: 'rgb(153, 153, 153)',
               borderWidth: 1,
             }]}
-            // onLayout={(event) => {
-            //   const { height } = event.nativeEvent.layout
-            //   this.setState({ heightBottom: height })
-            // }}
           >
             <RowContainer
               alignItems="center"
@@ -354,8 +353,11 @@ class StreamScreen extends Component {
               {this.renderSwitchCamera()}
               {this.renderCancelStreamerButton()}
             </RowContainer>
-            <FloatingHearts count={countHeart} style={stylesLive.wrapGroupHeart} />
           </RowContainer>
+          <FloatingHearts
+            count={deltailStream.countHeart || 0}
+            style={{ marginBottom: 8, zIndex: 1, flex: 1 }}
+          />
           {this.renderListMessages()}
         </StartColumnContainer>
 
@@ -369,9 +371,19 @@ class StreamScreen extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  user: state.user.user,
-  streamOnline: state.stream.streamOnline,
-})
+const mapStateToProps = (state) => {
+  const { list_live, streamOnline } = state.stream
+
+  const res = {
+    user: state.user.user,
+    streamOnline,
+  }
+  if (state.stream.streamOnline) {
+    res.deltailStream = list_live.filter(el => el.roomName === streamOnline.roomName)[0] || {}
+  } else {
+    res.deltailStream = {}
+  }
+  return res
+}
 
 export default connect(mapStateToProps)(StreamScreen)

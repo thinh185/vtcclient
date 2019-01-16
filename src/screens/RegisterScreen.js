@@ -29,7 +29,7 @@ class RegisterScreen extends React.Component {
   render() {
     return (
       <ScrollView>
-        <Container style={styleAuthen.container}>
+        <Container style={[styleAuthen.container, { marginHorizontal: 20 }]}>
           <StatusBar barStyle="dark-content" />
           <StartColumnContainer>
             <RowContainer alignItems="center" justifyContent="center">

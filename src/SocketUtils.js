@@ -49,12 +49,11 @@ const emitBeginLiveStream = (roomName, userId) => {
   )
 }
 
-const emitFinishLiveStream = (roomName, userId) => {
+const emitFinishLiveStream = (roomName) => {
   socket.emit(
     'finish-live-stream',
     {
       roomName,
-      userId,
     },
   )
 }
@@ -64,14 +63,21 @@ const emitJoinServer = (roomName, userId) => {
 }
 
 const handleOnClientJoin = () => {
-  socket.on('join-client', () => {
-    console.log('join-client')
+  socket.on('join-client', (data) => {
+    store.dispatch({
+      type: 'UPDATE_ROOM_SUCCESS',
+      payload: { data },
+    })
   })
 }
 
 const handleOnSendHeart = () => {
-  socket.on('send-heart', () => {
+  socket.on('send-heart', (data) => {
     console.log('send-heart')
+    store.dispatch({
+      type: 'UPDATE_ROOM_SUCCESS',
+      payload: { data },
+    })
   })
 }
 
@@ -127,13 +133,24 @@ const handleOnLeaveClient = () => {
 
 const onNewVideoLiveStream = () => {
   socket.on('new-live-stream', (data) => {
-    console.log('data ', data)
+    console.log('new-live-stream')
+    console.log(data)
+
+    store.dispatch({
+      type: 'ADD_NEW_VIDEO_LIVE_SUCCESS',
+      payload: { data },
+    })
   })
 }
 
 const onVideoLiveStreamFinish = () => {
   socket.on('live-stream-finish', (data) => {
-    console.log('data ', data)
+    console.log('data finish ', data)
+
+    store.dispatch({
+      type: 'DELETE_NEW_VIDEO_LIVE_SUCCESS',
+      payload: { data },
+    })
   })
 }
 

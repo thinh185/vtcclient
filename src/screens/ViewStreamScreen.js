@@ -11,17 +11,18 @@ import {
   Alert,
   ScrollView,
   LayoutAnimation,
-  WebView,
-  Modal,
   StatusBar,
 } from 'react-native'
+import { RowContainer } from 'components/common/SComponent'
 import KeyboardAccessory from 'react-native-sticky-keyboard-accessory'
 import { NodePlayerView } from 'react-native-nodemediaclient'
 import FloatingHearts from 'components/FloatingHearts'
 import { connect } from 'react-redux'
+import navigator from 'navigations/customNavigator'
 import SocketUtils from '../SocketUtils'
 import Utils from '../Utils'
 import { stylesLive } from './styles'
+import { LiveStatus } from '../liveStatus'
 
 
 class ViewStreamScreen extends Component {
@@ -32,7 +33,6 @@ class ViewStreamScreen extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      countViewer: 0,
       countHeart: 0,
       message: '',
       visibleListMessages: true,
@@ -41,7 +41,6 @@ class ViewStreamScreen extends Component {
       productId: null,
       productUrl: null,
       productImageUrl: null,
-      modalVisible: false,
       roomName: '',
     }
   }
@@ -126,7 +125,7 @@ class ViewStreamScreen extends Component {
       })
       SocketUtils.emitSendMessage(
         this.state.roomName,
-        user._id,
+        user.username,
         message,
         productId,
         productImageUrl,
@@ -143,7 +142,7 @@ class ViewStreamScreen extends Component {
       })
       SocketUtils.emitSendMessage(
         this.state.roomName,
-        user._id,
+        user.username,
         message,
       )
     }
@@ -154,7 +153,6 @@ class ViewStreamScreen extends Component {
       productId: null,
       productUrl: null,
       productImageUrl: null,
-      modalVisible: false,
     })
   };
 
@@ -355,24 +353,88 @@ class ViewStreamScreen extends Component {
     )
   };
 
-  renderViewerUI = () => {
-    const { countViewer, countHeart } = this.state
+  renderLiveText = () => {
+    const { liveStatus } = this.state
+    return (
+      <TouchableOpacity
+        onPress={() => navigator.goBack()}
 
+        style={
+          liveStatus === LiveStatus.ON_LIVE
+            ? { backgroundColor: 'red', paddingHorizontal: 10, paddingVertical: 8, borderRadius: 8, marginHorizontal: 5 }
+            : { backgroundColor: 'rgb(153,153,153)', borderRadius: 8, paddingHorizontal: 10, paddingVertical: 8, marginHorizontal: 5 }
+        }
+      >
+        <Text
+          style={
+              liveStatus === LiveStatus.ON_LIVE
+                ? stylesLive.liveText
+                : stylesLive.notLiveText
+            }
+        >
+            Kết thúc
+        </Text>
+      </TouchableOpacity>
+    )
+  };
+
+  renderViewerUI = () => {
+    const { countHeart } = this.state
+    const { detailRoom } = this.props
+    if (!detailRoom.roomName) navigator.goBack()
     return (
       <View style={stylesLive.container}>
         <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
+        <RowContainer
+          alignItems="center"
+          justifyContent="flex-start"
+          style={[{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: 300,
+            flex: 1,
+            zIndex: 2,
+          }]}
+        >
+          {this.renderLiveText()}
+          <RowContainer
+            alignItems="center"
+            justifyContents="flex-start"
+            style={{
+              paddingHorizontal: 10,
+              paddingVertical: 8,
+              backgroundColor: 'red',
+              borderRadius: 8,
+              marginHorizontal: 5,
+            }}
+          >
+            <Image
+              source={require('../assets/ico_view.png')}
+              style={stylesLive.iconView}
+            />
+            <Text style={{
+              paddingHorizontal: 8,
+              fontSize: 18,
+              fontWeight: '400',
+              color: 'white' }}
+            >{detailRoom.countViewer || 0}
+            </Text>
+          </RowContainer>
+
+        </RowContainer>
+
         <NodePlayerView
           style={stylesLive.streamerCameraView}
           ref={(vb) => {
             this.vbViewer = vb
           }}
           inputUrl={Utils.getRtmpPath() + this.props.navigation.getParam('pathStream')}
-          scaleMode="ScaleAspectFit"
+          scaleMode="ScaleToFill"
           bufferTime={300}
           maxBufferTime={1000}
           autoplay
         />
-
         <TouchableWithoutFeedback
           onPress={() => {
             Keyboard.dismiss()
@@ -382,53 +444,12 @@ class ViewStreamScreen extends Component {
           style={stylesLive.viewDismissKeyboard}
         >
           <View style={stylesLive.container}>
-            {this.renderCancelViewerButton()}
-            <View style={stylesLive.wrapIconView}>
-              <Image
-                source={require('../assets/ico_view.png')}
-                style={stylesLive.iconView}
-              />
-              <View style={stylesLive.wrapTextViewer}>
-                <Text style={stylesLive.textViewer}>{countViewer}</Text>
-              </View>
-            </View>
-            <FloatingHearts
-              count={countHeart}
-              style={stylesLive.wrapGroupHeart}
-            />
+            <FloatingHearts count={countHeart} style={{ marginBottom: -50, zIndex: 2, flex: 1 }} />
           </View>
         </TouchableWithoutFeedback>
+
         {this.renderGroupInput()}
         {this.renderListMessages()}
-        <Modal
-          animationType="slide"
-          transparent
-          visible={this.state.modalVisible}
-          onRequestClose={() => {
-            Alert('Modal has been closed.')
-          }}
-        >
-          <View
-            style={{
-              flex: 1,
-              backgroundColor: 'rgba(0,0,0,0.6)',
-              justifyContent: 'center',
-            }}
-          >
-            <TouchableOpacity
-              style={stylesLive.buttonCloseModal}
-              onPress={this.onPressCloseModal}
-            >
-              <Image
-                source={require('../assets/ico_cancel.png')}
-                style={stylesLive.iconCancel}
-              />
-            </TouchableOpacity>
-            <View style={stylesLive.wrapWebview}>
-              <WebView source={{ uri: this.state.productUrl }} />
-            </View>
-          </View>
-        </Modal>
       </View>
     )
   };
@@ -438,8 +459,14 @@ class ViewStreamScreen extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  user: state.user.user,
-})
+const mapStateToProps = (state, ownprops) => {
+  const res = {
+    user: state.user.user,
+  }
+  const { list_live } = state.stream
+  const roomName = ownprops.navigation.getParam('roomName')
+  res.detailRoom = list_live.filter(el => el.roomName === roomName)[0] || {}
+  return res
+}
 
 export default connect(mapStateToProps)(ViewStreamScreen)

@@ -1,6 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Image } from 'react-native';
+import React from 'react'
+import { Image } from 'react-native'
 
 /**
  * @class HeartShape
@@ -13,22 +12,10 @@ const HeartShape = ({ color }) => {
       style={{
         tintColor: color,
         width: 42,
-        height: 42
+        height: 42,
       }}
     />
-  );
-};
+  )
+}
 
-HeartShape.propTypes = {
-  color: PropTypes.string
-};
-
-HeartShape.defaultProps = {
-  // color: 'red'
-};
-
-/**
- * Exports
- */
-
-export default HeartShape;
+export default HeartShape
