@@ -3,3 +3,9 @@ export const listLiveStreamAction = () => {
     type: 'LIVE_STREAM',
   }
 }
+
+export const getLinkStreamAction = () => {
+  return {
+    type: 'EDGE_GETLINK',
+  }
+}

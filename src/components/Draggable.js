@@ -43,6 +43,7 @@ export default class Draggable extends Component {
       const condition = sy > SCREEN_HEIGHT - dropZoneCoordinates.height && sy < dropZoneCoordinates.height
       const condition2 = sy > SCREEN_HEIGHT - dropZoneCoordinates.height - dropZoneCoordinates.y - dropZoneCoordinates.keyboardHeight
         && sy < SCREEN_HEIGHT - dropZoneCoordinates.keyboardHeight
+
       if (Platform.OS === 'android') {
         condition ? this.addToCart() : this.backToStart()
       } else {

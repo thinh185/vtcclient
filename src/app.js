@@ -41,6 +41,9 @@ export default class App extends React.Component {
 
       if (!user.username) this.setState({ initialRouteName: 'AuthenStack' })
       else this.setState({ initialRouteName: 'HomeStack' })
+    }).catch((err) => {
+      console.log(`error ${err}`)
+      this.setState({ initialRouteName: 'HomeStack' })
     })
   }
 
@@ -62,7 +65,6 @@ export default class App extends React.Component {
 
   render() {
     const { initialRouteName } = this.state
-    console.log(initialRouteName)
 
     const RootRouter = AppContainer({ initialRouteName })
     return (

@@ -1,8 +1,5 @@
 import { NavigationActions, DrawerActions } from 'react-navigation'
-// import storeGetter from 'config/storeGetter'
-// import { SET_ACTIVE_SCREEN } from 'actions/types'
 
-// let store = storeGetter.getStore()
 let _container; // eslint-disable-line
 
 function setContainer(container) {
@@ -23,11 +20,6 @@ function reset(routeName, params = {}) {
 }
 
 function navigate(routeName, params = {}, key = null) {
-  // store.dispatch({
-  //   type: SET_ACTIVE_SCREEN,
-  //   payload: { screen: routeName },
-  // })
-
   _container.dispatch(NavigationActions.navigate({
     type: NavigationActions.NAVIGATE,
     // Add key for prevent multiple tap on same screen

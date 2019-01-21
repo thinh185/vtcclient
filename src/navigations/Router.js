@@ -1,7 +1,4 @@
 import { createStackNavigator, createSwitchNavigator, createAppContainer } from 'react-navigation'
-import HomeScreen from 'screens/HomeScreen'
-import ListScreen from 'screens/ListScreen'
-import LiveStreamScreen from 'screens/LiveStreamScreen'
 import LoginSCreen from 'screens/LoginScreen'
 import ContactLiveStreamScreen from 'screens/ContactLiveStream'
 import RegisterScreen from 'screens/RegisterScreen'
@@ -11,9 +8,6 @@ import ViewStreamScreen from 'screens/ViewStreamScreen'
 
 const AuthenStack = createStackNavigator(
   {
-    Home: HomeScreen,
-    List: ListScreen,
-    Live: LiveStreamScreen,
     Login: LoginSCreen,
     Register: RegisterScreen,
   },

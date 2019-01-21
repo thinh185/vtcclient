@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {
   View,
   Text,
-  TouchableWithoutFeedback,
   Keyboard,
   Image,
   TouchableOpacity,
@@ -13,6 +12,8 @@ import {
   LayoutAnimation,
   StatusBar,
   Dimensions,
+  TextInput,
+  KeyboardAccessory,
 } from 'react-native'
 import { NodeCameraView } from 'react-native-nodemediaclient'
 import FloatingHearts from 'components/FloatingHearts'
@@ -37,6 +38,7 @@ class StreamScreen extends Component {
       countHeart: 0,
       visibleListMessages: true,
       listMessages: [],
+      onMessage: false,
     }
     this.Animation = new Animated.Value(0)
   }
@@ -129,6 +131,149 @@ class StreamScreen extends Component {
     this.props.navigation.goBack()
   };
 
+  onChangeMessageText = (text) => {
+    this.setState({ message: text })
+  };
+
+  onPressSend = () => {
+    const {
+      message,
+      listMessages,
+    } = this.state
+    const { user } = this.props
+    this.setState({ onMessage: false })
+    if (message !== '') {
+      this.setState({ message: '' })
+      Keyboard.dismiss()
+      const newListMessages = listMessages.slice()
+      newListMessages.push({ userId: user._id, message })
+      this.setState({
+        listMessages: newListMessages,
+        visibleListMessages: true,
+      })
+      SocketUtils.emitSendMessage(
+        this.state.roomName,
+        user._id,
+        message,
+      )
+    }
+  };
+
+  onPressHeart = () => {
+    this.setState({ countHeart: this.state.countHeart + 1 })
+    SocketUtils.emitSendHeart(this.state.roomName)
+  };
+
+  renderGroupInput = () => {
+    const { message, onMessage } = this.state
+    if (Platform.OS === 'android') {
+      if (!onMessage) {
+        return (
+          <TouchableOpacity
+            onPress={() => this.setState({ onMessage: true })}
+          >
+            <Image
+              source={require('../assets/message.png')}
+              style={[stylesLive.iconSwitch, { marginHorizontal: 10 }]}
+            />
+          </TouchableOpacity>
+        )
+      }
+      return (
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+          <TextInput
+            style={{ backgroundColor: 'white', borderRadius: 8, flex: 1, marginHorizontal: 5 }}
+            placeholder="Comment input"
+            underlineColorAndroid="transparent"
+            onChangeText={this.onChangeMessageText}
+            value={message}
+            onEndEditing={this.onPressSend}
+            autoCapitalize="none"
+            autoCorrect={false}
+            onFocus={() => {
+              this.setState({ visibleListMessages: false })
+            }}
+          />
+          <TouchableOpacity
+            style={stylesLive.wrapIconSend}
+            onPress={this.onPressSend}
+            activeOpacity={0.6}
+          >
+            <Image
+              source={require('../assets/ico_send.png')}
+              style={stylesLive.iconSend}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={stylesLive.wrapIconHeart}
+            onPress={this.onPressHeart}
+            activeOpacity={0.6}
+          >
+            <Image
+              source={require('../assets/ico_heart.png')}
+              style={stylesLive.iconHeart}
+            />
+          </TouchableOpacity>
+        </View>
+      )
+    }
+    return (
+      <KeyboardAccessory backgroundColor="transparent">
+        <View style={stylesLive.wrapBottomIOS}>
+          <View style={stylesLive.col}>
+
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                height: 45,
+                marginHorizontal: 10,
+                marginBottom: 10,
+                borderRadius: 10,
+                alignItems: 'center',
+              }}
+              onLayout={this.setDropZoneValues}
+            >
+              <TextInput
+                style={stylesLive.textInput}
+                placeholder="Comment input"
+                underlineColorAndroid="transparent"
+                onChangeText={this.onChangeMessageText}
+                value={message}
+                onEndEditing={this.onPressSend}
+                autoCapitalize="none"
+                autoCorrect={false}
+                onFocus={() => {
+                  this.setState({ visibleListMessages: false })
+                }}
+              />
+              <TouchableOpacity
+                style={stylesLive.wrapIconSend}
+                onPress={this.onPressSend}
+                activeOpacity={0.6}
+              >
+                <Image
+                  source={require('../assets/ico_send.png')}
+                  style={stylesLive.iconSend}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={stylesLive.wrapIconHeart}
+                onPress={this.onPressHeart}
+                activeOpacity={0.6}
+              >
+                <Image
+                  source={require('../assets/ico_heart.png')}
+                  style={stylesLive.iconHeart}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </KeyboardAccessory>
+    )
+  };
+
   renderCancelStreamerButton = () => {
     const { liveStatus } = this.state
     const { user, streamOnline } = this.props
@@ -217,10 +362,7 @@ class StreamScreen extends Component {
           {listMessages.length > 0
             && listMessages.map((item) => {
               const {
-                productId,
-                productUrl,
-                productImageUrl,
-                userId,
+                username,
                 message,
               } = item
               return (
@@ -235,28 +377,9 @@ class StreamScreen extends Component {
                       />
                     )}
                   </View>
-                  <View style={stylesLive.messageItem}>
-                    {!Utils.isNullOrUndefined(productId)
-                      && !Utils.isNullOrUndefined(productUrl)
-                      && !Utils.isNullOrUndefined(productImageUrl) && (
-                        <TouchableWithoutFeedback
-                          onPress={() => this.onPressProduct(item)}
-                        >
-                          <View style={stylesLive.wrapSeeDetail}>
-                            <Image
-                              source={{ uri: productImageUrl }}
-                              style={stylesLive.iconProduct}
-                            />
-                            <Text style={stylesLive.textShowDetail}>
-                              Click here to see detail
-                            </Text>
-                          </View>
-                        </TouchableWithoutFeedback>
-                    )}
 
-                    <Text style={stylesLive.name}>{userId}</Text>
-                    <Text style={stylesLive.content}>{message}</Text>
-                  </View>
+                  <Text style={stylesLive.name}>{username}</Text>
+                  <Text style={stylesLive.content}>{message}</Text>
                 </View>
               )
             })}
@@ -314,7 +437,7 @@ class StreamScreen extends Component {
             ref={(vb) => {
               this.vbCamera = vb
             }}
-            outputUrl={Utils.getRtmpPath() + this.props.user._id}
+            outputUrl="rtmp://10.240.152.180/gotest/CLNBxmz"
             camera={{ cameraId: 1, cameraFrontMirror: true }}
             audio={{ bitrate: 32000, profile: 1, samplerate: 44100 }}
             video={{
@@ -340,19 +463,17 @@ class StreamScreen extends Component {
               borderColor: 'rgb(153, 153, 153)',
               backgroundColor: 'rgb(153, 153, 153)',
               borderWidth: 1,
+              width,
             }]}
-            // onLayout={(event) => {
-            //   const { height } = event.nativeEvent.layout
-            //   this.setState({ heightBottom: height })
-            // }}
           >
             <RowContainer
               alignItems="center"
               justifyContent="flex-end"
-              // style={{ flex: 1 }}
+              style={{ flex: 1 }}
             >
-              {this.renderSwitchCamera()}
-              {this.renderCancelStreamerButton()}
+              {this.renderGroupInput()}
+              {!this.state.onMessage && this.renderSwitchCamera()}
+              {!this.state.onMessage && this.renderCancelStreamerButton()}
             </RowContainer>
             <FloatingHearts count={countHeart} style={stylesLive.wrapGroupHeart} />
           </RowContainer>

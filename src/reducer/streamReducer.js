@@ -1,6 +1,7 @@
 const initState = {
   list_live: [],
   streamOnline: {},
+  link_stream: null,
 }
 
 export const streamReducer = (state = initState, action) => {
@@ -32,7 +33,11 @@ export const streamReducer = (state = initState, action) => {
           ...payload.data,
         },
       }
-
+    case 'EDGE_GETLINK_SUCCESS':
+      return {
+        ...state,
+        link_stream: payload.data.result,
+      }
     default:
       return state
   }

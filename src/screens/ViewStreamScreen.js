@@ -19,10 +19,10 @@ import KeyboardAccessory from 'react-native-sticky-keyboard-accessory'
 import { NodePlayerView } from 'react-native-nodemediaclient'
 import FloatingHearts from 'components/FloatingHearts'
 import { connect } from 'react-redux'
+import { getLinkStreamAction } from 'actions/streamAction'
 import SocketUtils from '../SocketUtils'
 import Utils from '../Utils'
 import { stylesLive } from './styles'
-
 
 class ViewStreamScreen extends Component {
   static navigationOptions = () => ({
@@ -59,6 +59,7 @@ class ViewStreamScreen extends Component {
     const roomName = this.props.navigation.getParam('roomName')
     this.setState({ roomName })
     SocketUtils.emitJoinServer(roomName, user._id)
+    this.props.getLinkStreamAction()
   };
 
   alertStreamerNotReady = () => {
@@ -357,21 +358,23 @@ class ViewStreamScreen extends Component {
 
   renderViewerUI = () => {
     const { countViewer, countHeart } = this.state
-
+    const link_stream = this.props
     return (
       <View style={stylesLive.container}>
         <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
-        <NodePlayerView
-          style={stylesLive.streamerCameraView}
-          ref={(vb) => {
-            this.vbViewer = vb
-          }}
-          inputUrl={Utils.getRtmpPath() + this.props.navigation.getParam('pathStream')}
-          scaleMode="ScaleAspectFit"
-          bufferTime={300}
-          maxBufferTime={1000}
-          autoplay
-        />
+        { link_stream && (
+          <NodePlayerView
+            style={stylesLive.streamerCameraView}
+            ref={(vb) => {
+              this.vbViewer = vb
+            }}
+            inputUrl={link_stream}
+            scaleMode="ScaleAspectFit"
+            bufferTime={300}
+            maxBufferTime={1000}
+            autoplay
+          />
+        )}
 
         <TouchableWithoutFeedback
           onPress={() => {
@@ -440,6 +443,7 @@ class ViewStreamScreen extends Component {
 
 const mapStateToProps = state => ({
   user: state.user.user,
+  link_stream: state.stream.link_stream,
 })
 
-export default connect(mapStateToProps)(ViewStreamScreen)
+export default connect(mapStateToProps, { getLinkStreamAction })(ViewStreamScreen)
