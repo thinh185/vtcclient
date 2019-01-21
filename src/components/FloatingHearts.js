@@ -86,7 +86,6 @@ class FloatingHearts extends Component {
   }
 }
 
-const getRandomNumber = (min, max) => Math.random() * (max - min) + min
 const styles = StyleSheet.create({
   container: {
     top: 0,
@@ -102,5 +101,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
 })
+
+const getRandomNumber = (min, max) => Math.random() * (max - min) + min
 
 export default FloatingHearts

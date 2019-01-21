@@ -93,7 +93,7 @@ MERGED from [org.webkit:android-jsc:r174650] /home/thinhnn/.gradle/caches/transf
 	android:icon
 		ADDED from /home/thinhnn/demo/vtcclient/android/app/src/main/AndroidManifest.xml:18:7-41
 	android:allowBackup
-		ADDED from /home/thinhnn/demo/vtcclient/android/app/src/main/AndroidManifest.xml:19:7-34
+		ADDED from /home/thinhnn/demo/vtcclient/android/app/src/main/AndroidManifest.xml:19:7-33
 	android:theme
 		ADDED from /home/thinhnn/demo/vtcclient/android/app/src/main/AndroidManifest.xml:20:7-38
 	android:name

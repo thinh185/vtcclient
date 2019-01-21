@@ -9,7 +9,6 @@ export default function* userSagas() {
 function* fetchLiveStreamSaga() {
   const res = yield call(streamAPI.list_livestream)
   const { list_live } = res.data.result
-
   if (res.data.code === 200) {
     yield put({ type: 'LIVE_STREAM_SUCCESS', payload: { list_live } })
   }

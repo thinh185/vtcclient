@@ -5999,9 +5999,15 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
+<<<<<<< HEAD
 react-native-camera@^1.8.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-1.9.0.tgz#3c33d0a5f4172785f3515b387937f07e2138072f"
+=======
+react-native-camera@^1.9.0:
+  version "1.9.0"
+  resolved "http://10.30.154.118:8888/repository/NodeJS/react-native-camera/-/react-native-camera-1.9.0.tgz#3c33d0a5f4172785f3515b387937f07e2138072f"
+>>>>>>> 267c2fa802abdb2ce01058cd00615baa6f1b71b2
   integrity sha512-stvA9rWmN95DRr7a+eNr7LQlQLxP2Z7AJEoR8ctjcYx1EUMoL7qPFdz2JKmqZ/DEsW3ZKOC+ZCx68tscj9gDbQ==
   dependencies:
     prop-types "^15.6.2"

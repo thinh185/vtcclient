@@ -21,7 +21,7 @@ import { connect } from 'react-redux'
 import { RowContainer, StartColumnContainer, Container } from 'components/common/SComponent'
 import { LiveStatus } from '../liveStatus'
 import SocketUtils from '../SocketUtils'
-import Utils from '../Utils'
+// import Utils from '../Utils'
 import { stylesLive } from './styles'
 
 const { width } = Dimensions.get('window')
@@ -34,9 +34,7 @@ class StreamScreen extends Component {
     super(props)
     this.state = {
       liveStatus: LiveStatus.REGISTER,
-      countViewer: 0,
       countHeart: 0,
-      visibleListMessages: true,
       listMessages: [],
       onMessage: false,
     }
@@ -60,7 +58,8 @@ class StreamScreen extends Component {
   };
 
   componentWillUnmount() {
-    this.vbCamera.stop()
+    const { streamOnline } = this.props
+    this.onFinishLiveStream(streamOnline.roomName)
   }
 
   keyboardShow() {
@@ -77,9 +76,9 @@ class StreamScreen extends Component {
     this.vbCamera.start()
   };
 
-  onFinishLiveStream = (roomName, userId) => {
+  onFinishLiveStream = (roomName) => {
     this.setState({ liveStatus: LiveStatus.FINISH })
-    SocketUtils.emitFinishLiveStream(roomName, userId)
+    SocketUtils.emitFinishLiveStream(roomName)
     this.vbCamera.stop()
   };
 
@@ -102,6 +101,8 @@ class StreamScreen extends Component {
       this.vbCamera.stop()
     }
     const { liveStatus } = this.state
+    const { streamOnline } = this.props
+
     if (
       liveStatus === LiveStatus.REGISTER
       || liveStatus === LiveStatus.ON_LIVE
@@ -118,9 +119,8 @@ class StreamScreen extends Component {
           {
             text: 'Sure',
             onPress: () => {
-              SocketUtils.emitLeaveServer(
-                Utils.getRoomName(),
-                Utils.getUserId(),
+              SocketUtils.emitFinishLiveStream(
+                streamOnline.roomName,
               )
               this.props.navigation.goBack()
             },
@@ -149,7 +149,6 @@ class StreamScreen extends Component {
       newListMessages.push({ userId: user._id, message })
       this.setState({
         listMessages: newListMessages,
-        visibleListMessages: true,
       })
       SocketUtils.emitSendMessage(
         this.state.roomName,
@@ -191,7 +190,6 @@ class StreamScreen extends Component {
             autoCapitalize="none"
             autoCorrect={false}
             onFocus={() => {
-              this.setState({ visibleListMessages: false })
             }}
           />
           <TouchableOpacity
@@ -244,7 +242,6 @@ class StreamScreen extends Component {
                 autoCapitalize="none"
                 autoCorrect={false}
                 onFocus={() => {
-                  this.setState({ visibleListMessages: false })
                 }}
               />
               <TouchableOpacity
@@ -280,7 +277,7 @@ class StreamScreen extends Component {
     return (
       <TouchableOpacity
         onPress={() => {
-          if (liveStatus == LiveStatus.ON_LIVE) {
+          if (liveStatus === LiveStatus.ON_LIVE) {
             this.onPressCancelStreamer()
             return
           }
@@ -347,10 +344,12 @@ class StreamScreen extends Component {
   };
 
   renderListMessages = () => {
-    const { listMessages, visibleListMessages } = this.state
-    if (!visibleListMessages) {
+    const { deltailStream } = this.props
+
+    if (!deltailStream.comments || deltailStream.comments.length === 0) {
       return null
     }
+    const { comments } = deltailStream
     return (
       <View style={stylesLive.wrapListMessages}>
         <ScrollView
@@ -359,8 +358,8 @@ class StreamScreen extends Component {
             this.scrollView.scrollToEnd({ animated: true })
           }}
         >
-          {listMessages.length > 0
-            && listMessages.map((item) => {
+          {comments.length > 0
+            && comments.map((item) => {
               const {
                 username,
                 message,
@@ -377,9 +376,10 @@ class StreamScreen extends Component {
                       />
                     )}
                   </View>
-
-                  <Text style={stylesLive.name}>{username}</Text>
-                  <Text style={stylesLive.content}>{message}</Text>
+                  <View style={stylesLive.messageItem}>
+                    <Text style={stylesLive.name}>{username}</Text>
+                    <Text style={stylesLive.content}>{message}</Text>
+                  </View>
                 </View>
               )
             })}
@@ -389,7 +389,8 @@ class StreamScreen extends Component {
   };
 
   renderStreamerUI = () => {
-    const { countViewer, countHeart } = this.state
+    const { deltailStream } = this.props
+
     return (
       <Container>
         <StartColumnContainer>
@@ -406,30 +407,33 @@ class StreamScreen extends Component {
               zIndex: 2,
             }]}
           >
-            {this.renderLiveText()}
-            <RowContainer
-              alignItems="center"
-              justifyContents="flex-start"
-              style={{
-                paddingHorizontal: 10,
-                paddingVertical: 8,
-                backgroundColor: 'red',
-                borderRadius: 8,
-                marginHorizontal: 5,
-              }}
-            >
-              <Image
-                source={require('../assets/ico_view.png')}
-                style={stylesLive.iconView}
-              />
-              <Text style={{
-                paddingHorizontal: 8,
-                fontSize: 18,
-                fontWeight: '400',
-                color: 'white' }}
-              >{countViewer}
-              </Text>
+            <RowContainer>
+              {this.renderLiveText()}
+              <RowContainer
+                alignItems="center"
+                justifyContents="flex-start"
+                style={{
+                  paddingHorizontal: 10,
+                  paddingVertical: 8,
+                  backgroundColor: 'red',
+                  borderRadius: 8,
+                  marginHorizontal: 5,
+                }}
+              >
+                <Image
+                  source={require('../assets/ico_view.png')}
+                  style={stylesLive.iconView}
+                />
+                <Text style={{
+                  paddingHorizontal: 8,
+                  fontSize: 18,
+                  fontWeight: '400',
+                  color: 'white' }}
+                >{deltailStream.countViewer || 0}
+                </Text>
+              </RowContainer>
             </RowContainer>
+
 
           </RowContainer>
           <NodeCameraView
@@ -475,8 +479,11 @@ class StreamScreen extends Component {
               {!this.state.onMessage && this.renderSwitchCamera()}
               {!this.state.onMessage && this.renderCancelStreamerButton()}
             </RowContainer>
-            <FloatingHearts count={countHeart} style={stylesLive.wrapGroupHeart} />
           </RowContainer>
+          <FloatingHearts
+            count={deltailStream.countHeart || 0}
+            style={{ marginBottom: 8, zIndex: 1, flex: 1 }}
+          />
           {this.renderListMessages()}
         </StartColumnContainer>
 
@@ -490,9 +497,19 @@ class StreamScreen extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  user: state.user.user,
-  streamOnline: state.stream.streamOnline,
-})
+const mapStateToProps = (state) => {
+  const { list_live, streamOnline } = state.stream
+
+  const res = {
+    user: state.user.user,
+    streamOnline,
+  }
+  if (state.stream.streamOnline) {
+    res.deltailStream = list_live.filter(el => el.roomName === streamOnline.roomName)[0] || {}
+  } else {
+    res.deltailStream = {}
+  }
+  return res
+}
 
 export default connect(mapStateToProps)(StreamScreen)
