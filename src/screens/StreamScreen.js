@@ -19,6 +19,7 @@ import { NodeCameraView } from 'react-native-nodemediaclient'
 import FloatingHearts from 'components/FloatingHearts'
 import { connect } from 'react-redux'
 import { RowContainer, StartColumnContainer, Container } from 'components/common/SComponent'
+import Message from 'components/Message'
 import { LiveStatus } from '../liveStatus'
 import SocketUtils from '../SocketUtils'
 // import Utils from '../Utils'
@@ -173,7 +174,7 @@ class StreamScreen extends Component {
           >
             <Image
               source={require('../assets/message.png')}
-              style={[stylesLive.iconSwitch, { marginHorizontal: 10 }]}
+              style={{ marginHorizontal: 10, width: 30, height: 30, tintColor: 'white' }}
             />
           </TouchableOpacity>
         )
@@ -344,12 +345,12 @@ class StreamScreen extends Component {
   };
 
   renderListMessages = () => {
-    const { deltailStream } = this.props
+    // const { deltailStream } = this.props
 
-    if (!deltailStream.comments || deltailStream.comments.length === 0) {
-      return null
-    }
-    const { comments } = deltailStream
+    // if (!deltailStream.comments || deltailStream.comments.length === 0) {
+    //   return null
+    // }
+    // const { comments } = deltailStream
     return (
       <View style={stylesLive.wrapListMessages}>
         <ScrollView
@@ -358,7 +359,7 @@ class StreamScreen extends Component {
             this.scrollView.scrollToEnd({ animated: true })
           }}
         >
-          {comments.length > 0
+          {/* {comments.length > 0
             && comments.map((item) => {
               const {
                 username,
@@ -382,7 +383,8 @@ class StreamScreen extends Component {
                   </View>
                 </View>
               )
-            })}
+            })} */}
+          <Message />
         </ScrollView>
       </View>
     )
@@ -393,7 +395,7 @@ class StreamScreen extends Component {
 
     return (
       <Container>
-        <StartColumnContainer>
+        <StartColumnContainer style={{ zIndex: 2, flex: 1 }}>
           <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
           <RowContainer
             alignItems="center"

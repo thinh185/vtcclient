@@ -36,7 +36,6 @@ export default class App extends React.Component {
     this.requestVideoCallPermission()
     AsyncStorage.getItem('persist:livestreamapp').then((result) => {
       const storage = JSON.parse(result)
-      console.log(storage)
       const { user } = JSON.parse(storage.user)
 
       if (!user.username) this.setState({ initialRouteName: 'AuthenStack' })
