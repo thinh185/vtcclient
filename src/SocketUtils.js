@@ -87,15 +87,10 @@ const emitSendHeart = (roomName) => {
 
 const handleOnSendMessage = () => {
   socket.on('send-message', (data) => {
-    const { userId, message, productId, productImageUrl, productUrl } = data
-    const listMessages = Utils.getContainer().state.listMessages
-    const newListMessages = listMessages.slice()
-    newListMessages.push({
-      userId,
-      message,
-      productId,
-      productImageUrl,
-      productUrl,
+    const { comment, roomName } = data
+    store.dispatch({
+      type: 'ADD_NEW_COMMENT_SUCCESS',
+      payload: { comment, roomName },
     })
   })
 }
@@ -104,17 +99,13 @@ const emitSendMessage = (
   roomName,
   userId,
   message,
-  productId,
-  productImageUrl,
-  productUrl,
+  username,
 ) => {
   socket.emit('send-message', {
     roomName,
     userId,
     message,
-    productId,
-    productImageUrl,
-    productUrl,
+    username,
   })
 }
 
@@ -133,9 +124,6 @@ const handleOnLeaveClient = () => {
 
 const onNewVideoLiveStream = () => {
   socket.on('new-live-stream', (data) => {
-    console.log('new-live-stream')
-    console.log(data)
-
     store.dispatch({
       type: 'ADD_NEW_VIDEO_LIVE_SUCCESS',
       payload: { data },

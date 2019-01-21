@@ -13,7 +13,7 @@ import {
   LayoutAnimation,
   StatusBar,
 } from 'react-native'
-import { RowContainer } from 'components/common/SComponent'
+import { RowContainer, Container, StartColumnContainer } from 'components/common/SComponent'
 import KeyboardAccessory from 'react-native-sticky-keyboard-accessory'
 import { NodePlayerView } from 'react-native-nodemediaclient'
 import FloatingHearts from 'components/FloatingHearts'
@@ -22,7 +22,6 @@ import navigator from 'navigations/customNavigator'
 import SocketUtils from '../SocketUtils'
 import Utils from '../Utils'
 import { stylesLive } from './styles'
-import { LiveStatus } from '../liveStatus'
 
 
 class ViewStreamScreen extends Component {
@@ -35,14 +34,10 @@ class ViewStreamScreen extends Component {
     this.state = {
       countHeart: 0,
       message: '',
-      visibleListMessages: true,
-      listMessages: [],
       keyboardHeight: 0,
-      productId: null,
-      productUrl: null,
-      productImageUrl: null,
       roomName: '',
     }
+    this.back = this.back.bind(this)
   }
 
   componentDidMount = () => {
@@ -99,61 +94,11 @@ class ViewStreamScreen extends Component {
   onPressSend = () => {
     const {
       message,
-      listMessages,
-      productId,
-      productImageUrl,
-      productUrl,
     } = this.state
     const { user } = this.props
-    if (productId !== null && productUrl !== null && productImageUrl !== null) {
-      this.setState({ message: '' })
-      Keyboard.dismiss()
-      const newListMessages = listMessages.slice()
-      newListMessages.push({
-        userId: user._id,
-        message,
-        productId,
-        productImageUrl,
-        productUrl,
-      })
-      this.setState({
-        listMessages: newListMessages,
-        visibleListMessages: true,
-        productId: null,
-        productUrl: null,
-        productImageUrl: null,
-      })
-      SocketUtils.emitSendMessage(
-        this.state.roomName,
-        user.username,
-        message,
-        productId,
-        productImageUrl,
-        productUrl,
-      )
-    } else if (message !== '') {
-      this.setState({ message: '' })
-      Keyboard.dismiss()
-      const newListMessages = listMessages.slice()
-      newListMessages.push({ userId: user._id, message })
-      this.setState({
-        listMessages: newListMessages,
-        visibleListMessages: true,
-      })
-      SocketUtils.emitSendMessage(
-        this.state.roomName,
-        user.username,
-        message,
-      )
-    }
-  };
-
-  onPressCloseModal = () => {
-    this.setState({
-      productId: null,
-      productUrl: null,
-      productImageUrl: null,
-    })
+    if (message.trim() === '') return
+    SocketUtils.emitSendMessage(this.props.navigation.getParam('roomName'), user._id, message, user.username)
+    this.setState({ message: '' })
   };
 
   onPressCancelViewer = () => {
@@ -202,9 +147,6 @@ class ViewStreamScreen extends Component {
                 onEndEditing={this.onPressSend}
                 autoCapitalize="none"
                 autoCorrect={false}
-                onFocus={() => {
-                  this.setState({ visibleListMessages: false })
-                }}
 
               />
               <TouchableOpacity
@@ -258,9 +200,6 @@ class ViewStreamScreen extends Component {
                 onEndEditing={this.onPressSend}
                 autoCapitalize="none"
                 autoCorrect={false}
-                onFocus={() => {
-                  this.setState({ visibleListMessages: false })
-                }}
               />
               <TouchableOpacity
                 style={stylesLive.wrapIconSend}
@@ -290,10 +229,12 @@ class ViewStreamScreen extends Component {
   };
 
   renderListMessages = () => {
-    const { listMessages, visibleListMessages } = this.state
-    if (!visibleListMessages) {
+    const { detailRoom } = this.props
+
+    if (!detailRoom.comments || detailRoom.comments.length === 0) {
       return null
     }
+    const { comments } = detailRoom
     return (
       <View style={stylesLive.wrapListMessages}>
         <ScrollView
@@ -302,13 +243,10 @@ class ViewStreamScreen extends Component {
             this.scrollView.scrollToEnd({ animated: true })
           }}
         >
-          {listMessages.length > 0
-            && listMessages.map((item) => {
+          {comments.length > 0
+            && comments.map((item) => {
               const {
-                productId,
-                productUrl,
-                productImageUrl,
-                userId,
+                username,
                 message,
               } = item
               return (
@@ -324,25 +262,7 @@ class ViewStreamScreen extends Component {
                     )}
                   </View>
                   <View style={stylesLive.messageItem}>
-                    {!Utils.isNullOrUndefined(productId)
-                      && !Utils.isNullOrUndefined(productUrl)
-                      && !Utils.isNullOrUndefined(productImageUrl) && (
-                        <TouchableWithoutFeedback
-                          onPress={() => this.onPressProduct(item)}
-                        >
-                          <View style={stylesLive.wrapSeeDetail}>
-                            <Image
-                              source={{ uri: productImageUrl }}
-                              style={stylesLive.iconProduct}
-                            />
-                            <Text style={stylesLive.textShowDetail}>
-                              Click here to see detail
-                            </Text>
-                          </View>
-                        </TouchableWithoutFeedback>
-                    )}
-
-                    <Text style={stylesLive.name}>{userId}</Text>
+                    <Text style={stylesLive.name}>{username}</Text>
                     <Text style={stylesLive.content}>{message}</Text>
                   </View>
                 </View>
@@ -353,28 +273,25 @@ class ViewStreamScreen extends Component {
     )
   };
 
-  renderLiveText = () => {
-    const { liveStatus } = this.state
+  back =() => {
+    navigator.goBack()
+  }
+
+  renderLeaveRoom = () => {
     return (
       <TouchableOpacity
-        onPress={() => navigator.goBack()}
-
-        style={
-          liveStatus === LiveStatus.ON_LIVE
-            ? { backgroundColor: 'red', paddingHorizontal: 10, paddingVertical: 8, borderRadius: 8, marginHorizontal: 5 }
-            : { backgroundColor: 'rgb(153,153,153)', borderRadius: 8, paddingHorizontal: 10, paddingVertical: 8, marginHorizontal: 5 }
-        }
+        onPress={this.back}
       >
-        <Text
-          style={
-              liveStatus === LiveStatus.ON_LIVE
-                ? stylesLive.liveText
-                : stylesLive.notLiveText
-            }
-        >
+        <View style={{ backgroundColor: 'red', paddingHorizontal: 10, paddingVertical: 8, borderRadius: 8, marginHorizontal: 5 }}>
+
+          <Text
+            style={stylesLive.liveText}
+          >
             Kết thúc
-        </Text>
+          </Text>
+        </View>
       </TouchableOpacity>
+
     )
   };
 
@@ -383,74 +300,78 @@ class ViewStreamScreen extends Component {
     const { detailRoom } = this.props
     if (!detailRoom.roomName) navigator.goBack()
     return (
-      <View style={stylesLive.container}>
-        <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
-        <RowContainer
-          alignItems="center"
-          justifyContent="flex-start"
-          style={[{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: 300,
-            flex: 1,
-            zIndex: 2,
-          }]}
-        >
-          {this.renderLiveText()}
-          <RowContainer
-            alignItems="center"
-            justifyContents="flex-start"
-            style={{
-              paddingHorizontal: 10,
-              paddingVertical: 8,
-              backgroundColor: 'red',
-              borderRadius: 8,
-              marginHorizontal: 5,
-            }}
-          >
-            <Image
-              source={require('../assets/ico_view.png')}
-              style={stylesLive.iconView}
-            />
-            <Text style={{
-              paddingHorizontal: 8,
-              fontSize: 18,
-              fontWeight: '400',
-              color: 'white' }}
-            >{detailRoom.countViewer || 0}
-            </Text>
-          </RowContainer>
 
-        </RowContainer>
+      <Container>
+        <StartColumnContainer>
+          <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
+          <View style={{ flex: 1, zIndex: 2 }}>
+            <RowContainer
+              alignItems="center"
+              justifyContent="flex-start"
+              style={[{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: 300,
+                flex: 1,
+                zIndex: 2,
+              }]}
+            >
+              <RowContainer>
+                {this.renderLeaveRoom()}
+                <RowContainer
+                  alignItems="center"
+                  justifyContents="flex-start"
+                  style={{
+                    paddingHorizontal: 10,
+                    paddingVertical: 8,
+                    backgroundColor: 'red',
+                    borderRadius: 8,
+                    marginHorizontal: 5,
+                  }}
+                >
+                  <Image
+                    source={require('../assets/ico_view.png')}
+                    style={stylesLive.iconView}
+                  />
+                  <Text style={{
+                    paddingHorizontal: 8,
+                    fontSize: 18,
+                    fontWeight: '400',
+                    color: 'white' }}
+                  >{detailRoom.countViewer || 0}
+                  </Text>
+                </RowContainer>
+              </RowContainer>
 
-        <NodePlayerView
-          style={stylesLive.streamerCameraView}
-          ref={(vb) => {
-            this.vbViewer = vb
-          }}
-          inputUrl={Utils.getRtmpPath() + this.props.navigation.getParam('pathStream')}
-          scaleMode="ScaleToFill"
-          bufferTime={300}
-          maxBufferTime={1000}
-          autoplay
-        />
-        <TouchableWithoutFeedback
-          onPress={() => {
-            Keyboard.dismiss()
-            this.setState({ visibleListMessages: true })
-          }}
-          accessible={false}
-          style={stylesLive.viewDismissKeyboard}
-        >
-          <View style={stylesLive.container}>
-            <FloatingHearts count={countHeart} style={{ marginBottom: -50, zIndex: 2, flex: 1 }} />
+
+            </RowContainer>
+
           </View>
-        </TouchableWithoutFeedback>
 
-        {this.renderGroupInput()}
-        {this.renderListMessages()}
-      </View>
+          <NodePlayerView
+            style={stylesLive.streamerCameraView}
+            ref={(vb) => {
+              this.vbViewer = vb
+            }}
+            inputUrl="rtmp://10.240.152.181/edgelive/b743e2a7-f826-412c-b897-c14f1780a8b3"
+            scaleMode="ScaleToFill"
+            bufferTime={300}
+            maxBufferTime={1000}
+            autoplay
+          />
+          <TouchableWithoutFeedback
+            accessible={false}
+            style={stylesLive.viewDismissKeyboard}
+          >
+            <FloatingHearts count={countHeart} style={{ marginBottom: 0, zIndex: 2, flex: 1 }} />
+          </TouchableWithoutFeedback>
+
+          {this.renderGroupInput()}
+          {this.renderListMessages()}
+
+        </StartColumnContainer>
+      </Container>
     )
   };
 

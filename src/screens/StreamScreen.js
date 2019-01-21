@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {
   View,
   Text,
-  TouchableWithoutFeedback,
   Keyboard,
   Image,
   TouchableOpacity,
@@ -20,7 +19,7 @@ import { connect } from 'react-redux'
 import { RowContainer, StartColumnContainer, Container } from 'components/common/SComponent'
 import { LiveStatus } from '../liveStatus'
 import SocketUtils from '../SocketUtils'
-import Utils from '../Utils'
+// import Utils from '../Utils'
 import { stylesLive } from './styles'
 
 const { width } = Dimensions.get('window')
@@ -33,8 +32,6 @@ class StreamScreen extends Component {
     super(props)
     this.state = {
       liveStatus: LiveStatus.REGISTER,
-      visibleListMessages: true,
-      listMessages: [],
     }
     this.Animation = new Animated.Value(0)
   }
@@ -56,7 +53,8 @@ class StreamScreen extends Component {
   };
 
   componentWillUnmount() {
-    this.vbCamera.stop()
+    const { streamOnline } = this.props
+    this.onFinishLiveStream(streamOnline.roomName)
   }
 
   keyboardShow() {
@@ -73,9 +71,9 @@ class StreamScreen extends Component {
     this.vbCamera.start()
   };
 
-  onFinishLiveStream = (roomName, userId) => {
+  onFinishLiveStream = (roomName) => {
     this.setState({ liveStatus: LiveStatus.FINISH })
-    SocketUtils.emitFinishLiveStream(roomName, userId)
+    SocketUtils.emitFinishLiveStream(roomName)
     this.vbCamera.stop()
   };
 
@@ -116,8 +114,6 @@ class StreamScreen extends Component {
           {
             text: 'Sure',
             onPress: () => {
-              console.log('send finish')
-
               SocketUtils.emitFinishLiveStream(
                 streamOnline.roomName,
               )
@@ -203,10 +199,12 @@ class StreamScreen extends Component {
   };
 
   renderListMessages = () => {
-    const { listMessages, visibleListMessages } = this.state
-    if (!visibleListMessages) {
+    const { deltailStream } = this.props
+
+    if (!deltailStream.comments || deltailStream.comments.length === 0) {
       return null
     }
+    const { comments } = deltailStream
     return (
       <View style={stylesLive.wrapListMessages}>
         <ScrollView
@@ -215,13 +213,10 @@ class StreamScreen extends Component {
             this.scrollView.scrollToEnd({ animated: true })
           }}
         >
-          {listMessages.length > 0
-            && listMessages.map((item) => {
+          {comments.length > 0
+            && comments.map((item) => {
               const {
-                productId,
-                productUrl,
-                productImageUrl,
-                userId,
+                username,
                 message,
               } = item
               return (
@@ -237,25 +232,7 @@ class StreamScreen extends Component {
                     )}
                   </View>
                   <View style={stylesLive.messageItem}>
-                    {!Utils.isNullOrUndefined(productId)
-                      && !Utils.isNullOrUndefined(productUrl)
-                      && !Utils.isNullOrUndefined(productImageUrl) && (
-                        <TouchableWithoutFeedback
-                          onPress={() => this.onPressProduct(item)}
-                        >
-                          <View style={stylesLive.wrapSeeDetail}>
-                            <Image
-                              source={{ uri: productImageUrl }}
-                              style={stylesLive.iconProduct}
-                            />
-                            <Text style={stylesLive.textShowDetail}>
-                              Click here to see detail
-                            </Text>
-                          </View>
-                        </TouchableWithoutFeedback>
-                    )}
-
-                    <Text style={stylesLive.name}>{userId}</Text>
+                    <Text style={stylesLive.name}>{username}</Text>
                     <Text style={stylesLive.content}>{message}</Text>
                   </View>
                 </View>
@@ -268,7 +245,6 @@ class StreamScreen extends Component {
 
   renderStreamerUI = () => {
     const { deltailStream } = this.props
-    console.log('detail Stream ', deltailStream)
 
     return (
       <Container>
@@ -286,30 +262,33 @@ class StreamScreen extends Component {
               zIndex: 2,
             }]}
           >
-            {this.renderLiveText()}
-            <RowContainer
-              alignItems="center"
-              justifyContents="flex-start"
-              style={{
-                paddingHorizontal: 10,
-                paddingVertical: 8,
-                backgroundColor: 'red',
-                borderRadius: 8,
-                marginHorizontal: 5,
-              }}
-            >
-              <Image
-                source={require('../assets/ico_view.png')}
-                style={stylesLive.iconView}
-              />
-              <Text style={{
-                paddingHorizontal: 8,
-                fontSize: 18,
-                fontWeight: '400',
-                color: 'white' }}
-              >{deltailStream.countViewer || 0}
-              </Text>
+            <RowContainer>
+              {this.renderLiveText()}
+              <RowContainer
+                alignItems="center"
+                justifyContents="flex-start"
+                style={{
+                  paddingHorizontal: 10,
+                  paddingVertical: 8,
+                  backgroundColor: 'red',
+                  borderRadius: 8,
+                  marginHorizontal: 5,
+                }}
+              >
+                <Image
+                  source={require('../assets/ico_view.png')}
+                  style={stylesLive.iconView}
+                />
+                <Text style={{
+                  paddingHorizontal: 8,
+                  fontSize: 18,
+                  fontWeight: '400',
+                  color: 'white' }}
+                >{deltailStream.countViewer || 0}
+                </Text>
+              </RowContainer>
             </RowContainer>
+
 
           </RowContainer>
           <NodeCameraView
@@ -317,7 +296,7 @@ class StreamScreen extends Component {
             ref={(vb) => {
               this.vbCamera = vb
             }}
-            outputUrl={Utils.getRtmpPath() + this.props.user._id}
+            outputUrl="rtmp://10.240.152.180/gotest/CLNBxmz"
             camera={{ cameraId: 1, cameraFrontMirror: true }}
             audio={{ bitrate: 32000, profile: 1, samplerate: 44100 }}
             video={{
@@ -348,7 +327,6 @@ class StreamScreen extends Component {
             <RowContainer
               alignItems="center"
               justifyContent="flex-end"
-              // style={{ flex: 1 }}
             >
               {this.renderSwitchCamera()}
               {this.renderCancelStreamerButton()}

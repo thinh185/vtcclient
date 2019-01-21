@@ -7,6 +7,7 @@ import ContactLiveStreamScreen from 'screens/ContactLiveStream'
 import RegisterScreen from 'screens/RegisterScreen'
 import StreamScreen from 'screens/StreamScreen'
 import ViewStreamScreen from 'screens/ViewStreamScreen'
+// import TestStreamApiScreen from 'screens/TestStreamApi'
 
 
 const AuthenStack = createStackNavigator(
@@ -32,6 +33,7 @@ const HomeStack = createStackNavigator(
     Streamer: StreamScreen,
     Viewer: ViewStreamScreen,
     Contact: ContactLiveStreamScreen,
+    // TestApi: TestStreamApiScreen,
   },
   {
     initialRouteName: 'Contact',
@@ -39,7 +41,6 @@ const HomeStack = createStackNavigator(
       gesturesEnabled: false,
     },
     headerMode: 'none',
-
   },
 )
 

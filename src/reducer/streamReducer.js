@@ -50,6 +50,22 @@ export const streamReducer = (state = initState, action) => {
         ...state,
         list_live: update_list,
       }
+    case 'ADD_NEW_COMMENT_SUCCESS':
+      const { comment } = payload
+      const new_update_list = state.list_live.map((el) => {
+        if (el.roomName === payload.roomName) {
+          return {
+            ...el,
+            comments: [...el.comments, comment],
+          }
+        }
+        return el
+      })
+      return {
+        ...state,
+        list_live: new_update_list,
+      }
+
     default:
       return state
   }
