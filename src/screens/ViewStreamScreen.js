@@ -12,6 +12,7 @@ import {
   ScrollView,
   LayoutAnimation,
   StatusBar,
+  Animated,
 } from 'react-native'
 import { RowContainer, Container, StartColumnContainer } from 'components/common/SComponent'
 import KeyboardAccessory from 'react-native-sticky-keyboard-accessory'
@@ -19,6 +20,7 @@ import { NodePlayerView } from 'react-native-nodemediaclient'
 import FloatingHearts from 'components/FloatingHearts'
 import { connect } from 'react-redux'
 import { getLinkStreamAction } from 'actions/streamAction'
+import Message from 'components/Message'
 import navigator from 'navigations/customNavigator'
 import SocketUtils from '../SocketUtils'
 import { stylesLive } from './styles'
@@ -31,10 +33,10 @@ class ViewStreamScreen extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      countHeart: 0,
       message: '',
       keyboardHeight: 0,
       roomName: '',
+      opacityMessage: new Animated.Value(1),
     }
     this.back = this.back.bind(this)
   }
@@ -82,8 +84,7 @@ class ViewStreamScreen extends Component {
   }
 
   onPressHeart = () => {
-    this.setState({ countHeart: this.state.countHeart + 1 })
-    SocketUtils.emitSendHeart(this.state.roomName)
+    SocketUtils.emitSendHeart(this.props.navigation.getParam('roomName'))
   };
 
 
@@ -107,7 +108,7 @@ class ViewStreamScreen extends Component {
       this.props.navigation.goBack()
     }
 
-    SocketUtils.emitLeaveServer(this.state.roomName, this.props.user._id)
+    SocketUtils.emitLeaveServer(this.props.navigation.getParam('roomName'), this.props.user._id)
   };
 
   renderCancelViewerButton = () => {
@@ -228,6 +229,26 @@ class ViewStreamScreen extends Component {
     )
   };
 
+  displayOnfocus = () => {
+    Animated.timing(
+      this.state.opacityMessage,
+    ).stop()
+
+    Animated.timing(this.state.opacityMessage, {
+      duration: 100,
+      useNativeDriver: true,
+      toValue: 1,
+    }).start()
+  }
+
+  hideMessage = () => {
+    Animated.timing(this.state.opacityMessage, {
+      duration: 15000,
+      useNativeDriver: true,
+      toValue: 0,
+    }).start()
+  }
+
   renderListMessages = () => {
     const { detailRoom } = this.props
 
@@ -236,40 +257,29 @@ class ViewStreamScreen extends Component {
     }
     const { comments } = detailRoom
     return (
-      <View style={stylesLive.wrapListMessages}>
-        <ScrollView
-          ref={(ref) => { this.scrollView = ref }}
-          onContentSizeChange={() => {
-            this.scrollView.scrollToEnd({ animated: true })
-          }}
+      <TouchableWithoutFeedback
+        onPressIn={this.displayOnfocus}
+        onPressOut={this.hideMessage}
+      >
+        <Animated.View
+          style={[stylesLive.wrapListMessages, { opacity: this.state.opacityMessage }]}
         >
-          {comments.length > 0
+          <ScrollView
+            ref={(ref) => { this.scrollView = ref }}
+            onContentSizeChange={() => {
+              this.scrollView.scrollToEnd({ animated: true })
+            }}
+          >
+            {comments.length > 0
             && comments.map((item) => {
-              const {
-                username,
-                message,
-              } = item
               return (
-                <View style={stylesLive.chatItem}>
-                  <View style={stylesLive.wrapAvatar}>
-                    {item.avatar ? (
-                      <Image source={item.avatar} style={stylesLive.iconAvatar} />
-                    ) : (
-                      <Image
-                        source={require('../assets/ico_heart.png')}
-                        style={stylesLive.iconAvatar}
-                      />
-                    )}
-                  </View>
-                  <View style={stylesLive.messageItem}>
-                    <Text style={stylesLive.name}>{username}</Text>
-                    <Text style={stylesLive.content}>{message}</Text>
-                  </View>
-                </View>
+                <Message message={item} />
               )
             })}
-        </ScrollView>
-      </View>
+            {/* <Message /> */}
+          </ScrollView>
+        </Animated.View>
+      </TouchableWithoutFeedback>
     )
   };
 
@@ -296,8 +306,7 @@ class ViewStreamScreen extends Component {
   };
 
   renderViewerUI = () => {
-    const { countHeart } = this.state
-    const { detailRoom } = this.props
+    const { detailRoom, link_stream } = this.props
     if (!detailRoom.roomName) navigator.goBack()
     return (
 
@@ -348,23 +357,28 @@ class ViewStreamScreen extends Component {
             </RowContainer>
 
           </View>
+          {link_stream && (
+            <NodePlayerView
+              style={stylesLive.streamerCameraView}
+              ref={(vb) => {
+                this.vbViewer = vb
+              }}
+              inputUrl={link_stream}
+              scaleMode="ScaleToFill"
+              bufferTime={300}
+              maxBufferTime={1000}
+              autoplay
+            />
+          )}
 
-          <NodePlayerView
-            style={stylesLive.streamerCameraView}
-            ref={(vb) => {
-              this.vbViewer = vb
-            }}
-            inputUrl="rtmp://10.240.152.181/edgelive/b743e2a7-f826-412c-b897-c14f1780a8b3"
-            scaleMode="ScaleToFill"
-            bufferTime={300}
-            maxBufferTime={1000}
-            autoplay
-          />
           <TouchableWithoutFeedback
             accessible={false}
             style={stylesLive.viewDismissKeyboard}
           >
-            <FloatingHearts count={countHeart} style={{ marginBottom: 0, zIndex: 2, flex: 1 }} />
+            <FloatingHearts
+              count={detailRoom.countHeart || 0}
+              style={{ marginBottom: 0, zIndex: 2, flex: 1 }}
+            />
           </TouchableWithoutFeedback>
 
           {this.renderGroupInput()}
@@ -384,7 +398,6 @@ const mapStateToProps = (state, ownprops) => {
   const res = {
     user: state.user.user,
     link_stream: state.stream.link_stream,
-
   }
   const { list_live } = state.stream
   const roomName = ownprops.navigation.getParam('roomName')

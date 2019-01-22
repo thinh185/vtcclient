@@ -15,8 +15,9 @@ function* fetchLiveStreamSaga() {
 }
 
 function* fetchEdgeLinkStreamSaga() {
-  const res = yield call(streamAPI.list_livestream)
+  const res = yield call(streamAPI.getLink_stream)
   const { data } = res
+  console.log('data ', data)
 
   if (data.code === 0) {
     yield put({ type: 'EDGE_GETLINK_SUCCESS', payload: { data } })

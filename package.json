@@ -12,6 +12,7 @@
     "apisauce": "^1.0.2",
     "eslint-import-resolver-babel-module": "^4.0.0",
     "eslint-plugin-react": "^7.12.3",
+    "frisbee": "^2.0.5",
     "moment": "^2.23.0",
     "prop-types": "^15.6.2",
     "react": "16.6.3",

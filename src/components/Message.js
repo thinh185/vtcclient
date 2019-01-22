@@ -10,45 +10,35 @@ export default class Message extends Component {
     }
   }
 
-  componentDidMount() {
-    Animated.timing(this.state.opacity, {
-      duration: 4000,
-      useNativeDriver: true,
-      toValue: 0,
-    }).start()
+  changeLayout = () => {
+    // Animated.timing(this.state.opacity, {
+    //   duration: 8000,
+    //   useNativeDriver: true,
+    //   toValue: 0,
+    // }).start()
   }
-
-  reverse = () => {
-    Animated.timing(this.state.opacity, {
-      duration: 4000,
-      useNativeDriver: true,
-      toValue: 1,
-    }).start()
-  }
-
-  // handleOnLayout = () => {
-  //   this.reverse()
-  // };
 
   render() {
     const { opacity } = this.state
+    const { message } = this.props
     return (
       <Animated.View
         style={[
           this.props.style,
           { opacity },
         ]}
+        onLayout={this.changeLayout}
       >
         <View style={stylesLive.chatItem}>
           <View style={stylesLive.wrapAvatar}>
             <Image
-              source={require('../assets/ico_heart.png')}
+              source={require('../assets/avatar_1.png')}
               style={stylesLive.iconAvatar}
             />
           </View>
           <View style={stylesLive.messageItem}>
-            <Text style={stylesLive.name}>thinh</Text>
-            <Text style={stylesLive.content}>den vl</Text>
+            <Text style={stylesLive.name}>{message.username}</Text>
+            <Text style={stylesLive.content}>{message.message}</Text>
           </View>
         </View>
       </Animated.View>

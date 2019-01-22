@@ -14,15 +14,18 @@ import {
   Dimensions,
   TextInput,
   KeyboardAccessory,
+  TouchableWithoutFeedback,
+  AppState,
 } from 'react-native'
 import { NodeCameraView } from 'react-native-nodemediaclient'
 import FloatingHearts from 'components/FloatingHearts'
+import FLoatingUser from 'components/FLoatingUser'
+
 import { connect } from 'react-redux'
 import { RowContainer, StartColumnContainer, Container } from 'components/common/SComponent'
 import Message from 'components/Message'
 import { LiveStatus } from '../liveStatus'
 import SocketUtils from '../SocketUtils'
-// import Utils from '../Utils'
 import { stylesLive } from './styles'
 
 const { width } = Dimensions.get('window')
@@ -38,6 +41,8 @@ class StreamScreen extends Component {
       countHeart: 0,
       listMessages: [],
       onMessage: false,
+      message: '',
+      opacityMessage: new Animated.Value(1),
     }
     this.Animation = new Animated.Value(0)
   }
@@ -56,11 +61,22 @@ class StreamScreen extends Component {
     this.setState({ liveStatus: LiveStatus.REGISTER })
     const { user } = this.props
     SocketUtils.emitRegisterLiveStream(user.streamKey, user._id)
+    AppState.addEventListener('change', this.handleAppStateChange)
   };
 
   componentWillUnmount() {
     const { streamOnline } = this.props
     this.onFinishLiveStream(streamOnline.roomName)
+    AppState.removeEventListener('change', this.handleAppStateChange)
+  }
+
+  handleAppStateChange = (nextAppState) => {
+    const { streamOnline } = this.props
+    console.log('rcsac ', nextAppState, streamOnline)
+
+    if (nextAppState === 'background') {
+      this.onFinishLiveStream(streamOnline.roomName)
+    }
   }
 
   keyboardShow() {
@@ -120,9 +136,7 @@ class StreamScreen extends Component {
           {
             text: 'Sure',
             onPress: () => {
-              SocketUtils.emitFinishLiveStream(
-                streamOnline.roomName,
-              )
+              this.onFinishLiveStream(streamOnline.roomName)
               this.props.navigation.goBack()
             },
           },
@@ -152,9 +166,10 @@ class StreamScreen extends Component {
         listMessages: newListMessages,
       })
       SocketUtils.emitSendMessage(
-        this.state.roomName,
+        this.props.streamOnline.roomName,
         user._id,
         message,
+        user.username,
       )
     }
   };
@@ -344,54 +359,64 @@ class StreamScreen extends Component {
     )
   };
 
-  renderListMessages = () => {
-    // const { deltailStream } = this.props
+  displayOnfocus = () => {
+    Animated.timing(
+      this.state.opacityMessage,
+    ).stop()
 
-    // if (!deltailStream.comments || deltailStream.comments.length === 0) {
-    //   return null
-    // }
-    // const { comments } = deltailStream
+    Animated.timing(this.state.opacityMessage, {
+      duration: 100,
+      useNativeDriver: true,
+      toValue: 1,
+    }).start()
+  }
+
+  hideMessage = () => {
+    Animated.timing(this.state.opacityMessage, {
+      duration: 15000,
+      useNativeDriver: true,
+      toValue: 0,
+    }).start()
+  }
+
+  renderListMessages = () => {
+    const { deltailStream } = this.props
+
+    if (!deltailStream.comments || deltailStream.comments.length === 0) {
+      return null
+    }
+    const { comments } = deltailStream
     return (
-      <View style={stylesLive.wrapListMessages}>
-        <ScrollView
-          ref={(ref) => { this.scrollView = ref }}
-          onContentSizeChange={() => {
-            this.scrollView.scrollToEnd({ animated: true })
-          }}
+      <TouchableWithoutFeedback
+        onPressIn={this.displayOnfocus}
+        onPressOut={this.hideMessage}
+      >
+        <Animated.View
+          style={[stylesLive.wrapListMessages, { opacity: this.state.opacityMessage }]}
+          onLayout={this.hideMessage}
         >
-          {/* {comments.length > 0
+          <ScrollView
+            ref={(ref) => { this.scrollView = ref }}
+            onContentSizeChange={() => {
+              this.scrollView.scrollToEnd({ animated: true })
+            }}
+          >
+            {comments.length > 0
             && comments.map((item) => {
-              const {
-                username,
-                message,
-              } = item
               return (
-                <View style={stylesLive.chatItem}>
-                  <View style={stylesLive.wrapAvatar}>
-                    {item.avatar ? (
-                      <Image source={item.avatar} style={stylesLive.iconAvatar} />
-                    ) : (
-                      <Image
-                        source={require('../assets/ico_heart.png')}
-                        style={stylesLive.iconAvatar}
-                      />
-                    )}
-                  </View>
-                  <View style={stylesLive.messageItem}>
-                    <Text style={stylesLive.name}>{username}</Text>
-                    <Text style={stylesLive.content}>{message}</Text>
-                  </View>
-                </View>
+                <Message message={item} />
               )
-            })} */}
-          <Message />
-        </ScrollView>
-      </View>
+            })}
+            {/* <Message /> */}
+          </ScrollView>
+        </Animated.View>
+      </TouchableWithoutFeedback>
     )
   };
 
   renderStreamerUI = () => {
     const { deltailStream } = this.props
+    const { liveStatus } = this.state
 
     return (
       <Container>
@@ -456,34 +481,43 @@ class StreamScreen extends Component {
             smoothSkinLevel={4}
             autopreview
           />
-          <RowContainer
-            alignItems="center"
-            justifyContent="flex-start"
-            style={[{
-              position: 'absolute',
-              bottom: 0,
-              right: 0,
-              zIndex: 2,
-              paddingVertical: 5,
-              borderRadius: 8,
-              borderColor: 'rgb(153, 153, 153)',
-              backgroundColor: 'rgb(153, 153, 153)',
-              borderWidth: 1,
-              width,
-            }]}
-          >
+          <TouchableWithoutFeedback>
             <RowContainer
               alignItems="center"
-              justifyContent="flex-end"
-              style={{ flex: 1 }}
+              justifyContent="flex-start"
+              style={[{
+                position: 'absolute',
+                bottom: 0,
+                right: 0,
+                zIndex: 2,
+                paddingVertical: 5,
+                borderRadius: 8,
+                borderColor: 'rgb(153, 153, 153)',
+                backgroundColor: 'rgb(153, 153, 153)',
+                borderWidth: 1,
+                width,
+              }]}
             >
-              {this.renderGroupInput()}
-              {!this.state.onMessage && this.renderSwitchCamera()}
-              {!this.state.onMessage && this.renderCancelStreamerButton()}
+              <RowContainer
+                alignItems="center"
+                justifyContent="flex-end"
+                style={{ flex: 1 }}
+              >
+                {liveStatus === LiveStatus.ON_LIVE ? this.renderGroupInput() : null}
+                {liveStatus === LiveStatus.ON_LIVE && !this.state.onMessage
+                  ? this.renderSwitchCamera()
+                  : null }
+                {!this.state.onMessage && this.renderCancelStreamerButton()}
+              </RowContainer>
             </RowContainer>
-          </RowContainer>
+
+          </TouchableWithoutFeedback>
           <FloatingHearts
             count={deltailStream.countHeart || 0}
+            style={{ marginBottom: 8, zIndex: 1, flex: 1 }}
+          />
+          <FLoatingUser
+            user={deltailStream.newuser}
             style={{ marginBottom: 8, zIndex: 1, flex: 1 }}
           />
           {this.renderListMessages()}

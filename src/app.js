@@ -42,7 +42,7 @@ export default class App extends React.Component {
       else this.setState({ initialRouteName: 'HomeStack' })
     }).catch((err) => {
       console.log(`error ${err}`)
-      this.setState({ initialRouteName: 'HomeStack' })
+      this.setState({ initialRouteName: 'AuthenStack' })
     })
   }
 

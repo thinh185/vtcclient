@@ -16,13 +16,13 @@ const getSocket = () => {
 const connect = (initstore) => {
   store = initstore
   socket.emit('testconnect', { data: 'data' })
-  socket.on('testconnect', (data) => {
-    console.log('data ', data)
-    store.dispatch({
-      type: 'TEST_SOCKETIO',
-      payload: { data },
-    })
-  })
+  // socket.on('testconnect', (data) => {
+  //   console.log('data ', data)
+  //   store.dispatch({
+  //     type: 'TEST_SOCKETIO',
+  //     payload: { data },
+  //   })
+  // })
 }
 
 const handleOnConnect = () => {
