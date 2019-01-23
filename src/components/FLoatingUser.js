@@ -36,7 +36,7 @@ class FloatingUser extends Component {
             <AnimatedShape
               key={user._id}
               height={height}
-              style={{ right: getRandomNumber(75, 180) }}
+              style={{ right: getRandomNumber(30, 80) }}
               time="10000"
             >
               <RowContainer

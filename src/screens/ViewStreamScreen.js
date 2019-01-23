@@ -92,6 +92,16 @@ class ViewStreamScreen extends Component {
     this.setState({ message: text })
   };
 
+  componentWillReceiveProps(newProps) {
+    const { detailRoom } = newProps
+    if (!detailRoom.comments || detailRoom.comments.length === 0) {
+      return null
+    }
+    if (detailRoom.comments.length !== this.props.detailRoom.comments.length) {
+      this.displayOnfocus()
+    }
+  }
+
   onPressSend = () => {
     const {
       message,
@@ -147,6 +157,7 @@ class ViewStreamScreen extends Component {
                 onChangeText={this.onChangeMessageText}
                 value={message}
                 onEndEditing={this.onPressSend}
+                onFocus={this.displayOnfocus}
                 autoCapitalize="none"
                 autoCorrect={false}
 
@@ -253,6 +264,8 @@ class ViewStreamScreen extends Component {
   renderListMessages = () => {
     const { detailRoom } = this.props
 
+    console.log('detail rooms ', detailRoom)
+
     if (!detailRoom.comments || detailRoom.comments.length === 0) {
       return null
     }
@@ -264,7 +277,6 @@ class ViewStreamScreen extends Component {
       >
         <Animated.View
           style={[stylesLive.wrapListMessages, { opacity: this.state.opacityMessage }]}
-          onLayout={this.hideMessage}
         >
           <ScrollView
             ref={(ref) => { this.scrollView = ref }}

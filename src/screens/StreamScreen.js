@@ -38,7 +38,6 @@ class StreamScreen extends Component {
     super(props)
     this.state = {
       liveStatus: LiveStatus.REGISTER,
-      countHeart: 0,
       listMessages: [],
       onMessage: false,
       message: '',
@@ -71,12 +70,12 @@ class StreamScreen extends Component {
   }
 
   handleAppStateChange = (nextAppState) => {
-    const { streamOnline } = this.props
-    console.log('rcsac ', nextAppState, streamOnline)
+    // const { streamOnline } = this.props
+    console.log(nextAppState)
 
-    if (nextAppState === 'background') {
-      this.onFinishLiveStream(streamOnline.roomName)
-    }
+    // if (nextAppState === 'background') {
+    //   this.onFinishLiveStream(streamOnline.roomName)
+    // }
   }
 
   keyboardShow() {
@@ -175,8 +174,7 @@ class StreamScreen extends Component {
   };
 
   onPressHeart = () => {
-    this.setState({ countHeart: this.state.countHeart + 1 })
-    SocketUtils.emitSendHeart(this.state.roomName)
+    SocketUtils.emitSendHeart(this.props.streamOnline.roomName)
   };
 
   renderGroupInput = () => {
@@ -203,10 +201,9 @@ class StreamScreen extends Component {
             onChangeText={this.onChangeMessageText}
             value={message}
             onEndEditing={this.onPressSend}
+            onFocus={this.displayOnfocus}
             autoCapitalize="none"
             autoCorrect={false}
-            onFocus={() => {
-            }}
           />
           <TouchableOpacity
             style={stylesLive.wrapIconSend}
@@ -360,23 +357,30 @@ class StreamScreen extends Component {
   };
 
   displayOnfocus = () => {
-    Animated.timing(
-      this.state.opacityMessage,
-    ).stop()
-
     Animated.timing(this.state.opacityMessage, {
       duration: 100,
       useNativeDriver: true,
       toValue: 1,
     }).start()
+    // this.hideMessage()
   }
 
   hideMessage = () => {
     Animated.timing(this.state.opacityMessage, {
-      duration: 10000,
+      duration: 12000,
       useNativeDriver: true,
       toValue: 0,
     }).start()
+  }
+
+  componentWillReceiveProps(newProps) {
+    const { deltailStream } = newProps
+    if (!deltailStream.comments || deltailStream.comments.length === 0) {
+      return null
+    }
+    if (deltailStream.comments.length !== this.props.deltailStream.comments.length) {
+      this.displayOnfocus()
+    }
   }
 
   renderListMessages = () => {
@@ -393,7 +397,6 @@ class StreamScreen extends Component {
       >
         <Animated.View
           style={[stylesLive.wrapListMessages, { opacity: this.state.opacityMessage }]}
-          onLayout={this.hideMessage}
         >
           <ScrollView
             ref={(ref) => { this.scrollView = ref }}
@@ -407,7 +410,6 @@ class StreamScreen extends Component {
                 <Message message={item} />
               )
             })}
-            {/* <Message /> */}
           </ScrollView>
         </Animated.View>
       </TouchableWithoutFeedback>

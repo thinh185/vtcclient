@@ -21,7 +21,6 @@ const list_livestream = () => {
 const getLink_stream = async () => {
   try {
     const res = await api2.post('/v1/stream_link', { username: 'ductm', token: 'bacasdasd' })
-    console.log('res ', res)
 
     return res
   } catch (error) {

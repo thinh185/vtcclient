@@ -6,7 +6,7 @@ import Utils from './Utils'
 let store = null
 const socket = io(
   Utils.getSocketIOIP(),
-  { transports: ['websocket'] },
+  { transports: ['websocket'], upgrade: false },
 )
 
 const getSocket = () => {
