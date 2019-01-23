@@ -12,8 +12,9 @@ export default class AnimatedShape extends Component {
   }
 
   componentDidMount() {
+    const { time } = this.props
     Animated.timing(this.state.position, {
-      duration: 4800,
+      duration: time || 4800,
       useNativeDriver: true,
       toValue: this.props.height * -1,
     }).start(this.props.onComplete)

@@ -100,6 +100,7 @@ class ViewStreamScreen extends Component {
     if (message.trim() === '') return
     SocketUtils.emitSendMessage(this.props.navigation.getParam('roomName'), user._id, message, user.username)
     this.setState({ message: '' })
+    Keyboard.dismiss()
   };
 
   onPressCancelViewer = () => {
@@ -263,6 +264,7 @@ class ViewStreamScreen extends Component {
       >
         <Animated.View
           style={[stylesLive.wrapListMessages, { opacity: this.state.opacityMessage }]}
+          onLayout={this.hideMessage}
         >
           <ScrollView
             ref={(ref) => { this.scrollView = ref }}

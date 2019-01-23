@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Image, Text } from 'react-native'
 import { RowContainer } from 'components/common/SComponent'
+import { stylesLive } from 'screens/styles'
 import AnimatedShape from './AnimatedShape'
-import { stylesLive } from './styles'
 
 class FloatingUser extends Component {
   constructor(props) {
@@ -36,14 +36,17 @@ class FloatingUser extends Component {
             <AnimatedShape
               key={user._id}
               height={height}
-              style={{ right: getRandomNumber(50, 150) }}
+              style={{ right: getRandomNumber(75, 180) }}
+              time="10000"
             >
-              <RowContainer>
+              <RowContainer
+                alignItems="center"
+              >
                 <Image
                   source={require('../assets/avatar_1.png')}
                   style={stylesLive.iconAvatar}
                 />
-                <Text style={stylesLive.name}>{user.username}</Text>
+                <Text style={[stylesLive.name, { color: 'white', marginHorizontal: 8 }]}>{`${user.username} đang xem live stream`}</Text>
               </RowContainer>
             </AnimatedShape>
           )}

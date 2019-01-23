@@ -159,7 +159,6 @@ class StreamScreen extends Component {
     this.setState({ onMessage: false })
     if (message !== '') {
       this.setState({ message: '' })
-      Keyboard.dismiss()
       const newListMessages = listMessages.slice()
       newListMessages.push({ userId: user._id, message })
       this.setState({
@@ -172,6 +171,7 @@ class StreamScreen extends Component {
         user.username,
       )
     }
+    Keyboard.dismiss()
   };
 
   onPressHeart = () => {
@@ -373,7 +373,7 @@ class StreamScreen extends Component {
 
   hideMessage = () => {
     Animated.timing(this.state.opacityMessage, {
-      duration: 15000,
+      duration: 10000,
       useNativeDriver: true,
       toValue: 0,
     }).start()
