@@ -99,7 +99,7 @@ android {
 
     defaultConfig {
         applicationId "com.client"
-        minSdkVersion 21
+        minSdkVersion 16
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
@@ -150,6 +150,7 @@ android {
 }
 
 dependencies {
+    compile project(':lottie-react-native')
     compile project(':react-native-config')
     compile project(':react-native-gesture-handler')
     compile project(':react-native-vector-icons')
