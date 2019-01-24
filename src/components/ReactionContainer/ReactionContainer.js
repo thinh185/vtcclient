@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { FlatList } from 'react-native'
-import { Card } from 'react-native-paper'
+import { FlatList, View } from 'react-native'
+// import { Card } from 'react-native-paper'
 
 import Reaction from './Reaction'
 import styles from './styles'
@@ -13,9 +13,10 @@ export default class ReactionContainer extends Component {
       { key: '1', type: 'Laugh' },
       { key: '2', type: 'Wow' },
       { key: '3', type: 'Angry' },
-      { key: '4', type: 'Laugh' },
-      { key: '5', type: 'Wow' },
-      { key: '6', type: 'Angry' },
+      { key: '4', type: 'Like' },
+      { key: '5', type: 'ThumpUp' },
+      { key: '6', type: 'crying' },
+
     ]
   }
 
@@ -25,7 +26,7 @@ export default class ReactionContainer extends Component {
 
     render() {
       return (
-        <Card style={styles.card}>
+        <View style={styles.card} {...this.props}>
           <FlatList
             data={this.types}
             horizontal
@@ -34,7 +35,7 @@ export default class ReactionContainer extends Component {
             bounces={false}
             style={styles.list}
           />
-        </Card>
+        </View>
       )
     }
 }

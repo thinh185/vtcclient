@@ -11,6 +11,7 @@ const metrics = {
 const styles = StyleSheet.create({
   card: {
     borderRadius: 30,
+    backgroundColor: 'rgb(201, 207, 216)',
   },
   list: {
     overflow: 'visible',

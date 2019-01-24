@@ -81,8 +81,8 @@ const handleOnSendHeart = () => {
   })
 }
 
-const emitSendHeart = (roomName) => {
-  socket.emit('send-heart', { roomName })
+const emitSendHeart = (roomName, type) => {
+  socket.emit('send-heart', { roomName, type })
 }
 
 const handleOnSendMessage = () => {

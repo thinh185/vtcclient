@@ -6,7 +6,6 @@ import {
   StartColumnContainer,
   RowContainer,
 } from 'components/common/SComponent'
-import ReactionContainer from 'components/ReactionContainer/ReactionContainer'
 import navigator from 'navigations/customNavigator'
 import { listLiveStreamAction } from 'actions/streamAction'
 import { styleAuthen } from './styles'
@@ -23,7 +22,6 @@ class ContactLiveStreamScreen extends React.Component {
         <Container style={styleAuthen.container}>
           <StatusBar barStyle="dark-content" />
           <StartColumnContainer>
-            <ReactionContainer />
 
             <RowContainer justifyContent="space-between" alignItems="center" style={{ paddingVertical: 20 }}>
               <RowContainer alignItems="center">

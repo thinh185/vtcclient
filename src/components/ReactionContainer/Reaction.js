@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { Animated, TouchableWithoutFeedback } from 'react-native'
-
+import { connect } from 'react-redux'
 import LottieView from 'lottie-react-native'
 import styles from './styles'
+import SocketUtils from '~/SocketUtils'
 
-export default class Reaction extends Component {
+class Reaction extends Component {
   constructor(props) {
     super(props)
 
@@ -13,7 +14,7 @@ export default class Reaction extends Component {
   }
 
   componentDidMount() {
-    this.animation.play()
+    this[`animation${this.props.type}`].play()
   }
 
   getReactionJson = (type) => {
@@ -24,7 +25,12 @@ export default class Reaction extends Component {
         return require('../../assets/animations/laugh.json')
       case 'Wow':
         return require('../../assets/animations/wow.json')
+      case 'Like':
+        return require('../../assets/animations/like.json')
+      case 'ThumpUp':
+        return require('../../assets/animations/thumpup.json')
       default:
+        return require('../../assets/animations/crying.json')
     }
   };
 
@@ -46,8 +52,18 @@ export default class Reaction extends Component {
     }).start()
   };
 
+  onPressSendInteraction = () => {
+    const { type } = this.props
+    // this.props.updateState()
+    console.log('type ', type)
+
+    SocketUtils.emitSendHeart(this.props.streamOnline.roomName, type)
+  }
+
   render() {
     const { type } = this.props
+    console.log('type Render request ', type)
+
     const animatedStyle = {
       transform: [{ scale: this.animatedValue }],
       paddingBottom: this.animatedMargin,
@@ -56,11 +72,12 @@ export default class Reaction extends Component {
       <TouchableWithoutFeedback
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}
+        onPress={this.onPressSendInteraction}
       >
         <Animated.View style={[styles.reactView, animatedStyle]}>
           <LottieView
             ref={(animation) => {
-              this.animation = animation
+              this[`animation${type}`] = animation
             }}
             style={styles.reaction}
             source={this.getReactionJson(type)}
@@ -70,3 +87,20 @@ export default class Reaction extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  const { list_live, streamOnline } = state.stream
+
+  const res = {
+    user: state.user.user,
+    streamOnline,
+  }
+  if (state.stream.streamOnline) {
+    res.deltailStream = list_live.filter(el => el.roomName === streamOnline.roomName)[0] || {}
+  } else {
+    res.deltailStream = {}
+  }
+  return res
+}
+
+export default connect(mapStateToProps)(Reaction)

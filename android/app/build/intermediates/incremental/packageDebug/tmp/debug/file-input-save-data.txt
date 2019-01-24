@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Wed Jan 23 17:27:44 ICT 2019
+#Thu Jan 24 08:25:44 ICT 2019
 5.base=/home/thinhnn/demo/vtcclient/android/app/build/intermediates/transforms/mergeJniLibs/debug/0
 42.base=/home/thinhnn/demo/vtcclient/android/app/build/intermediates/transforms/mergeJniLibs/debug/0
 22.path=lib/arm64-v8a/libimagepipeline.so
