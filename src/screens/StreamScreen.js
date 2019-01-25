@@ -18,9 +18,10 @@ import {
   AppState,
 } from 'react-native'
 import { NodeCameraView } from 'react-native-nodemediaclient'
-import FloatingHearts from 'components/FloatingHearts'
 import FLoatingUser from 'components/FLoatingUser'
-
+import FloatingReaction from 'components/FloatingReaction'
+import ReactionContainer from 'components/ReactionContainer/ReactionContainer'
+import Reaction from 'components/ReactionContainer/Reaction'
 import { connect } from 'react-redux'
 import { RowContainer, StartColumnContainer, Container } from 'components/common/SComponent'
 import Message from 'components/Message'
@@ -42,8 +43,11 @@ class StreamScreen extends Component {
       onMessage: false,
       message: '',
       opacityMessage: new Animated.Value(1),
+      onLongPress: false,
+      bottomInteraction: 0,
     }
     this.Animation = new Animated.Value(0)
+    this.updateState = this.updateState.bind(this)
   }
 
   componentDidMount = () => {
@@ -70,12 +74,7 @@ class StreamScreen extends Component {
   }
 
   handleAppStateChange = (nextAppState) => {
-    // const { streamOnline } = this.props
     console.log(nextAppState)
-
-    // if (nextAppState === 'background') {
-    //   this.onFinishLiveStream(streamOnline.roomName)
-    // }
   }
 
   keyboardShow() {
@@ -173,8 +172,13 @@ class StreamScreen extends Component {
     Keyboard.dismiss()
   };
 
+  updateState = () => {
+    this.setState({ onLongPress: false })
+  }
+
   onPressHeart = () => {
-    SocketUtils.emitSendHeart(this.props.streamOnline.roomName)
+    this.updateState()
+    SocketUtils.emitSendHeart(this.props.streamOnline.roomName, 'Like')
   };
 
   renderGroupInput = () => {
@@ -219,7 +223,10 @@ class StreamScreen extends Component {
             style={stylesLive.wrapIconHeart}
             onPress={this.onPressHeart}
             activeOpacity={0.6}
+            onLongPress={() => { this.setState({ onLongPress: true }) }}
           >
+            {/* <Reaction type="ThumpUp" /> */}
+
             <Image
               source={require('../assets/ico_heart.png')}
               style={stylesLive.iconHeart}
@@ -418,7 +425,7 @@ class StreamScreen extends Component {
 
   renderStreamerUI = () => {
     const { deltailStream } = this.props
-    const { liveStatus } = this.state
+    const { liveStatus, onLongPress } = this.state
 
     return (
       <Container>
@@ -483,6 +490,19 @@ class StreamScreen extends Component {
             smoothSkinLevel={4}
             autopreview
           />
+          {onLongPress && (
+            <ReactionContainer
+              style={{
+                position: 'absolute',
+                bottom: this.state.bottomInteraction,
+                right: 0,
+                zIndex: 2,
+                paddingVertical: 5,
+                borderRadius: 30,
+                backgroundColor: 'white',
+              }}
+            />
+          )}
           <TouchableWithoutFeedback>
             <RowContainer
               alignItems="center"
@@ -499,11 +519,17 @@ class StreamScreen extends Component {
                 borderWidth: 1,
                 width,
               }]}
+
             >
               <RowContainer
                 alignItems="center"
                 justifyContent="flex-end"
                 style={{ flex: 1 }}
+                onLayout={(event) => {
+                  const { height } = event.nativeEvent.layout
+
+                  this.setState({ bottomInteraction: height + 10 })
+                }}
               >
                 {liveStatus === LiveStatus.ON_LIVE ? this.renderGroupInput() : null}
                 {liveStatus === LiveStatus.ON_LIVE && !this.state.onMessage
@@ -514,9 +540,35 @@ class StreamScreen extends Component {
             </RowContainer>
 
           </TouchableWithoutFeedback>
-          <FloatingHearts
+          <FloatingReaction
+            count={deltailStream.countUrgy || 0}
+            style={{ marginBottom: 8, zIndex: 1, flex: 1 }}
+            type="Angry"
+          />
+          <FloatingReaction
+            count={deltailStream.countHappy || 0}
+            style={{ marginBottom: 8, zIndex: 1, flex: 1 }}
+            type="Laugh"
+          />
+          <FloatingReaction
+            count={deltailStream.countWow || 0}
+            style={{ marginBottom: 8, zIndex: 1, flex: 1 }}
+            type="Wow"
+          />
+          <FloatingReaction
             count={deltailStream.countHeart || 0}
             style={{ marginBottom: 8, zIndex: 1, flex: 1 }}
+            type="Like"
+          />
+          <FloatingReaction
+            count={deltailStream.countLike || 0}
+            style={{ marginBottom: 8, zIndex: 1, flex: 1 }}
+            type="ThumpUp"
+          />
+          <FloatingReaction
+            count={deltailStream.countSad || 0}
+            style={{ marginBottom: 8, zIndex: 1, flex: 1 }}
+            type="Sad"
           />
           <FLoatingUser
             user={deltailStream.newuser}

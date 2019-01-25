@@ -27,6 +27,23 @@ class FloatingHearts extends Component {
     })
   }
 
+  // static getDerivedStateFromProps(props, state) {
+  //   const oldCount = this.props.count
+  //   const newCount = props.count
+  //   const numHearts = newCount - oldCount
+
+  //   if (numHearts <= 0) {
+  //     return null
+  //   }
+  //   const items = Array(numHearts).fill()
+  //   const newHearts = items
+  //     .map((item, i) => oldCount + i)
+  //     .map(this.createHeart)
+  //   return {
+  //     hearts: state.hearts.concat(newHearts),
+  //   }
+  // }
+
   componentWillUpdate(nextProps) {
     const oldCount = this.props.count
     const newCount = nextProps.count
