@@ -23,6 +23,7 @@ class ContactLiveStreamScreen extends React.Component {
           <StatusBar barStyle="dark-content" />
           <Header />
           <StartColumnContainer>
+
             <RowContainer justifyContent="space-between" alignItems="center" style={{ paddingVertical: 20 }}>
               <RowContainer alignItems="center">
                 <Image
