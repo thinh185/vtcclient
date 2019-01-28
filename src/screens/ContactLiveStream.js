@@ -8,8 +8,8 @@ import {
 } from 'components/common/SComponent'
 import navigator from 'navigations/customNavigator'
 import { listLiveStreamAction } from 'actions/streamAction'
+import Header from 'components/Header'
 import { styleAuthen } from './styles'
-
 
 class ContactLiveStreamScreen extends React.Component {
   componentDidMount() {
@@ -21,6 +21,7 @@ class ContactLiveStreamScreen extends React.Component {
       <ScrollView>
         <Container style={styleAuthen.container}>
           <StatusBar barStyle="dark-content" />
+          <Header />
           <StartColumnContainer>
             <RowContainer justifyContent="space-between" alignItems="center" style={{ paddingVertical: 20 }}>
               <RowContainer alignItems="center">

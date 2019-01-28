@@ -1,7 +1,12 @@
-// import { Alert } from 'react-native'
 import io from 'socket.io-client'
+import {
+  REGISTER_ROOM_LIVE_STREAM_SUCCESS,
+  ADD_NEW_LIVE_STREAM_SUCCESS,
+  UPDATE_ROOM_LIVE_STREAM_SUCCESS,
+  ADD_NEW_COMMENT_LIVE_STREAM_SUCCESS,
+  DELETE_LIVE_STREAM_FINISH_SUCCESS,
+} from 'constant/StreamConstant'
 import Utils from './Utils'
-// import LiveStatus from './liveStatus'
 
 let store = null
 const socket = io(
@@ -15,14 +20,6 @@ const getSocket = () => {
 
 const connect = (initstore) => {
   store = initstore
-  socket.emit('testconnect', { data: 'data' })
-  // socket.on('testconnect', (data) => {
-  //   console.log('data ', data)
-  //   store.dispatch({
-  //     type: 'TEST_SOCKETIO',
-  //     payload: { data },
-  //   })
-  // })
 }
 
 const handleOnConnect = () => {
@@ -37,7 +34,7 @@ const emitRegisterLiveStream = (streamKey, userId) => {
   })
   socket.on('on_live_stream', (data) => {
     store.dispatch({
-      type: 'CREATE_ROOM_STREAM_SUCCESS',
+      type: REGISTER_ROOM_LIVE_STREAM_SUCCESS,
       payload: { data },
     })
   })
@@ -65,31 +62,30 @@ const emitJoinServer = (roomName, userId) => {
 const handleOnClientJoin = () => {
   socket.on('join-client', (data) => {
     store.dispatch({
-      type: 'UPDATE_ROOM_SUCCESS',
+      type: UPDATE_ROOM_LIVE_STREAM_SUCCESS,
       payload: { data },
     })
   })
 }
 
-const handleOnSendHeart = () => {
-  socket.on('send-heart', (data) => {
-    console.log('send-heart')
+const handleOnInteraction = () => {
+  socket.on('send-interaction', (data) => {
     store.dispatch({
-      type: 'UPDATE_ROOM_SUCCESS',
+      type: UPDATE_ROOM_LIVE_STREAM_SUCCESS,
       payload: { data },
     })
   })
 }
 
 const emitSendHeart = (roomName) => {
-  socket.emit('send-heart', { roomName })
+  socket.emit('send-interaction', { roomName })
 }
 
 const handleOnSendMessage = () => {
   socket.on('send-message', (data) => {
     const { comment, roomName } = data
     store.dispatch({
-      type: 'ADD_NEW_COMMENT_SUCCESS',
+      type: ADD_NEW_COMMENT_LIVE_STREAM_SUCCESS,
       payload: { comment, roomName },
     })
   })
@@ -125,7 +121,7 @@ const handleOnLeaveClient = () => {
 const onNewVideoLiveStream = () => {
   socket.on('new-live-stream', (data) => {
     store.dispatch({
-      type: 'ADD_NEW_VIDEO_LIVE_SUCCESS',
+      type: ADD_NEW_LIVE_STREAM_SUCCESS,
       payload: { data },
     })
   })
@@ -133,10 +129,8 @@ const onNewVideoLiveStream = () => {
 
 const onVideoLiveStreamFinish = () => {
   socket.on('live-stream-finish', (data) => {
-    console.log('data finish ', data)
-
     store.dispatch({
-      type: 'DELETE_NEW_VIDEO_LIVE_SUCCESS',
+      type: DELETE_LIVE_STREAM_FINISH_SUCCESS,
       payload: { data },
     })
   })
@@ -151,7 +145,7 @@ const SocketUtils = {
   emitFinishLiveStream,
   handleOnClientJoin,
   emitJoinServer,
-  handleOnSendHeart,
+  handleOnInteraction,
   emitSendHeart,
   handleOnSendMessage,
   emitSendMessage,

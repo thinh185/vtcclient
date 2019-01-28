@@ -4,7 +4,6 @@ const api = create({})
 
 export function configApi(token) {
   api.setBaseURL('http://172.16.2.5:3333')
-  // api.setBaseURL('http://192.168.10.122:3333')
   api.setHeader('Accept', 'application/vnd.github.v3+json')
   if (token) {
     api.setHeader('Authorization', `Bearer ${token}`)

@@ -70,12 +70,7 @@ class StreamScreen extends Component {
   }
 
   handleAppStateChange = (nextAppState) => {
-    // const { streamOnline } = this.props
     console.log(nextAppState)
-
-    // if (nextAppState === 'background') {
-    //   this.onFinishLiveStream(streamOnline.roomName)
-    // }
   }
 
   keyboardShow() {
@@ -362,7 +357,6 @@ class StreamScreen extends Component {
       useNativeDriver: true,
       toValue: 1,
     }).start()
-    // this.hideMessage()
   }
 
   hideMessage = () => {

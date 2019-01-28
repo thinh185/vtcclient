@@ -18,7 +18,7 @@ import SocketUtils from './SocketUtils'
 SocketUtils.connect(store)
 SocketUtils.handleOnConnect()
 SocketUtils.handleOnClientJoin()
-SocketUtils.handleOnSendHeart()
+SocketUtils.handleOnInteraction()
 SocketUtils.handleOnSendMessage()
 SocketUtils.handleOnLeaveClient()
 SocketUtils.onNewVideoLiveStream()

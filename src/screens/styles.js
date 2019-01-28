@@ -1,7 +1,6 @@
 import { Platform, StyleSheet, Dimensions } from 'react-native'
 
 const { width, height } = Dimensions.get('window')
-console.log('width height', width, height)
 
 export const stylesLive = StyleSheet.create({
   containerBackdrop: {
@@ -16,8 +15,6 @@ export const stylesLive = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     left: 0,
-    // height: height,
-    // width: width,
     zIndex: 2,
   },
   wrapPromotionText: {
