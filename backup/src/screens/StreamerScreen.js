@@ -16,9 +16,9 @@ import {
   Dimensions,
 } from 'react-native'
 import { NodeCameraView } from 'react-native-nodemediaclient'
-import FLoatingUser from 'share'
-import FloatingReaction from 'components/animation/FloatingReaction'
-import ReactionContainer from 'components/reaction/ReactionContainer'
+import FLoatingUser from 'features/share/animation/FLoatingUser'
+import FloatingReaction from 'features/share/animation/FloatingReaction'
+import ReactionContainer from 'features/share/reaction/ReactionContainer'
 import { connect } from 'react-redux'
 import {
   RowContainer,
@@ -31,10 +31,10 @@ import {
   SBottomContainer,
   SInput,
   SLiveStatusContainer,
-} from 'components/common/SComponent'
-import Message from 'components/Message'
-import { LiveStatus } from '../liveStatus'
-import SocketUtils from '../SocketUtils'
+} from 'features/share/component/SComponent'
+import Message from 'features/livestream/component/Message'
+import SocketUtils from 'features/videocall/socketConfig'
+import { LiveStatus } from 'features/livestream/LiveStreamConstant'
 
 const { width, height } = Dimensions.get('window')
 

@@ -23,17 +23,17 @@ import {
   SNumeralContainer,
   SCountViewText,
   SBottomContainer,
-} from 'components/common/SComponent'
+} from 'features/share/component/SComponent'
 // import KeyboardAccessory from 'react-native-sticky-keyboard-accessory'
-import FLoatingUser from 'components/animation/FLoatingUser'
-import FloatingReaction from 'components/animation/FloatingReaction'
+import FLoatingUser from 'features/share/animation/FLoatingUser'
+import FloatingReaction from 'features/share/animation/FloatingReaction'
 import { NodePlayerView } from 'react-native-nodemediaclient'
 import { connect } from 'react-redux'
-import { getLinkStreamAction } from 'actions/streamAction'
-import Message from 'components/Message'
-import navigator from 'navigations/customNavigator'
-import ReactionContainer from 'components/reaction/ReactionContainer'
-import SocketUtils from '../SocketUtils'
+import { getLinkStreamAction } from 'features/livestream/LiveStreamAction'
+import Message from 'features/livestream/component/Message'
+import navigator from 'navigation/CustomNavigator'
+import ReactionContainer from 'features/share/reaction/ReactionContainer'
+import SocketUtils from 'features/videocall/socketConfig'
 
 const { width, height } = Dimensions.get('window')
 

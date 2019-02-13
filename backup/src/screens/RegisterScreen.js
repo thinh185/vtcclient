@@ -1,5 +1,10 @@
 import React from 'react'
-import { StatusBar, TouchableOpacity, Image, ScrollView } from 'react-native'
+import {
+  StatusBar,
+  TouchableOpacity,
+  //  Image,
+  ScrollView,
+} from 'react-native'
 import {
   Container,
   StartColumnContainer,
@@ -8,12 +13,12 @@ import {
   SInput,
   SLabel,
   STextButton,
-} from ''
+} from 'features/share/component/SComponent'
 import navigator from 'navigation/CustomNavigator'
-import { registerAction } from 'actions/userActions'
+// import { registerAction } from 'actions/userActions'
 import { connect } from 'react-redux'
 import KeyboardSpacer from 'react-native-keyboard-spacer'
-import { styleAuthen } from '../screens_old/styles'
+// import { styleAuthen } from '../screens_old/styles'
 
 class RegisterScreen extends React.Component {
   constructor(props) {
@@ -37,17 +42,17 @@ class RegisterScreen extends React.Component {
           <StatusBar barStyle="dark-content" />
           <StartColumnContainer>
             <RowContainer alignItems="center" justifyContent="center">
-              <Image style={styleAuthen.image} source={require('../assets/logo.png')} />
+              {/* <Image style={styleAuthen.image} source={require('../assets/logo.png')} /> */}
             </RowContainer>
             <SHeading>REGISTER</SHeading>
             <StartColumnContainer>
               <SLabel>Username</SLabel>
-              <SInput value={this.state.username} onChangeText={username => this.setState({ username })} />
+              <SInput value={this.state.username} onChangeText={(username) => this.setState({ username })} />
               <SLabel>Password</SLabel>
               <SInput
                 secureTextEntry
                 value={this.state.password}
-                onChangeText={password => this.setState({ password })}
+                onChangeText={(password) => this.setState({ password })}
               />
             </StartColumnContainer>
             <StartColumnContainer alignItems="center" style={{ marginTop: 40 }}>
@@ -59,7 +64,7 @@ class RegisterScreen extends React.Component {
                   navigator.navigate('login')
                 }}
               >
-                <STextButton style={styleAuthen.textMore}> Login </STextButton>
+                {/* <STextButton style={styleAuthen.textMore}> Login </STextButton> */}
               </TouchableOpacity>
             </StartColumnContainer>
             <KeyboardSpacer />
@@ -71,8 +76,8 @@ class RegisterScreen extends React.Component {
 }
 
 export default connect(
-  null,
-  {
-    registerAction,
-  },
+  null
+  // {
+  //   registerAction,
+  // }
 )(RegisterScreen)

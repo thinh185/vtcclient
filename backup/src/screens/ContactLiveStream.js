@@ -85,12 +85,12 @@ const styles = StyleSheet.create({
     marginRight: 20,
   },
 })
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   user: state.user.user,
   list_live: state.stream.list_live,
 })
 
 export default connect(
   mapStateToProps,
-  { listLiveStreamAction },
+  { listLiveStreamAction }
 )(ContactLiveStreamScreen)

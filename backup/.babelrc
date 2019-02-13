@@ -18,7 +18,8 @@
           "share": "./src/features/share",
           "shareComponents": "./src/features/share/components",
           "shareConstant": "./src/features/share/constant",
-          "authentication": "./src/features/authentication"
+          "authentication": "./src/features/authentication",
+          "livestream" : "./src/features/livestream"
         },
         "stripExtensions": [
           ".js",
