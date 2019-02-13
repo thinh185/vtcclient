@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import { Dimensions } from 'react-native'
+import { LiveStatus } from '../../liveStatus'
+
+const { width, height } = Dimensions.get('window')
 
 export const lightGrey = 'rgb(170, 170, 170)'
 export const lightBlack = 'rgb(71, 71, 71)'
@@ -31,6 +35,7 @@ export const ColumnContainer = styled(Container)`
 export const StartColumnContainer = styled(Container)`
   flex-direction: column
   justify-content: flex-start
+  alignItems: ${props => props.alignItems || 'flex-start'}
 `
 export const RowContainer = styled.View`
   flexDirection: row
@@ -105,4 +110,91 @@ export const NotPostText = styled.Text`
   color: ${lightGrey}
   text-align: center
   padding-vertical: 20
+`
+
+export const SInput = styled.TextInput`
+  font-size: 16,
+  border-radius: 18,
+  border-width: 1,
+  margin-vertical: 8,
+`
+export const SHeading = styled.Text`
+  font-size: 25,
+  padding-vertical: 15,
+  font-weight: '500'
+`
+
+export const SLabel = styled.View`
+  font-size: 16,
+  font-weight: '300',
+  padding-horizontal: 8,
+`
+export const STextButton = styled.Text`
+  padding-horizontal: 10,
+  padding-vertical: 10,
+  text-align: 'center',
+  font-size: 20,
+  border-radius: 18,
+  border-width: 1,
+  width: 300,
+  backgroundColor: 'rgb(170,20,150)',
+`
+export const STextLive = styled.Text`
+  color: 'white',
+  border-width: 1,
+  padding-horizontal: 20,
+  padding-vertical: 10,
+  border-color: 'red',
+  border-radius: 8,
+  background-color: 'red',
+  margin-vertical: 10,
+`
+export const SAnimatedVIew = styled.View`
+  position: 'absolute',
+  bottom: 70,
+  left: 0,
+  right: 0,
+  height: ${height / 1.5} ,
+  width: ${width},
+  zIndex: 2,
+`
+export const STopContainer = styled(RowContainer)`
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  width,
+  flex: 1,
+  zIndex: 2,
+`
+export const SNumeralContainer = styled(RowContainer)`
+  padding-horizontal: 10,
+  padding-vertical: 8,
+  background-color: 'red',
+  border-radius: 8,
+  margin-horizontal: 5,
+`
+export const SCountViewText = styled.Text`
+  padding-horizontal: 8,
+  font-size: 18,
+  font-weight: '400',
+  color: 'white'
+`
+export const SBottomContainer = styled(RowContainer)`
+  position: 'absolute',
+  bottom: 0,
+  right: 0,
+  zIndex: 2,
+  padding-vertical: 5,
+  border-radius: 8,
+  border-color: 'rgb(153, 153, 153)',
+  background-color: 'rgb(153, 153, 153)',
+  border-width: 1,
+  width,
+`
+export const SLiveStatusContainer = styled.View`
+  background-color: ${props => (props.liveStatus === LiveStatus.ON_LIVE ? 'red' : 'rgb(153,153,153)')},
+  padding-horizontal: 10,
+  padding-vertical: 8, 
+  border-radius: 8, 
+  margin-horizontal: 5
 `

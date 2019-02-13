@@ -1,0 +1,31 @@
+{
+  "presets": ["module:metro-react-native-babel-preset"],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": ["./src"],
+        "alias": {
+          "~": "./src",
+          "screens": "./src/screens",
+          "features": "./src/features",
+          "post": "./src/features/post",
+          "config": "./src/config",
+          "assets": "./src/assets",
+          "navigation": "./src/navigation",
+          "utils": "./src/utils",
+          "constants": "./src/constants",
+          "share": "./src/features/share",
+          "shareComponents": "./src/features/share/components",
+          "shareConstant": "./src/features/share/constant",
+          "authentication": "./src/features/authentication"
+        },
+        "stripExtensions": [
+          ".js",
+          ".jsx"
+        ]
+      },
+      "babel-plugin-styled-components"
+    ]
+  ]
+}

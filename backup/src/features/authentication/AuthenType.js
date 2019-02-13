@@ -1,0 +1,8 @@
+export const SET_DEVICE_TOKEN = 'SET_DEVICE_TOKEN'
+
+// Socket
+export const LOGIN_SOCKET_SUCCESS = 'LOGIN_SOCKET_SUCCESS'
+export const SET_BUSY = 'SET_BUSY'
+export const SET_CALL_STATUS = 'SET_CALL_STATUS'
+export const SET_FRIEND_LIST = 'SET_FRIEND_LIST'
+export const KEEP_CALL = 'KEEP_CALL'

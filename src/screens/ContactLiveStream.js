@@ -1,73 +1,80 @@
 import React from 'react'
-import { StatusBar, Text, TouchableOpacity, Image, ScrollView, StyleSheet, FlatList } from 'react-native'
+import {
+  StatusBar,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+  StyleSheet,
+  FlatList } from 'react-native'
 import { connect } from 'react-redux'
 import {
   Container,
   StartColumnContainer,
   RowContainer,
+  SLabel,
+  STextLive,
+  SHeading,
 } from 'components/common/SComponent'
 import navigator from 'navigations/customNavigator'
 import { listLiveStreamAction } from 'actions/streamAction'
-import Header from 'components/Header'
-import { styleAuthen } from './styles'
+import Header from 'components/common/Header'
 
 class ContactLiveStreamScreen extends React.Component {
   componentDidMount() {
     this.props.listLiveStreamAction()
   }
 
+  renderItem = (item) => {
+    return (
+      <RowContainer justifyContent="space-between" alignItems="center">
+        <RowContainer alignItems="center">
+          <Image
+            style={styles.avatar}
+            source={require('../assets/female.png')}
+          />
+          <SLabel>{item.username}</SLabel>
+        </RowContainer>
+        <TouchableOpacity onPress={() => {
+          this.props.navigation.navigate('Viewer', {
+            pathStream: item.userId,
+            roomName: item.roomName })
+        }}
+        >
+          <STextLive>Xem live</STextLive>
+        </TouchableOpacity>
+      </RowContainer>
+    )
+  }
+
   render() {
     return (
       <ScrollView>
-        <Container style={styleAuthen.container}>
+        <Container paddingVertical="20">
           <StatusBar barStyle="dark-content" />
           <Header />
           <StartColumnContainer>
-
-            <RowContainer justifyContent="space-between" alignItems="center" style={{ paddingVertical: 20 }}>
+            <RowContainer justifyContent="space-between" alignItems="center">
               <RowContainer alignItems="center">
                 <Image
-                  style={stylesList.avatar}
+                  style={styles.avatar}
                   source={require('../assets/man.png')}
                 />
-                <Text style={stylesList.user}>{this.props.user.username}</Text>
+                <SLabel>{this.props.user.username}</SLabel>
               </RowContainer>
 
               <TouchableOpacity onPress={() => {
                 navigator.navigate('Streamer')
               }}
               >
-                <Text style={stylesList.live}>Begin Live</Text>
+                <STextLive>Begin Live</STextLive>
               </TouchableOpacity>
             </RowContainer>
             <StartColumnContainer>
-              <Text style={stylesList.title}>Danh sách bạn bè đang live stream</Text>
+              <SHeading>Danh sách bạn bè đang live stream</SHeading>
 
               <FlatList
                 data={this.props.list_live}
-                renderItem={({ item }) => {
-                  return (
-                    <RowContainer justifyContent="space-between" alignItems="center">
-                      <RowContainer alignItems="center">
-                        <Image
-                          style={stylesList.avatar}
-                          source={require('../assets/female.png')}
-                        />
-                        <Text style={stylesList.user}>{item.username}</Text>
-                      </RowContainer>
-                      <TouchableOpacity onPress={() => {
-                        this.props.navigation.navigate('Viewer', {
-                          pathStream: item.userId,
-                          roomName: item.roomName })
-                      }}
-                      >
-                        <Text style={stylesList.live}>Xem live</Text>
-                      </TouchableOpacity>
-                    </RowContainer>
-                  )
-                }
-
-              }
+                renderItem={({ item }) => { this.renderItem(item) }}
               />
             </StartColumnContainer>
           </StartColumnContainer>
@@ -77,31 +84,12 @@ class ContactLiveStreamScreen extends React.Component {
   }
 }
 
-const stylesList = StyleSheet.create({
-  live: {
-    color: 'white',
-    borderWidth: 1,
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderColor: 'red',
-    borderRadius: 8,
-    backgroundColor: 'red',
-    marginVertical: 10,
-  },
-  title: {
-    fontSize: 25,
-    textAlign: 'center',
-    fontWeight: '500',
-  },
+const styles = StyleSheet.create({
   avatar: {
     width: 50,
     height: 50,
     borderRadius: 50,
     marginRight: 20,
-  },
-  user: {
-    fontSize: 16,
-    fontWeight: '300',
   },
 })
 const mapStateToProps = state => ({

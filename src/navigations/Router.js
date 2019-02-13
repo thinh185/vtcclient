@@ -2,10 +2,12 @@ import { createStackNavigator, createSwitchNavigator, createAppContainer } from 
 import LoginSCreen from 'screens/LoginScreen'
 import ContactLiveStreamScreen from 'screens/ContactLiveStream'
 import RegisterScreen from 'screens/RegisterScreen'
-import StreamScreen from 'screens/StreamScreen'
-import ViewStreamScreen from 'screens/ViewStreamScreen'
-// import TestStreamApiScreen from 'screens/TestStreamApi'
+import StreamerScreen from 'screens/StreamerScreen'
+import ViewerScreen from 'screens/ViewerScreen'
+import KeyboardHOC from 'hoc/keyboardHoc'
 
+const StreamerScreenHoc = KeyboardHOC(StreamerScreen)
+const ViewerScreenHoc = KeyboardHOC(ViewerScreen)
 
 const AuthenStack = createStackNavigator(
   {
@@ -24,10 +26,9 @@ const AuthenStack = createStackNavigator(
 
 const HomeStack = createStackNavigator(
   {
-    Streamer: StreamScreen,
-    Viewer: ViewStreamScreen,
+    Streamer: StreamerScreenHoc,
+    Viewer: ViewerScreenHoc,
     Contact: ContactLiveStreamScreen,
-    // TestApi: TestStreamApiScreen,
   },
   {
     initialRouteName: 'Contact',

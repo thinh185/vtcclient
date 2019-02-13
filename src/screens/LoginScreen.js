@@ -1,15 +1,19 @@
 import React from 'react'
-import { StatusBar, TextInput, Text, TouchableOpacity, Image, ScrollView } from 'react-native'
+import { StatusBar, TouchableOpacity, Image, ScrollView } from 'react-native'
 import {
   Container,
   StartColumnContainer,
   RowContainer,
+  SHeading,
+  SInput,
+  SLabel,
+  STextButton,
 } from 'components/common/SComponent'
 import navigator from 'navigations/customNavigator'
 import { connect } from 'react-redux'
 import { loginAction } from 'actions/userActions'
 import KeyboardSpacer from 'react-native-keyboard-spacer'
-import { styleAuthen } from './styles'
+import { styleAuthen } from '../screens_old/styles'
 
 class LoginScreen extends React.Component {
   constructor(props) {
@@ -28,7 +32,7 @@ class LoginScreen extends React.Component {
   render() {
     return (
       <ScrollView>
-        <Container style={[styleAuthen.container, { marginHorizontal: 20 }]}>
+        <Container marginHorizontal="20">
           <StatusBar barStyle="dark-content" />
           <StartColumnContainer>
             <RowContainer alignItems="center" justifyContent="center">
@@ -37,28 +41,29 @@ class LoginScreen extends React.Component {
                 source={require('../assets/logo.png')}
               />
             </RowContainer>
-            <Text style={{ fontSize: 25, paddingVertical: 15, fontWeight: '500' }}>LOGIN</Text>
-            <StartColumnContainer style={styleAuthen.item}>
-              <Text style={styleAuthen.label}>Username</Text>
-              <TextInput
-                style={styleAuthen.textInput}
+            <SHeading>LOGIN</SHeading>
+            <StartColumnContainer>
+              <SLabel>Username</SLabel>
+              <SInput
                 value={this.state.username}
                 onChangeText={username => this.setState({ username })}
               />
-              <Text style={styleAuthen.label}>Password</Text>
-              <TextInput
-                style={styleAuthen.textInput}
+              <SLabel>Password</SLabel>
+              <SInput
                 secureTextEntry
                 value={this.state.password}
                 onChangeText={password => this.setState({ password })}
               />
             </StartColumnContainer>
-            <StartColumnContainer style={{ alignItems: 'center', marginTop: 40 }}>
+            <StartColumnContainer
+              alignItems="center"
+              style={{ marginTop: 40 }}
+            >
               <TouchableOpacity onPress={this.log}>
-                <Text style={styleAuthen.textButton}> Login </Text>
+                <STextButton> Login </STextButton>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => { navigator.navigate('Register') }}>
-                <Text style={styleAuthen.textMore}> Register </Text>
+                <STextButton> Register </STextButton>
               </TouchableOpacity>
             </StartColumnContainer>
             <KeyboardSpacer />

@@ -7,6 +7,7 @@
         "root": ["./src"],
         "alias": {
           "~": "./src",
+          "src": "./src",
           "screens": "./src/screens",
           "components": "./src/components",
           "actions": "./src/actions",
@@ -16,7 +17,8 @@
           "config": "./src/config",
           "navigations": "./src/navigations",
           "utils": "./src/utils",
-          "constant": "./src/constant"
+          "constant": "./src/constant",
+          "hoc": "./src/hoc"
         },
         "stripExtensions": [
           ".js",
