@@ -337,7 +337,7 @@ class StreamerScreen extends Component {
       <TouchableWithoutFeedback
         onPressIn={this.displayOnfocus}
         onPressOut={this.hideMessage}
-      >
+      >20
         <Animated.View
           style={{ opacity: this.state.opacityMessage }}
         >
