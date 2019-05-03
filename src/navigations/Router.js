@@ -45,7 +45,7 @@ export default ({ initialRouteName }) => {
       HomeStack,
     },
     {
-      initialRouteName,
+      initialRouteName: 'HomeStack',
       headerMode: 'none',
     },
   )
