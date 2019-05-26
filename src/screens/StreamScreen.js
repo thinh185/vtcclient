@@ -135,6 +135,7 @@ class StreamScreen extends Component {
             text: 'Sure',
             onPress: () => {
               this.onFinishLiveStream(streamOnline.roomName)
+              this.vbCamera.stop()
               this.props.navigation.goBack()
             },
           },

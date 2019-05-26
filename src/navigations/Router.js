@@ -4,12 +4,12 @@ import ContactLiveStreamScreen from 'screens/ContactLiveStream'
 import RegisterScreen from 'screens/RegisterScreen'
 import StreamScreen from 'screens/StreamScreen'
 import ViewStreamScreen from 'screens/ViewStreamScreen'
-// import TestStreamApiScreen from 'screens/TestStreamApi'
+import ChartDemo from 'screens/ChartDemoReactNative'
 
 
 const AuthenStack = createStackNavigator(
   {
-    Login: LoginSCreen,
+    Login: ChartDemo,
     Register: RegisterScreen,
   },
   {
@@ -45,7 +45,7 @@ export default ({ initialRouteName }) => {
       HomeStack,
     },
     {
-      initialRouteName,
+      initialRouteName: 'HomeStack',
       headerMode: 'none',
     },
   )

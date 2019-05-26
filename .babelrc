@@ -15,7 +15,8 @@
           "assets": "./src/assets",
           "config": "./src/config",
           "navigations": "./src/navigations",
-          "utils": "./src/utils"
+          "utils": "./src/utils",
+          "features": "./src/features"
         },
         "stripExtensions": [
           ".js",

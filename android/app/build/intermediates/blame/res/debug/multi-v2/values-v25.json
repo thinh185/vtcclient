@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/thinhnn/demo/vtcclient/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v25/values-v25.xml",
+            "outputFile": "/home/thinh/vtcclient/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v25/values-v25.xml",
             "map": [
                 {
-                    "source": "/home/thinhnn/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/e7deb9149401a7bfb4160a963f99733e/res/values-v25/values-v25.xml",
+                    "source": "/home/thinh/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/b2831a2559d3394ef1ffc728b2b9e614/res/values-v25/values-v25.xml",
                     "from": {
                         "startLines": "2,3,4,6",
                         "startColumns": "4,4,4,4",
