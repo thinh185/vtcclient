@@ -5,12 +5,14 @@ import RegisterScreen from 'screens/RegisterScreen'
 import StreamScreen from 'screens/StreamScreen'
 import ViewStreamScreen from 'screens/ViewStreamScreen'
 import ChartDemo from 'screens/ChartDemoReactNative'
+import WebViewChartDemo from 'screens/WebViewChart'
 
 
 const AuthenStack = createStackNavigator(
   {
     Login: ChartDemo,
     Register: RegisterScreen,
+    Web: WebViewChartDemo,
   },
   {
     initialRouteName: 'Login',
@@ -45,7 +47,7 @@ export default ({ initialRouteName }) => {
       HomeStack,
     },
     {
-      initialRouteName: 'HomeStack',
+      initialRouteName: 'AuthenStack',
       headerMode: 'none',
     },
   )

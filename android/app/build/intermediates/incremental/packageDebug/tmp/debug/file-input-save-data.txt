@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Wed Mar 13 22:18:12 ICT 2019
+#Mon May 27 22:16:12 ICT 2019
 5.base=/home/thinh/vtcclient/android/app/build/intermediates/transforms/mergeJniLibs/debug/0
 42.base=/home/thinh/vtcclient/android/app/build/intermediates/assets/debug
 22.path=fonts/FontAwesome5_Solid.ttf

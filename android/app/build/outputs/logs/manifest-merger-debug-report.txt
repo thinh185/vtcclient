@@ -4,33 +4,35 @@ ADDED from /home/thinh/vtcclient/android/app/src/main/AndroidManifest.xml:1:1-34
 INJECTED from /home/thinh/vtcclient/android/app/src/main/AndroidManifest.xml:1:1-34:12
 INJECTED from /home/thinh/vtcclient/android/app/src/main/AndroidManifest.xml:1:1-34:12
 INJECTED from /home/thinh/vtcclient/android/app/src/main/AndroidManifest.xml:1:1-34:12
+MERGED from [:react-native-webview] /home/thinh/vtcclient/node_modules/react-native-webview/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-23:12
+MERGED from [:react-native-svg] /home/thinh/vtcclient/node_modules/react-native-svg/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:lottie-react-native] /home/thinh/vtcclient/node_modules/lottie-react-native/src/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-config] /home/thinh/vtcclient/node_modules/react-native-config/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-gesture-handler] /home/thinh/vtcclient/node_modules/react-native-gesture-handler/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-vector-icons] /home/thinh/vtcclient/node_modules/react-native-vector-icons/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-nodemediaclient] /home/thinh/vtcclient/node_modules/react-native-nodemediaclient/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-11:12
-MERGED from [com.facebook.react:react-native:0.57.8] /home/thinh/.gradle/caches/transforms-1/files-1.1/react-native-0.57.8.aar/fd21e5751af64ffcbb3ea7a8f8482c4d/AndroidManifest.xml:2:1-15:12
-MERGED from [com.airbnb.android:lottie:2.5.6] /home/thinh/.gradle/caches/transforms-1/files-1.1/lottie-2.5.6.aar/70eaee44dd36fad605d9b6df8fa4aee3/AndroidManifest.xml:2:1-13:12
-MERGED from [com.github.NodeMedia:NodeMediaClient-Android:2.4.2] /home/thinh/.gradle/caches/transforms-1/files-1.1/NodeMediaClient-Android-2.4.2.aar/70268ac2a2e1179438c120dfe6d430d0/AndroidManifest.xml:2:1-11:12
-MERGED from [com.android.support:appcompat-v7:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/b2831a2559d3394ef1ffc728b2b9e614/AndroidManifest.xml:17:1-22:12
-MERGED from [com.facebook.fresco:fresco:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/fresco-1.10.0.aar/6b8111e11588aeb2f10c345764f047e8/AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/imagepipeline-okhttp3-1.10.0.aar/70b5ccfa04ce8408be0c7a33ffca46fa/AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:drawee:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/drawee-1.10.0.aar/c41b95246ac0792874edae5e7c680cc9/AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:imagepipeline:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/imagepipeline-1.10.0.aar/d61549b54f91651ecf6c492c1f8cb813/AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:imagepipeline-base:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/imagepipeline-base-1.10.0.aar/7e7cafb33840eb166b3c33c280db3b2b/AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.soloader:soloader:0.5.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/soloader-0.5.1.aar/6367ce89d979199cbcdc72d14f88f8a1/AndroidManifest.xml:2:1-13:12
-MERGED from [org.webkit:android-jsc:r174650] /home/thinh/.gradle/caches/transforms-1/files-1.1/android-jsc-r174650.aar/db02669cc1ad1c41b9f3796271562f43/AndroidManifest.xml:1:1-3:12
-MERGED from [com.facebook.fresco:fbcore:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/fbcore-1.10.0.aar/610d64fc5b5a135b1c2a5323ec4baa76/AndroidManifest.xml:2:1-9:12
-MERGED from [com.android.support:support-fragment:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/bc05eda21edf14b65122f473205505b2/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:animated-vector-drawable:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/3694f33929640486831392012f2a507f/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-core-ui:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/9966c04e76697c4cd327aede11384e57/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-core-utils:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/25f61c8882783fdcab977fee524f981d/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-vector-drawable:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/cb1b5cff75ac3a6f83be2ff8b11054c0/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-compat:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/d5782f10625970eb5c4f8bcbe23d4335/AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/50cd16f722065bc2cf3d4c9a9e6c34a6/AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/b78d965aa7e96d1aeed77f0ddc360103/AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:runtime:1.1.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/34e1d82ea9a128865ffe84c0f7e06d6c/AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.core:runtime:1.1.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/c0ab240043315b3f547c448ee384c11d/AndroidManifest.xml:17:1-22:12
+MERGED from [com.facebook.react:react-native:0.57.8] /home/thinh/.gradle/caches/transforms-1/files-1.1/react-native-0.57.8.aar/3502a5157bf553410da0349639a5976d/AndroidManifest.xml:2:1-15:12
+MERGED from [com.airbnb.android:lottie:2.5.6] /home/thinh/.gradle/caches/transforms-1/files-1.1/lottie-2.5.6.aar/83749c773de21550a238c3e3653ad48e/AndroidManifest.xml:2:1-13:12
+MERGED from [com.github.NodeMedia:NodeMediaClient-Android:2.4.2] /home/thinh/.gradle/caches/transforms-1/files-1.1/NodeMediaClient-Android-2.4.2.aar/a934b02d0d3a779620ec6defef287c9e/AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:appcompat-v7:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/60bc61684461746c2a86684dcf629813/AndroidManifest.xml:17:1-22:12
+MERGED from [com.facebook.fresco:fresco:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/fresco-1.10.0.aar/050f5b67a797b3e87483778777b91122/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/imagepipeline-okhttp3-1.10.0.aar/09122a7cb66141ae0343d8b7dbe8062c/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:drawee:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/drawee-1.10.0.aar/26690038274f276d16acfe5ed72edd4f/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/imagepipeline-1.10.0.aar/218b5c924f2942f67337ffb47f844407/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline-base:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/imagepipeline-base-1.10.0.aar/8cc9dbcdaf7fec3bb8f9d51edb60a2f1/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.soloader:soloader:0.5.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/soloader-0.5.1.aar/c2115331a44a5f2b27c8b2325623d7c0/AndroidManifest.xml:2:1-13:12
+MERGED from [org.webkit:android-jsc:r174650] /home/thinh/.gradle/caches/transforms-1/files-1.1/android-jsc-r174650.aar/432207746d9c495e9964abec5e2ff035/AndroidManifest.xml:1:1-3:12
+MERGED from [com.facebook.fresco:fbcore:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/fbcore-1.10.0.aar/be37dd2f9d7e18c2589655af773629dd/AndroidManifest.xml:2:1-9:12
+MERGED from [com.android.support:support-fragment:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/7c2b3b60cb8ff1ebed12df530e3cd0b6/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/7ed50c4ef7f460111b9e9d4b3541c468/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/e0e5d79bb1df75e0774c1e1f99a10590/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/c4346caa4836bbb86e8a6f4d58e2f800/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/88418d467f21831c7191ca92eb57a1b6/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/884e66e5dd23353be9b3032f4d6bcf4b/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/50605550376b70ce56319933e71c5c5f/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/8e2011761bc9942a304c9e939b27c16f/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/c8b1c24f8dc9065c2ba1163fa2dbc7f6/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/1c8434d49444fba2408572e638c7a722/AndroidManifest.xml:17:1-22:12
 INJECTED from /home/thinh/vtcclient/android/app/src/main/AndroidManifest.xml:1:1-34:12
 INJECTED from /home/thinh/vtcclient/android/app/src/main/AndroidManifest.xml:1:1-34:12
 INJECTED from /home/thinh/vtcclient/android/app/src/main/AndroidManifest.xml:1:1-34:12
@@ -80,20 +82,22 @@ MERGED from [:lottie-react-native] /home/thinh/vtcclient/node_modules/lottie-rea
 		ADDED from /home/thinh/vtcclient/android/app/src/main/AndroidManifest.xml:12:22-64
 uses-permission#android.permission.SYSTEM_ALERT_WINDOW
 ADDED from /home/thinh/vtcclient/android/app/src/main/AndroidManifest.xml:13:5-77
-MERGED from [com.facebook.react:react-native:0.57.8] /home/thinh/.gradle/caches/transforms-1/files-1.1/react-native-0.57.8.aar/fd21e5751af64ffcbb3ea7a8f8482c4d/AndroidManifest.xml:11:5-78
-MERGED from [com.facebook.react:react-native:0.57.8] /home/thinh/.gradle/caches/transforms-1/files-1.1/react-native-0.57.8.aar/fd21e5751af64ffcbb3ea7a8f8482c4d/AndroidManifest.xml:11:5-78
+MERGED from [com.facebook.react:react-native:0.57.8] /home/thinh/.gradle/caches/transforms-1/files-1.1/react-native-0.57.8.aar/3502a5157bf553410da0349639a5976d/AndroidManifest.xml:11:5-78
+MERGED from [com.facebook.react:react-native:0.57.8] /home/thinh/.gradle/caches/transforms-1/files-1.1/react-native-0.57.8.aar/3502a5157bf553410da0349639a5976d/AndroidManifest.xml:11:5-78
 	android:name
 		ADDED from /home/thinh/vtcclient/android/app/src/main/AndroidManifest.xml:13:22-75
 application
 ADDED from /home/thinh/vtcclient/android/app/src/main/AndroidManifest.xml:15:5-32:19
-MERGED from [com.facebook.react:react-native:0.57.8] /home/thinh/.gradle/caches/transforms-1/files-1.1/react-native-0.57.8.aar/fd21e5751af64ffcbb3ea7a8f8482c4d/AndroidManifest.xml:13:5-20
-MERGED from [com.facebook.react:react-native:0.57.8] /home/thinh/.gradle/caches/transforms-1/files-1.1/react-native-0.57.8.aar/fd21e5751af64ffcbb3ea7a8f8482c4d/AndroidManifest.xml:13:5-20
-MERGED from [com.airbnb.android:lottie:2.5.6] /home/thinh/.gradle/caches/transforms-1/files-1.1/lottie-2.5.6.aar/70eaee44dd36fad605d9b6df8fa4aee3/AndroidManifest.xml:11:5-20
-MERGED from [com.airbnb.android:lottie:2.5.6] /home/thinh/.gradle/caches/transforms-1/files-1.1/lottie-2.5.6.aar/70eaee44dd36fad605d9b6df8fa4aee3/AndroidManifest.xml:11:5-20
-MERGED from [com.facebook.soloader:soloader:0.5.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/soloader-0.5.1.aar/6367ce89d979199cbcdc72d14f88f8a1/AndroidManifest.xml:11:5-20
-MERGED from [com.facebook.soloader:soloader:0.5.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/soloader-0.5.1.aar/6367ce89d979199cbcdc72d14f88f8a1/AndroidManifest.xml:11:5-20
-MERGED from [org.webkit:android-jsc:r174650] /home/thinh/.gradle/caches/transforms-1/files-1.1/android-jsc-r174650.aar/db02669cc1ad1c41b9f3796271562f43/AndroidManifest.xml:2:3-17
-MERGED from [org.webkit:android-jsc:r174650] /home/thinh/.gradle/caches/transforms-1/files-1.1/android-jsc-r174650.aar/db02669cc1ad1c41b9f3796271562f43/AndroidManifest.xml:2:3-17
+MERGED from [:react-native-webview] /home/thinh/vtcclient/node_modules/react-native-webview/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:11:5-21:19
+MERGED from [:react-native-webview] /home/thinh/vtcclient/node_modules/react-native-webview/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:11:5-21:19
+MERGED from [com.facebook.react:react-native:0.57.8] /home/thinh/.gradle/caches/transforms-1/files-1.1/react-native-0.57.8.aar/3502a5157bf553410da0349639a5976d/AndroidManifest.xml:13:5-20
+MERGED from [com.facebook.react:react-native:0.57.8] /home/thinh/.gradle/caches/transforms-1/files-1.1/react-native-0.57.8.aar/3502a5157bf553410da0349639a5976d/AndroidManifest.xml:13:5-20
+MERGED from [com.airbnb.android:lottie:2.5.6] /home/thinh/.gradle/caches/transforms-1/files-1.1/lottie-2.5.6.aar/83749c773de21550a238c3e3653ad48e/AndroidManifest.xml:11:5-20
+MERGED from [com.airbnb.android:lottie:2.5.6] /home/thinh/.gradle/caches/transforms-1/files-1.1/lottie-2.5.6.aar/83749c773de21550a238c3e3653ad48e/AndroidManifest.xml:11:5-20
+MERGED from [com.facebook.soloader:soloader:0.5.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/soloader-0.5.1.aar/c2115331a44a5f2b27c8b2325623d7c0/AndroidManifest.xml:11:5-20
+MERGED from [com.facebook.soloader:soloader:0.5.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/soloader-0.5.1.aar/c2115331a44a5f2b27c8b2325623d7c0/AndroidManifest.xml:11:5-20
+MERGED from [org.webkit:android-jsc:r174650] /home/thinh/.gradle/caches/transforms-1/files-1.1/android-jsc-r174650.aar/432207746d9c495e9964abec5e2ff035/AndroidManifest.xml:2:3-17
+MERGED from [org.webkit:android-jsc:r174650] /home/thinh/.gradle/caches/transforms-1/files-1.1/android-jsc-r174650.aar/432207746d9c495e9964abec5e2ff035/AndroidManifest.xml:2:3-17
 	android:label
 		ADDED from /home/thinh/vtcclient/android/app/src/main/AndroidManifest.xml:17:7-39
 	android:icon
@@ -132,6 +136,10 @@ uses-sdk
 INJECTED from /home/thinh/vtcclient/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/thinh/vtcclient/android/app/src/main/AndroidManifest.xml
 INJECTED from /home/thinh/vtcclient/android/app/src/main/AndroidManifest.xml
+MERGED from [:react-native-webview] /home/thinh/vtcclient/node_modules/react-native-webview/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-webview] /home/thinh/vtcclient/node_modules/react-native-webview/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-svg] /home/thinh/vtcclient/node_modules/react-native-svg/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-svg] /home/thinh/vtcclient/node_modules/react-native-svg/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:lottie-react-native] /home/thinh/vtcclient/node_modules/lottie-react-native/src/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:lottie-react-native] /home/thinh/vtcclient/node_modules/lottie-react-native/src/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-config] /home/thinh/vtcclient/node_modules/react-native-config/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
@@ -142,48 +150,48 @@ MERGED from [:react-native-vector-icons] /home/thinh/vtcclient/node_modules/reac
 MERGED from [:react-native-vector-icons] /home/thinh/vtcclient/node_modules/react-native-vector-icons/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-nodemediaclient] /home/thinh/vtcclient/node_modules/react-native-nodemediaclient/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-nodemediaclient] /home/thinh/vtcclient/node_modules/react-native-nodemediaclient/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.react:react-native:0.57.8] /home/thinh/.gradle/caches/transforms-1/files-1.1/react-native-0.57.8.aar/fd21e5751af64ffcbb3ea7a8f8482c4d/AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.react:react-native:0.57.8] /home/thinh/.gradle/caches/transforms-1/files-1.1/react-native-0.57.8.aar/fd21e5751af64ffcbb3ea7a8f8482c4d/AndroidManifest.xml:7:5-9:41
-MERGED from [com.airbnb.android:lottie:2.5.6] /home/thinh/.gradle/caches/transforms-1/files-1.1/lottie-2.5.6.aar/70eaee44dd36fad605d9b6df8fa4aee3/AndroidManifest.xml:7:5-9:41
-MERGED from [com.airbnb.android:lottie:2.5.6] /home/thinh/.gradle/caches/transforms-1/files-1.1/lottie-2.5.6.aar/70eaee44dd36fad605d9b6df8fa4aee3/AndroidManifest.xml:7:5-9:41
-MERGED from [com.github.NodeMedia:NodeMediaClient-Android:2.4.2] /home/thinh/.gradle/caches/transforms-1/files-1.1/NodeMediaClient-Android-2.4.2.aar/70268ac2a2e1179438c120dfe6d430d0/AndroidManifest.xml:7:5-9:41
-MERGED from [com.github.NodeMedia:NodeMediaClient-Android:2.4.2] /home/thinh/.gradle/caches/transforms-1/files-1.1/NodeMediaClient-Android-2.4.2.aar/70268ac2a2e1179438c120dfe6d430d0/AndroidManifest.xml:7:5-9:41
-MERGED from [com.android.support:appcompat-v7:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/b2831a2559d3394ef1ffc728b2b9e614/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:appcompat-v7:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/b2831a2559d3394ef1ffc728b2b9e614/AndroidManifest.xml:20:5-44
-MERGED from [com.facebook.fresco:fresco:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/fresco-1.10.0.aar/6b8111e11588aeb2f10c345764f047e8/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:fresco:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/fresco-1.10.0.aar/6b8111e11588aeb2f10c345764f047e8/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/imagepipeline-okhttp3-1.10.0.aar/70b5ccfa04ce8408be0c7a33ffca46fa/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/imagepipeline-okhttp3-1.10.0.aar/70b5ccfa04ce8408be0c7a33ffca46fa/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:drawee:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/drawee-1.10.0.aar/c41b95246ac0792874edae5e7c680cc9/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:drawee:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/drawee-1.10.0.aar/c41b95246ac0792874edae5e7c680cc9/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/imagepipeline-1.10.0.aar/d61549b54f91651ecf6c492c1f8cb813/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/imagepipeline-1.10.0.aar/d61549b54f91651ecf6c492c1f8cb813/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-base:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/imagepipeline-base-1.10.0.aar/7e7cafb33840eb166b3c33c280db3b2b/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-base:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/imagepipeline-base-1.10.0.aar/7e7cafb33840eb166b3c33c280db3b2b/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.soloader:soloader:0.5.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/soloader-0.5.1.aar/6367ce89d979199cbcdc72d14f88f8a1/AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.soloader:soloader:0.5.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/soloader-0.5.1.aar/6367ce89d979199cbcdc72d14f88f8a1/AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.fresco:fbcore:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/fbcore-1.10.0.aar/610d64fc5b5a135b1c2a5323ec4baa76/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:fbcore:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/fbcore-1.10.0.aar/610d64fc5b5a135b1c2a5323ec4baa76/AndroidManifest.xml:5:5-7:41
-MERGED from [com.android.support:support-fragment:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/bc05eda21edf14b65122f473205505b2/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-fragment:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/bc05eda21edf14b65122f473205505b2/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:animated-vector-drawable:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/3694f33929640486831392012f2a507f/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:animated-vector-drawable:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/3694f33929640486831392012f2a507f/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-ui:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/9966c04e76697c4cd327aede11384e57/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-ui:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/9966c04e76697c4cd327aede11384e57/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-utils:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/25f61c8882783fdcab977fee524f981d/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-utils:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/25f61c8882783fdcab977fee524f981d/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/cb1b5cff75ac3a6f83be2ff8b11054c0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/cb1b5cff75ac3a6f83be2ff8b11054c0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-compat:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/d5782f10625970eb5c4f8bcbe23d4335/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-compat:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/d5782f10625970eb5c4f8bcbe23d4335/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/50cd16f722065bc2cf3d4c9a9e6c34a6/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/50cd16f722065bc2cf3d4c9a9e6c34a6/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/b78d965aa7e96d1aeed77f0ddc360103/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/b78d965aa7e96d1aeed77f0ddc360103/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:runtime:1.1.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/34e1d82ea9a128865ffe84c0f7e06d6c/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:runtime:1.1.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/34e1d82ea9a128865ffe84c0f7e06d6c/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.core:runtime:1.1.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/c0ab240043315b3f547c448ee384c11d/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.core:runtime:1.1.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/c0ab240043315b3f547c448ee384c11d/AndroidManifest.xml:20:5-44
+MERGED from [com.facebook.react:react-native:0.57.8] /home/thinh/.gradle/caches/transforms-1/files-1.1/react-native-0.57.8.aar/3502a5157bf553410da0349639a5976d/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.57.8] /home/thinh/.gradle/caches/transforms-1/files-1.1/react-native-0.57.8.aar/3502a5157bf553410da0349639a5976d/AndroidManifest.xml:7:5-9:41
+MERGED from [com.airbnb.android:lottie:2.5.6] /home/thinh/.gradle/caches/transforms-1/files-1.1/lottie-2.5.6.aar/83749c773de21550a238c3e3653ad48e/AndroidManifest.xml:7:5-9:41
+MERGED from [com.airbnb.android:lottie:2.5.6] /home/thinh/.gradle/caches/transforms-1/files-1.1/lottie-2.5.6.aar/83749c773de21550a238c3e3653ad48e/AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.NodeMedia:NodeMediaClient-Android:2.4.2] /home/thinh/.gradle/caches/transforms-1/files-1.1/NodeMediaClient-Android-2.4.2.aar/a934b02d0d3a779620ec6defef287c9e/AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.NodeMedia:NodeMediaClient-Android:2.4.2] /home/thinh/.gradle/caches/transforms-1/files-1.1/NodeMediaClient-Android-2.4.2.aar/a934b02d0d3a779620ec6defef287c9e/AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:appcompat-v7:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/60bc61684461746c2a86684dcf629813/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/60bc61684461746c2a86684dcf629813/AndroidManifest.xml:20:5-44
+MERGED from [com.facebook.fresco:fresco:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/fresco-1.10.0.aar/050f5b67a797b3e87483778777b91122/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fresco:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/fresco-1.10.0.aar/050f5b67a797b3e87483778777b91122/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/imagepipeline-okhttp3-1.10.0.aar/09122a7cb66141ae0343d8b7dbe8062c/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/imagepipeline-okhttp3-1.10.0.aar/09122a7cb66141ae0343d8b7dbe8062c/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:drawee:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/drawee-1.10.0.aar/26690038274f276d16acfe5ed72edd4f/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:drawee:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/drawee-1.10.0.aar/26690038274f276d16acfe5ed72edd4f/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/imagepipeline-1.10.0.aar/218b5c924f2942f67337ffb47f844407/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/imagepipeline-1.10.0.aar/218b5c924f2942f67337ffb47f844407/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-base:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/imagepipeline-base-1.10.0.aar/8cc9dbcdaf7fec3bb8f9d51edb60a2f1/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-base:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/imagepipeline-base-1.10.0.aar/8cc9dbcdaf7fec3bb8f9d51edb60a2f1/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.soloader:soloader:0.5.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/soloader-0.5.1.aar/c2115331a44a5f2b27c8b2325623d7c0/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.soloader:soloader:0.5.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/soloader-0.5.1.aar/c2115331a44a5f2b27c8b2325623d7c0/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.fresco:fbcore:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/fbcore-1.10.0.aar/be37dd2f9d7e18c2589655af773629dd/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fbcore:1.10.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/fbcore-1.10.0.aar/be37dd2f9d7e18c2589655af773629dd/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:support-fragment:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/7c2b3b60cb8ff1ebed12df530e3cd0b6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/7c2b3b60cb8ff1ebed12df530e3cd0b6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/7ed50c4ef7f460111b9e9d4b3541c468/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/7ed50c4ef7f460111b9e9d4b3541c468/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/e0e5d79bb1df75e0774c1e1f99a10590/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/e0e5d79bb1df75e0774c1e1f99a10590/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/c4346caa4836bbb86e8a6f4d58e2f800/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/c4346caa4836bbb86e8a6f4d58e2f800/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/88418d467f21831c7191ca92eb57a1b6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/88418d467f21831c7191ca92eb57a1b6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/884e66e5dd23353be9b3032f4d6bcf4b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] /home/thinh/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/884e66e5dd23353be9b3032f4d6bcf4b/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/50605550376b70ce56319933e71c5c5f/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/50605550376b70ce56319933e71c5c5f/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/8e2011761bc9942a304c9e939b27c16f/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/8e2011761bc9942a304c9e939b27c16f/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/c8b1c24f8dc9065c2ba1163fa2dbc7f6/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/c8b1c24f8dc9065c2ba1163fa2dbc7f6/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/1c8434d49444fba2408572e638c7a722/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] /home/thinh/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/1c8434d49444fba2408572e638c7a722/AndroidManifest.xml:20:5-44
 INJECTED from /home/thinh/vtcclient/android/app/src/main/AndroidManifest.xml
 INJECTED from /home/thinh/vtcclient/android/app/src/main/AndroidManifest.xml
 	android:targetSdkVersion
@@ -194,6 +202,22 @@ INJECTED from /home/thinh/vtcclient/android/app/src/main/AndroidManifest.xml
 		INJECTED from /home/thinh/vtcclient/android/app/src/main/AndroidManifest.xml
 		ADDED from /home/thinh/vtcclient/android/app/src/main/AndroidManifest.xml
 		INJECTED from /home/thinh/vtcclient/android/app/src/main/AndroidManifest.xml
+provider#com.reactnativecommunity.webview.RNCWebViewFileProvider
+ADDED from [:react-native-webview] /home/thinh/vtcclient/node_modules/react-native-webview/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:12:9-20:20
+	android:grantUriPermissions
+		ADDED from [:react-native-webview] /home/thinh/vtcclient/node_modules/react-native-webview/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:16:13-47
+	android:authorities
+		ADDED from [:react-native-webview] /home/thinh/vtcclient/node_modules/react-native-webview/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:14:13-64
+	android:exported
+		ADDED from [:react-native-webview] /home/thinh/vtcclient/node_modules/react-native-webview/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:15:13-37
+	android:name
+		ADDED from [:react-native-webview] /home/thinh/vtcclient/node_modules/react-native-webview/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:13:13-83
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from [:react-native-webview] /home/thinh/vtcclient/node_modules/react-native-webview/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:17:13-19:63
+	android:resource
+		ADDED from [:react-native-webview] /home/thinh/vtcclient/node_modules/react-native-webview/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:19:17-60
+	android:name
+		ADDED from [:react-native-webview] /home/thinh/vtcclient/node_modules/react-native-webview/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:18:17-67
 uses-permission#android.permission.READ_PHONE_STATE
 IMPLIED from /home/thinh/vtcclient/android/app/src/main/AndroidManifest.xml:1:1-34:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
 uses-permission#android.permission.READ_EXTERNAL_STORAGE

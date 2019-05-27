@@ -2,6 +2,7 @@ import React from 'react'
 import { TouchableOpacity, Text, StyleSheet } from 'react-native'
 import { StartColumnContainer, RowContainer } from 'features/share/component/SComponent'
 import { ScrollView } from 'react-native-gesture-handler'
+import navigator from 'navigations/customNavigator'
 import AreaChart from 'features/chart/component/AreaChart'
 import BarChart from 'features/chart/component/BarChart'
 import LineChart from 'features/chart/component/LineChart'
@@ -39,6 +40,9 @@ class AreaChartExample extends React.PureComponent {
             </TouchableOpacity>
             <TouchableOpacity onPress={() => this.setState({ points: 50 })}>
               <Text style={styles.button}>50</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigator.navigate('Web')}>
+              <Text>WebViewChat</Text>
             </TouchableOpacity>
           </RowContainer>
           <PieLabelCircle />

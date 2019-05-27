@@ -4,7 +4,7 @@
             "outputFile": "/home/thinh/vtcclient/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v17/values-v17.xml",
             "map": [
                 {
-                    "source": "/home/thinh/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/b2831a2559d3394ef1ffc728b2b9e614/res/values-v17/values-v17.xml",
+                    "source": "/home/thinh/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/60bc61684461746c2a86684dcf629813/res/values-v17/values-v17.xml",
                     "from": {
                         "startLines": "2,5,9,12,15,18,22,26,29,32,35,39,42,46",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",
